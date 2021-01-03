@@ -1,0 +1,454 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+.logoText {
+  font-family: 'Megrim', cursive;
+  color: #00c2cb;
+  -webkit-filter: drop-shadow(2px 2px 10px #000);
+          filter: drop-shadow(2px 2px 10px #000);
+  display: inline;
+  font-size: 2em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0px 5px;
+  text-rendering: geometricPrecision;
+}
+
+.chivo {
+  font-family: 'Chivo', sans-serif;
+}
+
+.overpass {
+  font-family: 'Overpass', sans-serif;
+}
+
+#userProfilePicture {
+  position: absolute;
+  right: 1em;
+  vertical-align: middle;
+  padding-right: 5px;
+  height: auto;
+  width: 3.4em;
+  border-radius: 50%;
+}
+
+#navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: auto;
+  border-bottom: 3px solid #00c2cb;
+  background-color: white;
+}
+
+#navbar span, #navbar img, #navbar svg {
+  padding: 5px 5px;
+}
+
+#navbar svg {
+  height: auto;
+  -webkit-transform: scale(1.6);
+          transform: scale(1.6);
+}
+
+button {
+  cursor: pointer;
+}
+
+.secondaryNav {
+  display: block;
+  background-color: #9fd0eb;
+}
+
+.secondaryNav button {
+  font-family: 'Chivo', sans-serif;
+  font-size: 1.5em;
+  color: white;
+  background-color: transparent;
+  border: none;
+  padding: 0.7em 1.3em 0.5em 0.5em;
+}
+
+.secondaryNav button:focus {
+  outline: none;
+  color: #000;
+}
+
+.lineContainer {
+  position: relative;
+  width: auto;
+  height: 0.2em;
+  display: block;
+  background: white;
+}
+
+.line {
+  width: 9em;
+  display: inline;
+  position: absolute;
+  height: 0.2em;
+  background-color: #000;
+  z-index: 9;
+}
+
+.forward {
+  -webkit-animation: lineAnimRight .5s ease-in 1 forwards;
+          animation: lineAnimRight .5s ease-in 1 forwards;
+}
+
+.reverse {
+  -webkit-animation: lineAnimLeft .5s ease-in 1 forwards;
+          animation: lineAnimLeft .5s ease-in 1 forwards;
+}
+
+.blackText {
+  color: #000 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.tabContainer {
+  position: relative;
+}
+
+.classroomSection {
+  position: relative;
+}
+
+.studentSection {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bgSection {
+  background-color: #9fd0eb;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.classname {
+  font-size: 2em;
+  width: 20vw;
+  position: absolute;
+  top: 1em;
+  left: 33%;
+  -webkit-transform: translateX(-33%);
+          transform: translateX(-33%);
+}
+
+.roomSpace {
+  border-radius: 3px;
+  background-color: #ecd997;
+  margin: 5em 3em;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  height: 60vh;
+  width: 100vh;
+  display: inline-block;
+}
+
+.roomSpace .whiteboard {
+  position: absolute;
+  background-color: white;
+  display: block;
+  width: 20vw;
+  height: auto;
+  font-size: 8px;
+  text-align: center;
+  top: 0.7em;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.roomSpace .tdesk {
+  background-color: #00c2cb;
+  position: absolute;
+  top: 3.5em;
+  right: 2.5em;
+  border-radius: 0px;
+  width: auto;
+  display: block;
+  height: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0.7em 0.3em;
+}
+
+.roomSpace .students {
+  display: -ms-grid;
+  display: grid;
+  top: 6em;
+  position: absolute;
+  padding: 1em;
+}
+
+.roomSpace .sdesk {
+  background-color: white;
+  position: inline;
+  border-radius: 0px;
+  width: auto;
+  display: inline;
+  height: auto;
+  font-size: 14px;
+  padding: 0.7em 0.3em;
+}
+
+.greenButton {
+  background-color: #E0FFF0;
+  border-radius: 5px;
+  font-size: 1.8em;
+  font-family: 'Overpass', sans-serif;
+  text-align: center;
+  padding: 0.7em 2em;
+  display: inline-block;
+  border: none;
+  margin-bottom: 2em;
+}
+
+.greenButton:hover {
+  background-color: #c7ffe4;
+}
+
+.greenButton:focus {
+  outline: none;
+}
+
+.whiteButton {
+  background: -webkit-gradient(linear, left top, left bottom, from(#EAE7E7), to(rgba(255, 255, 255, 0))), #FFFFFF;
+  background: linear-gradient(180deg, #EAE7E7 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3em;
+  font-family: 'Overpass', sans-serif;
+  font-size: 1.5em;
+  border: none;
+  color: black;
+  text-align: center;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  padding: 1em 1em;
+  margin-top: 2em;
+}
+
+.whiteButton:hover {
+  background-color: #f2f2f2;
+}
+
+.whiteButton:focus {
+  outline: none;
+}
+
+.buttons {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-top: 2em;
+  position: absolute;
+  top: 7em;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2020-12-28 20:54:57
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+/**
+ * ----------------------------------------
+ * animation fade-out-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes fade-out-left {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out-left {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
+
+.fade-out-left {
+  -webkit-animation: fade-out-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: fade-out-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.fade-out-right {
+  -webkit-animation: fade-out-right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: fade-out-right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes fade-out-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+}
+
+.fade-in-right {
+  -webkit-animation: fade-in-right 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s both;
+  animation: fade-in-right 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s both;
+}
+
+@-webkit-keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-left {
+  -webkit-animation: fade-in-left 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s both;
+  animation: fade-in-left 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s both;
+}
+
+@-webkit-keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes lineAnimRight {
+  0% {
+    -webkit-transform: translateX(0em);
+    transform: translateX(0em);
+  }
+  100% {
+    -webkit-transform: translateX(9.7em);
+    transform: translateX(9.7em);
+  }
+}
+
+@keyframes lineAnimRight {
+  0% {
+    -webkit-transform: translateX(0em);
+    transform: translateX(0em);
+  }
+  100% {
+    -webkit-transform: translateX(9.7em);
+    transform: translateX(9.7em);
+  }
+}
+
+@-webkit-keyframes lineAnimLeft {
+  0% {
+    -webkit-transform: translateX(9.7em);
+    transform: translateX(9.7em);
+  }
+  100% {
+    -webkit-transform: translateX(0em);
+    transform: translateX(0em);
+  }
+}
+
+@keyframes lineAnimLeft {
+  0% {
+    -webkit-transform: translateX(9.7em);
+    transform: translateX(9.7em);
+  }
+  100% {
+    -webkit-transform: translateX(0em);
+    transform: translateX(0em);
+  }
+}
+/*# sourceMappingURL=style.css.map */
