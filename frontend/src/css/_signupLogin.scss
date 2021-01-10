@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+.support {
+  position: absolute;
+  right: 30%;
+  border: 0px;
+  background: transparent;
+  width: 156px;
+  font-family: Chivo, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 36px;
+  text-align: center;
+  padding: 10px;
+}
+.updates {
+  position: absolute;
+  right: 15%;
+  border: 0px;
+  background: transparent;
+  width: 156px;
+  font-family: Chivo, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 36px;
+  text-align: center;
+  padding: 10px;
+}
+.signInButton {
+  position: absolute;
+  right: 1px;
+  border: 0px;
+  width: 120px;
+  border-radius: 25px;
+  background: rgb(159, 208, 235);
+  color: Black;
+  font-family: Chivo, sans-serif;
+  font-size: 20px;
+  line-height: 36px;
+  font-weight: 400;
+  text-align: center;
+  height: 35px;
+  margin: 10px 20px;
+}
+.logoText2 {
+  font-family: "Megrim", cursive;
+  color: $accent;
+  display: inline;
+  font-size: 2em;
+  user-select: none;
+  font-weight: normal;
+  padding: 0px 10px;
+  margin-left: 10px;
+  filter: drop-shadow(1px 1px 3px rgb(105, 105, 105));
+  text-rendering: geometricPrecision;
+}
+.loginContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0px;
+  width: 440px;
+  height: 393px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  background: white;
+}
+.signupContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0px;
+  width: 440px;
+  height: 430px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  background: white;
+}
+.loginTitle {
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 57px;
+  text-align: center;
+}
+#navbarB {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  span,
+  img,
+  svg {
+    padding: 5px 5px;
+  }
+  svg {
+    height: 10%;
+    transform: scale(1.6);
+  }
+}
+button {
+  cursor: pointer;
+}
+.placeHolderTextLogin {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 0.5px solid #000000;
+  margin: 8px;
+  color: black;
+  padding-left: 5px;
+  height: 40px;
+}
+.placeHolderTextSignup {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 0.5px solid #000000;
+  margin: 5px;
+  color: black;
+  padding-left: 5px;
+  height: 40px;
+}
+.signInButtonB {
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+  text-align: center;
+  width: 37%;
+  border-radius: 24px;
+  background: #b0ffff;
+  margin: 10px;
+  outline: none;
+}
+.forgotPassword {
+  width: 163px;
+  height: 20px;
+  left: 630px;
+  top: 510px;
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #000000;
+  background: white;
+  border: 0px;
+}
+.signUpButtonB {
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  width: 37%;
+  border-radius: 20px;
+  background: #01ccc0;
+  margin: 10px;
+  outline: none;
+  color: #ffffff;
+}
+.basicBackground {
+  background-image: url("../assets/linearGradientBackground.png");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+.main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}

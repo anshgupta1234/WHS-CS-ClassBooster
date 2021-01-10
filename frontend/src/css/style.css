@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 .logoText {
-  font-family: 'Megrim', cursive;
+  font-family: "Megrim", cursive;
   color: #00c2cb;
   -webkit-filter: drop-shadow(2px 2px 10px #000);
           filter: drop-shadow(2px 2px 10px #000);
@@ -15,11 +16,11 @@
 }
 
 .chivo {
-  font-family: 'Chivo', sans-serif;
+  font-family: "Chivo", sans-serif;
 }
 
 .overpass {
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
 }
 
 #userProfilePicture {
@@ -32,7 +33,7 @@
   border-radius: 50%;
 }
 
-#navbar {
+#navbar2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -45,11 +46,13 @@
   background-color: white;
 }
 
-#navbar span, #navbar img, #navbar svg {
+#navbar2 span,
+#navbar2 img,
+#navbar2 svg {
   padding: 5px 5px;
 }
 
-#navbar svg {
+#navbar2 svg {
   height: auto;
   -webkit-transform: scale(1.6);
           transform: scale(1.6);
@@ -65,7 +68,7 @@ button {
 }
 
 .secondaryNav button {
-  font-family: 'Chivo', sans-serif;
+  font-family: "Chivo", sans-serif;
   font-size: 1.5em;
   color: white;
   background-color: transparent;
@@ -96,13 +99,13 @@ button {
 }
 
 .forward {
-  -webkit-animation: lineAnimRight .5s ease-in 1 forwards;
-          animation: lineAnimRight .5s ease-in 1 forwards;
+  -webkit-animation: lineAnimRight 0.5s ease-in 1 forwards;
+          animation: lineAnimRight 0.5s ease-in 1 forwards;
 }
 
 .reverse {
-  -webkit-animation: lineAnimLeft .5s ease-in 1 forwards;
-          animation: lineAnimLeft .5s ease-in 1 forwards;
+  -webkit-animation: lineAnimLeft 0.5s ease-in 1 forwards;
+          animation: lineAnimLeft 0.5s ease-in 1 forwards;
 }
 
 .blackText {
@@ -210,10 +213,10 @@ button {
 }
 
 .greenButton {
-  background-color: #E0FFF0;
+  background-color: #e0fff0;
   border-radius: 5px;
   font-size: 1.8em;
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
   text-align: center;
   padding: 0.7em 2em;
   display: inline-block;
@@ -230,12 +233,12 @@ button {
 }
 
 .whiteButton {
-  background: -webkit-gradient(linear, left top, left bottom, from(#EAE7E7), to(rgba(255, 255, 255, 0))), #FFFFFF;
-  background: linear-gradient(180deg, #EAE7E7 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eae7e7), to(rgba(255, 255, 255, 0))), #ffffff;
+  background: linear-gradient(180deg, #eae7e7 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 3em;
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
   font-size: 1.5em;
   border: none;
   color: black;
@@ -450,5 +453,236 @@ button {
     -webkit-transform: translateX(0em);
     transform: translateX(0em);
   }
+}
+
+.support {
+  position: absolute;
+  right: 30%;
+  border: 0px;
+  background: transparent;
+  width: 156px;
+  font-family: Chivo, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 36px;
+  text-align: center;
+  padding: 10px;
+}
+
+.updates {
+  position: absolute;
+  right: 15%;
+  border: 0px;
+  background: transparent;
+  width: 156px;
+  font-family: Chivo, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 36px;
+  text-align: center;
+  padding: 10px;
+}
+
+.signInButton {
+  position: absolute;
+  right: 1px;
+  border: 0px;
+  width: 120px;
+  border-radius: 25px;
+  background: #9fd0eb;
+  color: Black;
+  font-family: Chivo, sans-serif;
+  font-size: 20px;
+  line-height: 36px;
+  font-weight: 400;
+  text-align: center;
+  height: 35px;
+  margin: 10px 20px;
+}
+
+.logoText2 {
+  font-family: "Megrim", cursive;
+  color: #00c2cb;
+  display: inline;
+  font-size: 2em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-weight: normal;
+  padding: 0px 10px;
+  margin-left: 10px;
+  -webkit-filter: drop-shadow(1px 1px 3px dimgray);
+          filter: drop-shadow(1px 1px 3px dimgray);
+  text-rendering: geometricPrecision;
+}
+
+.loginContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 0px;
+  width: 440px;
+  height: 393px;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  background: white;
+}
+
+.signupContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 0px;
+  width: 440px;
+  height: 430px;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  background: white;
+}
+
+.loginTitle {
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 57px;
+  text-align: center;
+}
+
+#navbarB {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: auto;
+  background-color: white;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#navbarB span,
+#navbarB img,
+#navbarB svg {
+  padding: 5px 5px;
+}
+
+#navbarB svg {
+  height: 10%;
+  -webkit-transform: scale(1.6);
+          transform: scale(1.6);
+}
+
+button {
+  cursor: pointer;
+}
+
+.placeHolderTextLogin {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 0.5px solid #000000;
+  margin: 8px;
+  color: black;
+  padding-left: 5px;
+  height: 40px;
+}
+
+.placeHolderTextSignup {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 0.5px solid #000000;
+  margin: 5px;
+  color: black;
+  padding-left: 5px;
+  height: 40px;
+}
+
+.signInButtonB {
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+  text-align: center;
+  width: 37%;
+  border-radius: 24px;
+  background: #b0ffff;
+  margin: 10px;
+  outline: none;
+}
+
+.forgotPassword {
+  width: 163px;
+  height: 20px;
+  left: 630px;
+  top: 510px;
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #000000;
+  background: white;
+  border: 0px;
+}
+
+.signUpButtonB {
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  width: 37%;
+  border-radius: 20px;
+  background: #01ccc0;
+  margin: 10px;
+  outline: none;
+  color: #ffffff;
+}
+
+.basicBackground {
+  background-image: url("../assets/linearGradientBackground.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 /*# sourceMappingURL=style.css.map */
