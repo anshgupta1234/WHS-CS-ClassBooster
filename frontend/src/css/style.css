@@ -485,7 +485,9 @@ button {
   padding: 10px;
 }
 
-.signInButton {
+.loginSignupButton,
+.loginSignupButton:hover,
+.loginSignupButton:focus {
   position: absolute;
   right: 1px;
   border: 0px;
@@ -500,6 +502,7 @@ button {
   text-align: center;
   height: 35px;
   margin: 10px 20px;
+  text-decoration: none;
 }
 
 .logoText2 {
@@ -600,7 +603,7 @@ button {
   border: 0.5px solid #000000;
   margin: 8px;
   color: black;
-  padding-left: 5px;
+  padding-left: 10px;
   height: 40px;
 }
 
@@ -618,7 +621,7 @@ button {
   border: 0.5px solid #000000;
   margin: 5px;
   color: black;
-  padding-left: 5px;
+  padding-left: 10px;
   height: 40px;
 }
 
@@ -631,7 +634,7 @@ button {
   font-size: 20px;
   line-height: 29px;
   text-align: center;
-  width: 37%;
+  width: 163px;
   border-radius: 24px;
   background: #b0ffff;
   margin: 10px;
@@ -654,7 +657,11 @@ button {
   border: 0px;
 }
 
-.signUpButtonB {
+.signUpLoginButtonB,
+.signUpLoginButtonB:hover,
+.signUpLoginButtonB:focus {
+  display: inline-block;
+  padding-top: 5px;
   border: 0px;
   height: 40px;
   font-family: Chivo;
@@ -663,12 +670,13 @@ button {
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  width: 37%;
+  width: 163px;
   border-radius: 20px;
   background: #01ccc0;
   margin: 10px;
   outline: none;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .basicBackground {

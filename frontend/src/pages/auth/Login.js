@@ -1,6 +1,12 @@
 // Aryan Vora
 import React, { Component } from "react";
 import "../../css/style.css";
+
+
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
  
 
 export default class Login extends React.Component {
@@ -18,6 +24,12 @@ export default class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
   };
+  
+  handleSignUp = () => {
+     
+  };
+
+
   render() {
     return (
       <section className="main" >
@@ -26,7 +38,7 @@ export default class Login extends React.Component {
 					<span className="logoText2">CLASSBOOSTER </span>
 					<button className="support ">Support</button>
           <button className="updates ">Updates</button>
-          <button className="signInButton">SIGN UP</button>
+          <Link to="/Signup" className="loginSignupButton" >SIGN UP</Link>
 				</nav>
         </section> 
         <section className="basicBackground">
@@ -53,7 +65,7 @@ export default class Login extends React.Component {
               <br/>
               <input type="submit"  
               className = "signInButtonB"
-              value="Sign-in"/>
+              value="Login"/>
             </form>
             <button className="forgotPassword">Forgot Password?</button>
             
@@ -74,11 +86,13 @@ export default class Login extends React.Component {
             textAlign: "center",
             }}>or</span></h6>
 
-            <button className="signUpButtonB"> Signup</button>
+          <Link to="/Signup" className="signUpLoginButtonB">Sign Up</Link>
           </center>
           </section>
           </section>
-        </section>
+          
+      </section>      
     );
   }
 }
+

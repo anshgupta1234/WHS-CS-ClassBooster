@@ -1,7 +1,11 @@
 // Aryan Vora
 import React, { Component } from "react";
 import "../../css/style.css";
-
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
+ 
 export default class Signup extends React.Component {
   state = {
     username: "",
@@ -30,7 +34,7 @@ export default class Signup extends React.Component {
 					<span className="logoText2">CLASSBOOSTER </span>
 					<button className="support">Support</button>
           <button className="updates">Updates</button>
-          <button className="signInButton">SIGN UP</button>
+          <Link to="/Login" className="loginSignupButton">LOGIN</Link>
 				</nav>
         </div>   
 
@@ -68,7 +72,7 @@ export default class Signup extends React.Component {
               <br />
               <input type="submit"  
               className = "signInButtonB"
-              value="Sign-in"/>
+              value="Sign Up"/>
               
             </form>
             <button className="forgotPassword">
@@ -92,8 +96,8 @@ export default class Signup extends React.Component {
             textAlign: "center",
             }}>or</span></h6>
 
-            <button className="signUpButtonB" 
-              > Signup</button>
+          <Link to="/Login" className="signUpLoginButtonB">Login</Link>
+
           </center>
           </div>
         </div>
