@@ -12,7 +12,7 @@ class DashboardNavbar extends Component {
           </a>
           <button
             className="dashboard-plus"
-            onClick={() => this.props.toggleEditClassnamePopup(-1)}
+            onClick={() => this.props.toggleRenameClassroomPopup(-1)}
           >
             {<PlusSign />}
           </button>

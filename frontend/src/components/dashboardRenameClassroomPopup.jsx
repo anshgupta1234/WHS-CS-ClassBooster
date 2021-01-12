@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class DashboardEditClassnamePopup extends Component {
+class DashboardRenameClassroomPopup extends Component {
   state = { noClassnameWarning: "" };
   checkInputs() {
     let indexOfClassroom = this.props.selectedClassroom.index;
@@ -26,7 +26,7 @@ class DashboardEditClassnamePopup extends Component {
       oldClassroomName = "";
       oldNickname = "";
     } else {
-      header = "Edit classname and nickname";
+      header = "Rename classroom";
       classnameLabel = "Choose a classname";
       nicknameLabel = "Choose a nickname";
       oldClassroomName = selectedClassroom.name;
@@ -73,7 +73,7 @@ class DashboardEditClassnamePopup extends Component {
           </button>
           <button
             className="dashboard-popup-classname-cancel"
-            onClick={this.props.toggleEditClassnamePopup}
+            onClick={this.props.toggleRenameClassroomPopup}
           >
             Cancel
           </button>
@@ -83,4 +83,4 @@ class DashboardEditClassnamePopup extends Component {
   }
 }
 
-export default DashboardEditClassnamePopup;
+export default DashboardRenameClassroomPopup;

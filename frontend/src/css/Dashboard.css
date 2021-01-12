@@ -1,5 +1,5 @@
 :root {
-  --classroom-width: 310px;
+  --classroom-width: 300px;
   --classroom-height: 320px;
   --classroom-card-border-radius: 6px;
 }
@@ -42,8 +42,6 @@
   font-family: "Megrim", cursive;
   display: inline;
   font-size: 2em;
-  user-select: none;
-  font-weight: normal;
   padding: 0px 10px;
   margin-left: 5px;
   filter: drop-shadow(1px 1px 3px rgb(105, 105, 105));
@@ -65,14 +63,16 @@
   background-color: white;
   cursor: pointer;
   border-radius: 50%;
-  padding: 6px;
+  height: 52px;
+  width: 52px;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: background-color 300ms;
 }
 
 .dashboard-plus:hover {
-  background-color: #d9d9d9;
+  background-color: #f2f2f2;
 }
 
 .dashboard-plus:focus {
@@ -83,8 +83,8 @@
   display: flex;
   align-items: center;
   background-color: #ffff;
-  width: 55px;
-  height: 55px;
+  width: 52px;
+  height: 52px;
   border: none;
   cursor: pointer;
   border-radius: 50%;
@@ -96,7 +96,7 @@
 }
 
 #dashboard-profile:hover {
-  background-color: #e6e6e6;
+  background-color: #f2f2f2;
 }
 
 #dashboard-profile:focus {
@@ -109,7 +109,7 @@
   top: 64px;
   right: 24px;
   border-radius: 7px;
-  box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px 4px rgba(0, 0, 0, 0.1);
 }
 
 #dashboard-profile-dropdown a {
@@ -136,6 +136,7 @@
 #dashboard-account-link {
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
+  
 }
 
 #dashboard-support-link {
@@ -173,7 +174,7 @@
 .dashboard-classroom-name {
   display: inline-block;
   margin-top: 6px;
-  margin-left: 10px;
+  margin-left: 12px;
   font: 26px Chivo, sans-serif;
   cursor: pointer;
   max-width: 260px;
@@ -195,7 +196,7 @@
 .dashboard-nickname {
   color: #949494;
   font: 20px Overpass, sans-serif;
-  margin-left: 10px;
+  margin-left: 12px;
   max-width: 260px;
   white-space: pre;
   overflow: hidden;
@@ -218,14 +219,15 @@
 
 .dashboard-classroom-options-dropdown {
   position: absolute;
+  border-radius: 7px;
+  box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, 0.1);
   top: 47px;
   right: 13px;
 }
 
 .dashboard-classroom-options-dropdown button {
-  background-color: #e6e6e6;
-  border: none;
-  width: 100%;
+  background-color: #f2f2f2;
+  width: 160px;
   transition: filter 300ms;
   cursor: pointer;
   font: 17px Overpass, sans-serif;
@@ -235,20 +237,25 @@
 }
 
 .dashboard-classroom-options-dropdown button:hover {
-  filter: brightness(0.9);
+  filter: brightness(0.92);
 }
 
 .dashboard-classroom-options-dropdown button:focus {
   outline: none;
 }
 
-.dashboard-edit-classname {
+.dashboard-rename-classroom {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d9d9d9;
   padding-top: 5px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
 }
 
 .dashboard-delete-classroom {
+  border: none;
   padding-bottom: 5px;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;

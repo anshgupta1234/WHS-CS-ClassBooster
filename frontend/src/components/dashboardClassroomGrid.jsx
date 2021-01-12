@@ -7,7 +7,7 @@ class DashboardClassroomGrid extends Component {
       colPerRow, //each # in this array represents the # of columns in a Row
       maxNumOfColumns,
       classrooms,
-      toggleEditClassnamePopup,
+      toggleRenameClassroomPopup,
       toggleClassroomOptions,
       toggleDeleteClassroomPopup,
     } = this.props;
@@ -21,7 +21,7 @@ class DashboardClassroomGrid extends Component {
           columns={colPerRow[i]}
           maxNumOfColumns={maxNumOfColumns}
           classrooms={classrooms}
-          toggleEditClassnamePopup={toggleEditClassnamePopup}
+          toggleRenameClassroomPopup={toggleRenameClassroomPopup}
           toggleClassroomOptions={toggleClassroomOptions}
           toggleDeleteClassroomPopup={toggleDeleteClassroomPopup}
         ></Row>
@@ -55,7 +55,7 @@ function Row(props) {
           numOfStudents={classroom.numOfStudents}
           classroomOptionsVisible={classroom.classroomOptionsVisible}
           toggleClassroomOptions={props.toggleClassroomOptions}
-          toggleEditClassnamePopup={props.toggleEditClassnamePopup}
+          toggleRenameClassroomPopup={props.toggleRenameClassroomPopup}
           toggleDeleteClassroomPopup={props.toggleDeleteClassroomPopup}
           link={classroom.link}
         ></Classroom>

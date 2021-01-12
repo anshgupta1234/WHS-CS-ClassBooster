@@ -10,7 +10,7 @@ class DashboardClassroom extends Component {
       numOfStudents,
       classroomOptionsVisible,
       toggleClassroomOptions,
-      toggleEditClassnamePopup,
+      toggleRenameClassroomPopup,
       toggleDeleteClassroomPopup,
       link,
     } = this.props;
@@ -34,7 +34,7 @@ class DashboardClassroom extends Component {
           <div className="dashboard-nickname">{nickname}</div>
           {classroomOptionsVisible && (
             <ClassroomOptionsDropdown
-              toggleEditClassnamePopup={toggleEditClassnamePopup}
+              toggleRenameClassroomPopup={toggleRenameClassroomPopup}
               toggleDeleteClassroomPopup={toggleDeleteClassroomPopup}
               classroomIndex={index}
             ></ClassroomOptionsDropdown>
@@ -53,11 +53,11 @@ function ClassroomOptionsDropdown(props) {
   return (
     <div className="dashboard-classroom-options-dropdown">
       <button
-        id={"editClassnameOption" + props.classroomIndex}
-        className="dashboard-edit-classname"
-        onClick={() => props.toggleEditClassnamePopup(props.classroomIndex)}
+        id={"renameClassroomOption" + props.classroomIndex}
+        className="dashboard-rename-classroom"
+        onClick={() => props.toggleRenameClassroomPopup(props.classroomIndex)}
       >
-        Edit classname
+        Rename classroom
       </button>
       <button
         id={"deleteClassroomOption" + props.classroomIndex}

@@ -2,7 +2,7 @@
 import React, { Component, useState } from "react";
 import DashboardNavbar from "../components/dashboardNavbar";
 import DashboardClassroomGrid from "../components/dashboardClassroomGrid";
-import DashboardEditClassnamePopup from "../components/dashboardEditClassnamePopup";
+import DashboardRenameClassroomPopup from "../components/dashboardRenameClassroomPopup";
 import DashboardDeleteClassroomPopup from "../components/dashboardDeleteClassroomPopup";
 import "../css/Dashboard.css";
 
@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
   state = {
     colPerRow: [],
     maxNumOfColumns: 0,
-    editClassnamePopup: { show: false, indexOfClassroom: 0 },
+    renameClassroomPopup: { show: false, indexOfClassroom: 0 },
     deleteClassroomPopup: { show: false, indexOfClassroom: 0 },
     classroomWithOptionsOn: -1,
     classrooms: [],
@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
       if (
         targetedElement !==
           document.getElementById(
-            "editClassnameOption" + classroomWithOptionsOn
+            "renameClassroomOption" + classroomWithOptionsOn
           ) &&
         targetedElement !==
           document.getElementById(
@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
         !document
           .getElementById("verticalEllipsisButton" + classroomWithOptionsOn)
           .contains(e.target) &&
-        this.state.editClassnamePopup.show !== true &&
+        this.state.renameClassroomPopup.show !== true &&
         this.state.deleteClassroomPopup.show !== true
       ) {
         classrooms[classroomWithOptionsOn].classroomOptionsVisible = false;
@@ -139,7 +139,7 @@ export default class Dashboard extends Component {
 
   calculateRows = (newClassroomList) => {
     //calculate how many classrooms can fit in each row, how many rows are needed, and how many classrooms are in the last row since it's not always full
-    let classroomTotalWidthInPx = 360;
+    let classroomTotalWidthInPx = 350;
     let viewportWidth = window.innerWidth - 50; // -50 to allow for a 50px padding on the right side
     if (viewportWidth > classroomTotalWidthInPx) {
       let numOfClassrooms = newClassroomList.length;
@@ -199,19 +199,19 @@ export default class Dashboard extends Component {
     }
   }
 
-  toggleEditClassnamePopup = (indexOfClassroom) => {
-    let editClassnamePopup = this.state.editClassnamePopup;
-    editClassnamePopup.show = !editClassnamePopup.show;
-    editClassnamePopup.indexOfClassroom = indexOfClassroom;
+  toggleRenameClassroomPopup = (indexOfClassroom) => {
+    let renameClassroomPopup = this.state.renameClassroomPopup;
+    renameClassroomPopup.show = !renameClassroomPopup.show;
+    renameClassroomPopup.indexOfClassroom = indexOfClassroom;
     this.setState({
-      editClassnamePopup,
+      renameClassroomPopup,
     });
   };
 
   setClassroomName = (indexOfClassroom, classroomName, nickname) => {
     classroomName = classroomName.trim();
     nickname = nickname.trim();
-    this.toggleEditClassnamePopup();
+    this.toggleRenameClassroomPopup();
     if (indexOfClassroom === -1) {
       //index of -1 means a new classroom
       this.addClassroom(classroomName, nickname);
@@ -227,7 +227,7 @@ export default class Dashboard extends Component {
     return (
       <div id="dashboard-page">
         <DashboardNavbar
-          toggleEditClassnamePopup={this.toggleEditClassnamePopup}
+          toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
           toggleProfileDropdown={this.toggleProfileDropdown}
           profileDropdownVisible={this.state.profileDropdownVisible}
         ></DashboardNavbar>
@@ -235,23 +235,23 @@ export default class Dashboard extends Component {
           colPerRow={this.state.colPerRow}
           maxNumOfColumns={this.state.maxNumOfColumns}
           classrooms={this.state.classrooms}
-          toggleEditClassnamePopup={this.toggleEditClassnamePopup}
+          toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
           toggleClassroomOptions={this.toggleClassroomOptions}
           toggleDeleteClassroomPopup={this.toggleDeleteClassroomPopup}
         ></DashboardClassroomGrid>
-        {this.state.editClassnamePopup.show && (
-          <DashboardEditClassnamePopup
+        {this.state.renameClassroomPopup.show && (
+          <DashboardRenameClassroomPopup
             selectedClassroom={
-              this.state.editClassnamePopup.indexOfClassroom > -1
+              this.state.renameClassroomPopup.indexOfClassroom > -1
                 ? this.state.classrooms[
-                    this.state.editClassnamePopup.indexOfClassroom
+                    this.state.renameClassroomPopup.indexOfClassroom
                   ]
                 : { index: -1 }
             }
             setClassroomName={this.setClassroomName}
-            toggleEditClassnamePopup={this.toggleEditClassnamePopup}
+            toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
             toggleClassroomOptions={this.toggleClassroomOptions}
-          ></DashboardEditClassnamePopup>
+          ></DashboardRenameClassroomPopup>
         )}
         {this.state.deleteClassroomPopup.show && (
           <DashboardDeleteClassroomPopup
