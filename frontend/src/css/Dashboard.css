@@ -1,0 +1,411 @@
+:root {
+  --classroom-width: 310px;
+  --classroom-height: 320px;
+  --classroom-card-border-radius: 6px;
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+#dashboard-page {
+  background-color: #9fd0eb;
+  position: absolute;
+  overflow: auto;
+  width: 100%;
+  height: 100vh;
+}
+
+.dashboard-navbar-container {
+  box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 65px;
+}
+
+.dashboard-navbar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+.dashboard-logo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00c2cb;
+  display: flex;
+  align-items: center;
+  font-family: "Megrim", cursive;
+  display: inline;
+  font-size: 2em;
+  user-select: none;
+  font-weight: normal;
+  padding: 0px 10px;
+  margin-left: 5px;
+  filter: drop-shadow(1px 1px 3px rgb(105, 105, 105));
+  text-rendering: geometricPrecision;
+}
+
+.dashboard-logo:link,
+.dashboard-logo:visited {
+  text-decoration: none;
+  color: #00c2cb;
+}
+
+.dashboard-plus {
+  position: absolute;
+  top: 50%;
+  right: 120px;
+  transform: translateY(-50%);
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  transition: background-color 300ms;
+}
+
+.dashboard-plus:hover {
+  background-color: #d9d9d9;
+}
+
+.dashboard-plus:focus {
+  outline: none;
+}
+
+#dashboard-profile {
+  display: flex;
+  align-items: center;
+  background-color: #ffff;
+  width: 55px;
+  height: 55px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translate(-15px, -50%);
+  transition: background-color 300ms;
+}
+
+#dashboard-profile:hover {
+  background-color: #e6e6e6;
+}
+
+#dashboard-profile:focus {
+  background-color: #e6e6e6;
+  outline: none;
+}
+
+#dashboard-profile-dropdown {
+  position: absolute;
+  top: 64px;
+  right: 24px;
+  border-radius: 7px;
+  box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.1);
+}
+
+#dashboard-profile-dropdown a {
+  font: 20px Overpass, sans-serif;
+  background-color: #b0ffff;
+  display: block;
+  cursor: pointer;
+  width: 130px;
+  transition: filter 300ms;
+  padding-left: 8px;
+  padding-top: 7px;
+}
+
+#dashboard-profile-dropdown a:link,
+#dashboard-profile-dropdown a:visited {
+  text-decoration: none;
+  color: #000000;
+}
+
+#dashboard-profile-dropdown a:hover {
+  filter: brightness(0.9);
+}
+
+#dashboard-account-link {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+#dashboard-support-link {
+  padding-bottom: 4px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.dashboard-classroom {
+  border-radius: var(--classroom-card-border-radius);
+  margin-left: 50px;
+  width: var(--classroom-width);
+  height: var(--classroom-height);
+  box-shadow: 0 0 12px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-classroom-top-section {
+  position: relative;
+  width: var(--classroom-width);
+  height: 40%;
+  border-top-left-radius: var(--classroom-card-border-radius);
+  border-top-right-radius: var(--classroom-card-border-radius);
+  background-color: #b0ffff;
+}
+
+.dashboard-classroom-bottom-section {
+  position: relative;
+  width: var(--classroom-width);
+  height: 60%;
+  border-bottom-left-radius: var(--classroom-card-border-radius);
+  border-bottom-right-radius: var(--classroom-card-border-radius);
+  background-color: white;
+}
+
+.dashboard-classroom-name {
+  display: inline-block;
+  margin-top: 6px;
+  margin-left: 10px;
+  font: 26px Chivo, sans-serif;
+  cursor: pointer;
+  max-width: 260px;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-classroom-name:link,
+.dashboard-classroom-name:visited {
+  text-decoration: none;
+  color: #000000;
+}
+
+.dashboard-classroom-name:hover {
+  text-decoration: underline;
+}
+
+.dashboard-nickname {
+  color: #949494;
+  font: 20px Overpass, sans-serif;
+  margin-left: 10px;
+  max-width: 260px;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-vertical-ellipsis {
+  border: none;
+  float: right;
+  margin-top: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: block;
+  background-color: #b0ffff;
+}
+
+.dashboard-vertical-ellipsis:focus {
+  outline: none;
+}
+
+.dashboard-classroom-options-dropdown {
+  position: absolute;
+  top: 47px;
+  right: 13px;
+}
+
+.dashboard-classroom-options-dropdown button {
+  background-color: #e6e6e6;
+  border: none;
+  width: 100%;
+  transition: filter 300ms;
+  cursor: pointer;
+  font: 17px Overpass, sans-serif;
+  display: block;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.dashboard-classroom-options-dropdown button:hover {
+  filter: brightness(0.9);
+}
+
+.dashboard-classroom-options-dropdown button:focus {
+  outline: none;
+}
+
+.dashboard-edit-classname {
+  padding-top: 5px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.dashboard-delete-classroom {
+  padding-bottom: 5px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.dashboard-students {
+  color: #949494;
+  position: absolute;
+  bottom: 0;
+  right: 55%;
+  font: 20px Overpass, sans-serif;
+}
+
+.dashboard-classroom-row {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dashboard-popup-background {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(70, 70, 70, 0.8);
+}
+
+.dashboard-popup-classname {
+  background-color: #ffffff;
+  border-radius: 7px;
+  width: 500px;
+  height: 275px;
+  transform: translateY(230px);
+  padding-top: 20px;
+}
+
+.dashboard-popup-classname p {
+  font: 28px Chivo, sans-serif;
+  text-align: center;
+}
+
+.dashboard-popup-classname label,
+span {
+  font: 20px Overpass, sans-serif;
+  margin-left: 10px;
+}
+
+.dashboard-popup-classname input {
+  font: 18px Overpass, sans-serif;
+  margin-left: 10px;
+  padding: 5px;
+  width: 480px;
+  border-radius: 3px;
+  border: 2px solid #b3b3b3;
+  box-sizing: border-box;
+  transition: border-color 450ms;
+}
+
+.dashboard-popup-classname input:focus {
+  outline: none;
+  border-color: #01ccc0;
+}
+.dashboard-popup-classname button {
+  font: 20px Overpass, sans-serif;
+  margin-top: 10px;
+  border-radius: 10px;
+  height: 30px;
+  cursor: pointer;
+  transition-duration: 300ms;
+}
+
+.dashboard-popup-classname button:focus {
+  outline: none;
+}
+
+.dashboard-popup-classname-save {
+  width: 70px;
+  background-color: #01ccc0;
+  color: #ffff;
+  border: none;
+  margin-left: 15px;
+}
+
+.dashboard-popup-classname-save:hover {
+  filter: brightness(0.9);
+}
+
+.dashboard-popup-classname-cancel {
+  width: 80px;
+  border: 1px solid #9fd0eb;
+  color: #808080;
+  background-color: #ffff;
+  margin-left: 10px;
+}
+
+.dashboard-popup-classname-cancel:hover {
+  background-color: #9fd0eb;
+  color: #ffff;
+}
+
+.dashboard-popup-delete-classroom {
+  background-color: #ffff;
+  border-radius: 7px;
+  width: 470px;
+  height: 220px;
+  transform: translateY(250px);
+  padding-top: 20px;
+  text-align: center;
+}
+
+.dashboard-popup-delete-classroom p {
+  font: 28px Chivo, sans-serif;
+}
+
+.dashboard-popup-delete-classroom-warning {
+  font: 24px Overpass, sans-serif;
+  color: #e60000;
+}
+
+.dashboard-popup-delete-classroom button {
+  font: 20px Overpass, sans-serif;
+  height: 30px;
+  margin-top: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition-duration: 300ms;
+}
+
+.dashboard-popup-delete-classroom button:focus {
+  outline: none;
+}
+
+.dashboard-popup-delete-classroom-delete {
+  margin-right: 6px;
+  width: 80px;
+  background-color: #ffff;
+  border: 1px solid #e60000;
+  cursor: pointer;
+}
+
+.dashboard-popup-delete-classroom-delete:hover {
+  color: #ffff;
+  background-color: #e60000;
+}
+
+.dashboard-popup-delete-classroom-cancel {
+  margin-left: 6px;
+  width: 80px;
+  border: none;
+  color: white;
+  background-color: #01ccc0;
+}
+
+.dashboard-popup-delete-classroom-cancel:hover {
+  filter: brightness(0.9);
+}
