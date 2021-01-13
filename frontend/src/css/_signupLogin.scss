@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
-.support {
+.signupLogin-support {
   position: absolute;
   right: 30%;
   border: 0px;
@@ -13,7 +13,7 @@
   text-align: center;
   padding: 10px;
 }
-.updates {
+.signupLogin-updates {
   position: absolute;
   right: 15%;
   border: 0px;
@@ -27,9 +27,9 @@
   text-align: center;
   padding: 10px;
 }
-.loginSignupButton,
-.loginSignupButton:hover,
-.loginSignupButton:focus {
+.signupLogin-ButtonA,
+.signupLogin-ButtonA:hover,
+.signupLogin-ButtonA:focus {
   position: absolute;
   right: 1px;
   border: 0px;
@@ -46,8 +46,10 @@
   margin: 10px 20px;
   text-decoration: none;
 }
-
-.logoText2 {
+.signupLogin-logoText,
+.signupLogin-logoText:focus,
+.signupLogin-logoText:hover {
+  text-decoration: none;
   font-family: "Megrim", cursive;
   color: $accent;
   display: inline;
@@ -89,25 +91,15 @@
   line-height: 57px;
   text-align: center;
 }
-#navbarB {
+#signupLogin-navbar {
   display: flex;
   flex-direction: row;
   width: auto;
   background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-  span,
-  img,
-  svg {
-    padding: 5px 5px;
-  }
-  svg {
-    height: 10%;
-    transform: scale(1.6);
-  }
+  box-shadow: 0 0 20px black;
+  padding: 5px 5px;
 }
-button {
-  cursor: pointer;
-}
+
 .placeHolderTextLogin {
   font-family: Overpass;
   font-style: normal;
@@ -142,7 +134,7 @@ button {
   padding-left: 10px;
   height: 40px;
 }
-.signInButtonB {
+.signupLogin-ButtonB {
   border: 0px;
   height: 40px;
   font-family: Chivo;
@@ -157,7 +149,7 @@ button {
   margin: 10px;
   outline: none;
 }
-.forgotPassword {
+.signupLogin-forgotPassword {
   width: 163px;
   height: 20px;
   left: 630px;
@@ -172,9 +164,9 @@ button {
   background: white;
   border: 0px;
 }
-.signUpLoginButtonB,
-.signUpLoginButtonB:hover,
-.signUpLoginButtonB:focus {
+.signupLogin-ButtonC,
+.signupLogin-ButtonC:hover,
+.signupLogin-ButtonC:focus {
   display: inline-block;
   padding-top: 5px;
   border: 0px;
@@ -193,7 +185,36 @@ button {
   color: #ffffff;
   text-decoration: none;
 }
-.basicBackground {
+.signupLogin-orLine {
+  overflow: hidden;
+  display: inline-block;
+  padding: 0px 10px;
+  background: white;
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+h2.signupLogin-background {
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    border-top: 1px;
+    border-top-style: solid;
+    border-top-color: black;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 65%;
+    left: 0;
+    right: 0;
+    width: 78%;
+    z-index: -1;
+  }
+}
+.signupLogin-basicBackground {
   background-image: url("../assets/linearGradientBackground.png");
 
   background-position: center;
@@ -202,7 +223,7 @@ button {
   height: 100%;
   width: 100%;
 }
-.main {
+.signupLogin-main {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
