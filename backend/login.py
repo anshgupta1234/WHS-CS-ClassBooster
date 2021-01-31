@@ -30,6 +30,7 @@ class login(Resource):
             print(sha256.verify(args["password"],userCursor["password"]))
             if sha256.verify(args["password"],userCursor["password"]):
                 session['username'] = args["username"]
+                session['userID'] = str(userCursor['_id'])
                 print("session username is "+session.get('username'))
                 return "Signed In.",201
             else:
