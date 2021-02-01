@@ -2,8 +2,11 @@
 import React, { Component } from 'react'
 import "../css/style.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+import Example from './DnDComponents/example.js'
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 export default class ClassEditor extends Component {
-	state = {onClassroom : true}
+	state = {onClassroom : true, first: true}
 getClass(para){
 	const cs = document.getElementById('classSection');
 	const ss = document.getElementById('studentSection');
@@ -23,6 +26,7 @@ getClass(para){
 			if (this.state.onClassroom){
 				if(ss)
 					setTimeout(function(){ss.classList.add("hidden"); }, 300);
+				if(this.state.first) return "studentSection fade-out-right hidden";
 				return "studentSection fade-out-right";
 			}
 			else{
@@ -33,6 +37,7 @@ getClass(para){
 		}
 	}
 handleChange(para){
+	this.setState({ first : false })
 		if(para){
 			this.setState({onClassroom : true});
 			document.getElementById('classroomNavButton').classList.add("blackText");
@@ -51,7 +56,7 @@ handleChange(para){
   render(){
     return (
 			<section className="bgSection">
-				<nav id="navbar">
+				<nav id="navbar2">
 					<svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor" /><path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="currentColor" /><path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="currentColor" /></svg>
 					<span className="logoText">CLASSBOOSTER </span>
 					<img draggable="false" id="userProfilePicture" src = "https://www.pathcenter.co.il/wp-content/uploads/2014/03/user_icon.png" />
@@ -68,14 +73,13 @@ handleChange(para){
 						<span className="chivo classname">Class Name</span>
 						<div className="roomSpace">
 							<div className="whiteboard overpass">Whiteboard</div>
-							<div className="tdesk overpass">Teacher Desk</div>
-							<br></br>
-							<div className="students">
-								<div className="sdesk">Student #1</div>
+							<div className="deskSpace">
+							<DndProvider backend={HTML5Backend}>
+								<Example />
+							</DndProvider>
 							</div>
 						</div>
 						<div className="buttons">
-							<button className="greenButton">Add Desk</button>
 							<button className="whiteButton">Create Seating Chart</button>
 						</div>
 					</section>
