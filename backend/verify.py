@@ -13,7 +13,7 @@ import dnspython
 from pymongo import MongoClient
 
 client = MongoClient("mongodb+srv://ansh:ClassBooster@cluster0.uefsc.mongodb.net/Cluster0?retryWrites=true&w=majority")
-database = client["nathan"] 
+database = client["creds"] 
 auth = database["auth"]
 emailVerifCollection = database["verification"]
 
