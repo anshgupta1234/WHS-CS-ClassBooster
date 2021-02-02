@@ -32,16 +32,16 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <section className="main" >
+      <section className="signupLogin-main" >
         <section>
-        <nav id="navbarB">
-					<span className="logoText2">CLASSBOOSTER </span>
-					<button className="support ">Support</button>
-          <button className="updates ">Updates</button>
-          <Link to="/Signup" className="loginSignupButton" >SIGN UP</Link>
+        <nav id="signupLogin-navbar">
+					<Link to="/landing" className="signupLogin-logoText">CLASSBOOSTER </Link>
+					<button className="signupLogin-support ">Support</button>
+          <button className="signupLogin-updates ">Updates</button>
+          <Link to="/Signup" className="signupLogin-ButtonA" >SIGN UP</Link>
 				</nav>
         </section> 
-        <section className="basicBackground">
+        <section className="signupLogin-basicBackground">
       <section  className = "loginContainer">
           <center>
             <h1 className="loginTitle"
@@ -64,29 +64,14 @@ export default class Login extends React.Component {
               />
               <br/>
               <input type="submit"  
-              className = "signInButtonB"
+              className = "signupLogin-ButtonB"
               value="Login"/>
             </form>
-            <button className="forgotPassword">Forgot Password?</button>
-            
-            <h6 style={{
-                 textAlign: "center",
-                 borderBottom: "0.5px solid #000000",
-                 lineHeight: "1px",
-                 margin: "20px",
-                 width: "78%"
+            <button className="signupLogin-forgotPassword">Forgot Password?</button>
+            <h2 className="signupLogin-background"><span className="signupLogin-orLine">or</span></h2>
 
-            }}><span style={{
-            padding: "0 10px",
-            background:"#fff",
-            fontFamily: "Roboto Condensed",
-            fontStyle: "normal",
-            fontWeight: "300",
-            fontSize: "12px",
-            textAlign: "center",
-            }}>or</span></h6>
 
-          <Link to="/Signup" className="signUpLoginButtonB">Sign Up</Link>
+          <Link to="/Signup" className="signupLogin-ButtonC">Sign Up</Link>
           </center>
           </section>
           </section>
