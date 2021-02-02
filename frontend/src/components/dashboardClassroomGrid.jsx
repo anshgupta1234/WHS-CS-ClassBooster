@@ -4,7 +4,7 @@ import Classroom from "./dashboardClassroom";
 class DashboardClassroomGrid extends Component {
   render() {
     const {
-      colPerRow, //each # in this array represents the # of columns in a Row
+      columnsPerRow, //each # in this array represents the # of columns in a Row
       maxNumOfColumns,
       classrooms,
       toggleRenameClassroomPopup,
@@ -12,13 +12,13 @@ class DashboardClassroomGrid extends Component {
       toggleDeleteClassroomPopup,
     } = this.props;
     let rows = []; //array containing each Row component
-    for (let i = 0; i < colPerRow.length; i++) {
+    for (let i = 0; i < columnsPerRow.length; i++) {
       //for number n in the array, add a Row component with n # of columns
       rows.push(
         <Row
           key={i}
           rowNumber={i}
-          columns={colPerRow[i]}
+          columns={columnsPerRow[i]}
           maxNumOfColumns={maxNumOfColumns}
           classrooms={classrooms}
           toggleRenameClassroomPopup={toggleRenameClassroomPopup}

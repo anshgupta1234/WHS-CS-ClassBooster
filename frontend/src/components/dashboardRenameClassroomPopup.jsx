@@ -4,11 +4,11 @@ class DashboardRenameClassroomPopup extends Component {
   state = { noClassnameWarning: "" };
   checkInputs() {
     let indexOfClassroom = this.props.selectedClassroom.index;
-    if (document.getElementById("classname").value.trim().length > 0) {
+    if (document.getElementById("dashboard-classname").value.trim().length > 0) {
       this.props.setClassroomName(
         indexOfClassroom,
-        document.getElementById("classname").value,
-        document.getElementById("nickname").value
+        document.getElementById("dashboard-classname").value,
+        document.getElementById("dashboard-nickname").value
       );
       this.props.toggleClassroomOptions(indexOfClassroom);
     } else {
@@ -20,15 +20,15 @@ class DashboardRenameClassroomPopup extends Component {
     let indexOfClassroom = selectedClassroom.index;
     let header, classnameLabel, nicknameLabel, oldClassroomName, oldNickname;
     if (indexOfClassroom === -1) {
-      header = "Choose classname and nickname";
-      classnameLabel = "Choose a classname (required)";
-      nicknameLabel = "Choose a nickname (optional)";
+      header = "Name classroom";
+      classnameLabel = "Classname (required)";
+      nicknameLabel = "Nickname";
       oldClassroomName = "";
       oldNickname = "";
     } else {
       header = "Rename classroom";
-      classnameLabel = "Choose a classname";
-      nicknameLabel = "Choose a nickname";
+      classnameLabel = "Classname";
+      nicknameLabel = "Nickname";
       oldClassroomName = selectedClassroom.name;
       oldNickname = selectedClassroom.nickname;
     }
@@ -47,24 +47,25 @@ class DashboardRenameClassroomPopup extends Component {
           <br></br>
           <input
             type="text"
-            id="classname"
+            id="dashboard-classname"
             name="classname"
             maxLength="40"
-            size="30"
+            size="20"
             defaultValue={oldClassroomName}
             autoComplete="off"
           ></input>
-          <label htmlFor="nickname">{nicknameLabel}</label>
+          <label htmlFor="nickname" id="dashboard-nickname-label">{nicknameLabel}</label>
           <br></br>
           <input
             type="text"
-            id="nickname"
+            id="dashboard-nickname"
             name="nickname"
             maxLength="40"
-            size="30"
+            size="20"
             defaultValue={oldNickname}
             autoComplete="off"
           ></input>
+          <br></br>
           <button
             className="dashboard-popup-classname-save"
             onClick={() => this.checkInputs()}

@@ -4,7 +4,7 @@
   --classroom-card-border-radius: 6px;
 }
 
-.noscroll {
+.dashboard-noscroll {
   overflow: hidden;
 }
 
@@ -175,9 +175,9 @@
   display: inline-block;
   margin-top: 6px;
   margin-left: 12px;
-  font: 26px Chivo, sans-serif;
+  font: 23px Chivo, sans-serif;
   cursor: pointer;
-  max-width: 260px;
+  max-width: 255px;
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -195,9 +195,9 @@
 
 .dashboard-nickname {
   color: #949494;
-  font: 20px Overpass, sans-serif;
+  font: 19px Overpass, sans-serif;
   margin-left: 12px;
-  max-width: 260px;
+  max-width: 255px;
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -265,7 +265,7 @@
   color: #949494;
   position: absolute;
   bottom: 0;
-  right: 55%;
+  margin-left: 12px;
   font: 20px Overpass, sans-serif;
 }
 
@@ -290,28 +290,36 @@
 .dashboard-popup-classname {
   background-color: #ffffff;
   border-radius: 7px;
-  width: 500px;
-  height: 275px;
+  width: 360px;
+  height: 280px;
   transform: translateY(230px);
   padding-top: 20px;
 }
 
 .dashboard-popup-classname p {
-  font: 28px Chivo, sans-serif;
+  font: 25px Chivo, sans-serif;
   text-align: center;
 }
 
-.dashboard-popup-classname label,
-span {
-  font: 20px Overpass, sans-serif;
-  margin-left: 10px;
+.dashboard-popup-classname label {
+  font: 16px Overpass, sans-serif;
+  margin-left: 20px;
+}
+
+.dashboard-popup-classname span {
+  font: 16px Overpass, sans-serif;
+  margin-left: 12px;
+}
+
+#dashboard-nickname-label {
+  margin-top: 10px;
 }
 
 .dashboard-popup-classname input {
   font: 18px Overpass, sans-serif;
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 5px;
-  width: 480px;
+  width: 320px;
   border-radius: 3px;
   border: 2px solid #b3b3b3;
   box-sizing: border-box;
@@ -324,7 +332,7 @@ span {
 }
 .dashboard-popup-classname button {
   font: 20px Overpass, sans-serif;
-  margin-top: 10px;
+  margin-top: 14px;
   border-radius: 10px;
   height: 30px;
   cursor: pointer;
@@ -340,7 +348,7 @@ span {
   background-color: #01ccc0;
   color: #ffff;
   border: none;
-  margin-left: 15px;
+  margin-left: 25px;
 }
 
 .dashboard-popup-classname-save:hover {
@@ -352,7 +360,7 @@ span {
   border: 1px solid #9fd0eb;
   color: #808080;
   background-color: #ffff;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .dashboard-popup-classname-cancel:hover {
@@ -371,11 +379,11 @@ span {
 }
 
 .dashboard-popup-delete-classroom p {
-  font: 28px Chivo, sans-serif;
+  font: 25px Chivo, sans-serif;
 }
 
 .dashboard-popup-delete-classroom-warning {
-  font: 24px Overpass, sans-serif;
+  font: 20px Overpass, sans-serif;
   color: #e60000;
 }
 
@@ -393,7 +401,7 @@ span {
 }
 
 .dashboard-popup-delete-classroom-delete {
-  margin-right: 6px;
+  margin-right: 20px;
   width: 80px;
   background-color: #ffff;
   border: 1px solid #e60000;
@@ -406,7 +414,6 @@ span {
 }
 
 .dashboard-popup-delete-classroom-cancel {
-  margin-left: 6px;
   width: 80px;
   border: none;
   color: white;

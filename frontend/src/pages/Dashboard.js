@@ -8,7 +8,7 @@ import "../css/Dashboard.css";
 
 export default class Dashboard extends Component {
   state = {
-    colPerRow: [],
+    columnsPerRow: [],
     maxNumOfColumns: 0,
     renameClassroomPopup: { show: false, indexOfClassroom: 0 },
     deleteClassroomPopup: { show: false, indexOfClassroom: 0 },
@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
       this.calculateRows(this.state.classrooms)
     );
     document.addEventListener("mousedown", this.handleClick);
-    document.body.classList.add("noscroll");
+    document.body.classList.add("dashboard-noscroll");
   }
 
   componentWillUnmount() {
@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
       this.calculateRows(this.state.classrooms)
     );
     document.removeEventListener("mousedown", this.handleClick);
-    document.body.classList.remove("noscroll");
+    document.body.classList.remove("dashboard-noscroll");
   }
 
   handleClick = (e) => {
@@ -180,7 +180,7 @@ export default class Dashboard extends Component {
     this.setState(
       {
         classrooms: newClassroomList,
-        colPerRow: rowsArray,
+        columnsPerRow: rowsArray,
         maxNumOfColumns: maxNumOfColumns,
         classroomWithOptionsOn: -1,
       },
@@ -232,7 +232,7 @@ export default class Dashboard extends Component {
           profileDropdownVisible={this.state.profileDropdownVisible}
         ></DashboardNavbar>
         <DashboardClassroomGrid
-          colPerRow={this.state.colPerRow}
+          columnsPerRow={this.state.columnsPerRow}
           maxNumOfColumns={this.state.maxNumOfColumns}
           classrooms={this.state.classrooms}
           toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
