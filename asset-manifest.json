@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/WHS-CS-ClassBooster/static/css/main.eb4e05a4.chunk.css",
+    "main.js": "/WHS-CS-ClassBooster/static/js/main.ce700caf.chunk.js",
+    "main.js.map": "/WHS-CS-ClassBooster/static/js/main.ce700caf.chunk.js.map",
+    "runtime-main.js": "/WHS-CS-ClassBooster/static/js/runtime-main.fa7d3c09.js",
+    "runtime-main.js.map": "/WHS-CS-ClassBooster/static/js/runtime-main.fa7d3c09.js.map",
+    "static/css/2.c98882f1.chunk.css": "/WHS-CS-ClassBooster/static/css/2.c98882f1.chunk.css",
+    "static/js/2.9641a410.chunk.js": "/WHS-CS-ClassBooster/static/js/2.9641a410.chunk.js",
+    "static/js/2.9641a410.chunk.js.map": "/WHS-CS-ClassBooster/static/js/2.9641a410.chunk.js.map",
+    "index.html": "/WHS-CS-ClassBooster/index.html",
+    "precache-manifest.2981eb19c3acaa7ad141a36bfd379392.js": "/WHS-CS-ClassBooster/precache-manifest.2981eb19c3acaa7ad141a36bfd379392.js",
+    "service-worker.js": "/WHS-CS-ClassBooster/service-worker.js",
+    "static/css/2.c98882f1.chunk.css.map": "/WHS-CS-ClassBooster/static/css/2.c98882f1.chunk.css.map",
+    "static/css/main.eb4e05a4.chunk.css.map": "/WHS-CS-ClassBooster/static/css/main.eb4e05a4.chunk.css.map",
+    "static/js/2.9641a410.chunk.js.LICENSE.txt": "/WHS-CS-ClassBooster/static/js/2.9641a410.chunk.js.LICENSE.txt",
+    "static/media/PlusSign.a189691d.svg": "/WHS-CS-ClassBooster/static/media/PlusSign.a189691d.svg",
+    "static/media/VerticalEllipsis.99f78968.svg": "/WHS-CS-ClassBooster/static/media/VerticalEllipsis.99f78968.svg",
+    "static/media/defaultProfile.6877374d.svg": "/WHS-CS-ClassBooster/static/media/defaultProfile.6877374d.svg",
+    "static/media/style.css": "/WHS-CS-ClassBooster/static/media/linearGradientBackground.3b02502b.png",
+    "static/media/logo.svg": "/WHS-CS-ClassBooster/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fa7d3c09.js",
+    "static/css/2.c98882f1.chunk.css",
+    "static/js/2.9641a410.chunk.js",
+    "static/css/main.eb4e05a4.chunk.css",
+    "static/js/main.ce700caf.chunk.js"
+  ]
+}
