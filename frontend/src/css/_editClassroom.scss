@@ -51,11 +51,12 @@ button {
   background-color: $primarybg;
   button {
     font-family: "Chivo", sans-serif;
-    font-size: 1.5em;
+    width: 160px;
+    font-size: 26px;
     color: white;
     background-color: transparent;
     border: none;
-    padding: 0.7em 1.8em 0.5em 0.7em;
+    padding: 8px 0px;
     &:focus {
       outline: none;
       color: #000;
@@ -71,7 +72,7 @@ button {
   margin: 0;
 }
 .line {
-  width: 8em;
+  width: 160px;
   display: inline;
   position: absolute;
   height: 0.2em;
@@ -199,6 +200,26 @@ button {
     outline: none;
   }
 }
+.blackButton {
+  background: linear-gradient(180deg, #1a1a1a 0%, rgba(255, 255, 255, 0) 100%),
+    #000000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3em;
+  font-family: "Overpass", sans-serif;
+  font-size: 1.5em;
+  border: none;
+  color: white;
+  text-align: center;
+  height: min-content;
+  padding: 1em 1em;
+  margin-top: 2em;
+  &:hover {
+    background-color: darken(rgb(70, 68, 68), 5%);
+  }
+  &:focus {
+    outline: none;
+  }
+}
 .buttons {
   display: inline-flex;
   align-items: center;
@@ -302,25 +323,21 @@ button {
 }
 @-webkit-keyframes fade-in-left {
   0% {
-    -webkit-transform: translateX(-50px);
-    transform: translateX(-50px);
+    margin-left: -50px;
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    margin-left: 0px;
     opacity: 1;
   }
 }
 @keyframes fade-in-left {
   0% {
-    -webkit-transform: translateX(-50px);
-    transform: translateX(-50px);
+    margin-left: -50px;
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    margin-left: 0px;
     opacity: 1;
   }
 }
@@ -330,8 +347,8 @@ button {
     transform: translateX(0em);
   }
   100% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
 }
 @keyframes lineAnimRight {
@@ -340,14 +357,14 @@ button {
     transform: translateX(0em);
   }
   100% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
 }
 @-webkit-keyframes lineAnimLeft {
   0% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
   100% {
     -webkit-transform: translateX(0em);
@@ -356,8 +373,8 @@ button {
 }
 @keyframes lineAnimLeft {
   0% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
   100% {
     -webkit-transform: translateX(0em);

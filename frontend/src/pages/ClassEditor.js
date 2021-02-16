@@ -4,9 +4,19 @@ import "../css/style.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import Example from './DnDComponents/example.js'
 import { DndProvider } from 'react-dnd';
+import { ReactComponent as DefaultProfile } from "../assets/defaultProfile.svg";
 import { HTML5Backend } from 'react-dnd-html5-backend';
 export default class ClassEditor extends Component {
-	state = {onClassroom : true, first: true}
+	state = {
+		onClassroom : true,
+		first: true,
+		profileDropdownVisible: false
+	}
+toggleProfileDropdown = () => {
+		this.setState({
+		  profileDropdownVisible: !this.state.profileDropdownVisible,
+		});
+	};
 getClass(para){
 	const cs = document.getElementById('classSection');
 	const ss = document.getElementById('studentSection');
@@ -55,12 +65,34 @@ handleChange(para){
 	}
   render(){
     return (
-			<section className="bgSection">
-				<nav id="navbar2">
-					<svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor" /><path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="currentColor" /><path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="currentColor" /></svg>
-					<span className="logoText">CLASSBOOSTER </span>
-					<img draggable="false" id="userProfilePicture" src = "https://www.pathcenter.co.il/wp-content/uploads/2014/03/user_icon.png" />
-				</nav>
+		<section className="bgSection">				
+			<nav className="dashboard-navbar-container">
+				<div className="dashboard-navbar">
+				<a href="http://localhost:3000" className="dashboard-logo">
+					CLASSBOOSTER
+				</a>
+				<button
+					id="dashboard-profile"
+					onClick={this.toggleProfileDropdown}
+				>
+					{<DefaultProfile />}
+				</button>
+				{this.state.profileDropdownVisible && (
+					<div id="dashboard-profile-dropdown">
+					<link
+					  href="https://fonts.googleapis.com/css2?family=Chivo&family=Overpass:wght@300&display=swap"
+					  rel="stylesheet"
+					></link>
+					<a href="#" id="dashboard-account-link">
+					  Account
+					</a>
+					<a href="#" id="dashboard-support-link">
+					  Support
+					</a>
+				  	</div>
+				)}
+				</div>
+			</nav>
 				<nav className="secondaryNav">
 					<button onClick = {() => this.handleChange(1)} id="classroomNavButton" className="blackText" >Classroom</button>
 					<button onClick = {() => this.handleChange(0)} id="studentsNavButton" >Students</button>
@@ -80,6 +112,7 @@ handleChange(para){
 							</div>
 						</div>
 						<div className="buttons">
+							<button className="blackButton">Save Seating Chart</button>
 							<button className="whiteButton">Create Seating Chart</button>
 						</div>
 					</section>
@@ -95,7 +128,7 @@ handleChange(para){
 						</div>
 					</section>
 				</div>
-			</section>
+		</section>
 		)
   }
 }

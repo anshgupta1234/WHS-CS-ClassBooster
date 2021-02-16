@@ -69,11 +69,12 @@ button {
 
 .secondaryNav button {
   font-family: "Chivo", sans-serif;
-  font-size: 1.5em;
+  width: 160px;
+  font-size: 26px;
   color: white;
   background-color: transparent;
   border: none;
-  padding: 0.7em 1.8em 0.5em 0.7em;
+  padding: 8px 0px;
 }
 
 .secondaryNav button:focus {
@@ -91,7 +92,7 @@ button {
 }
 
 .line {
-  width: 8em;
+  width: 160px;
   display: inline;
   position: absolute;
   height: 0.2em;
@@ -195,7 +196,7 @@ button {
 }
 
 .whiteButton {
-  background: -webkit-linear-gradient(linear, left top, left bottom, from(#eae7e7), to(rgba(255, 255, 255, 0))), #ffffff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#eae7e7), to(rgba(255, 255, 255, 0))), #ffffff;
   background: linear-gradient(180deg, #eae7e7 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -217,6 +218,32 @@ button {
 }
 
 .whiteButton:focus {
+  outline: none;
+}
+
+.blackButton {
+  background: -webkit-gradient(linear, left top, left bottom, from(#1a1a1a), to(rgba(255, 255, 255, 0))), #000000;
+  background: linear-gradient(180deg, #1a1a1a 0%, rgba(255, 255, 255, 0) 100%), #000000;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3em;
+  font-family: "Overpass", sans-serif;
+  font-size: 1.5em;
+  border: none;
+  color: white;
+  text-align: center;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  padding: 1em 1em;
+  margin-top: 2em;
+}
+
+.blackButton:hover {
+  background-color: #393737;
+}
+
+.blackButton:focus {
   outline: none;
 }
 
@@ -345,7 +372,7 @@ button {
     margin-left: 0px;
     opacity: 1;
   }
-} 
+}
 
 @keyframes fade-in-left {
   0% {
@@ -364,8 +391,8 @@ button {
     transform: translateX(0em);
   }
   100% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
 }
 
@@ -375,15 +402,15 @@ button {
     transform: translateX(0em);
   }
   100% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
 }
 
 @-webkit-keyframes lineAnimLeft {
   0% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
   100% {
     -webkit-transform: translateX(0em);
@@ -393,8 +420,8 @@ button {
 
 @keyframes lineAnimLeft {
   0% {
-    -webkit-transform: translateX(8.5em);
-    transform: translateX(8.5em);
+    -webkit-transform: translateX(160px);
+    transform: translateX(160px);
   }
   100% {
     -webkit-transform: translateX(0em);
