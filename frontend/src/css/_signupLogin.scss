@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
-.signupLogin-support {
+.signupLogin-support,
+.signupLogin-support:hover,
+.signupLogin-support:focus {
   position: absolute;
-  right: 30%;
+  right: 5%;
   border: 0px;
   background: transparent;
   width: 156px;
@@ -12,21 +14,10 @@
   line-height: 36px;
   text-align: center;
   padding: 10px;
+  text-decoration: none;
+  color: Black;
 }
-.signupLogin-updates {
-  position: absolute;
-  right: 15%;
-  border: 0px;
-  background: transparent;
-  width: 156px;
-  font-family: Chivo, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 26px;
-  line-height: 36px;
-  text-align: center;
-  padding: 10px;
-}
+
 .signupLogin-ButtonA,
 .signupLogin-ButtonA:hover,
 .signupLogin-ButtonA:focus {
@@ -35,7 +26,7 @@
   border: 0px;
   width: 120px;
   border-radius: 25px;
-  background: rgb(159, 208, 235);
+  background: #b0ffff;
   color: Black;
   font-family: Chivo, sans-serif;
   font-size: 20px;
@@ -79,7 +70,7 @@
   transform: translate(-50%, -50%);
   border: 0px;
   width: 440px;
-  height: 430px;
+  height: 480px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   background: white;
 }
@@ -190,13 +181,13 @@
   display: inline-block;
   padding: 0px 10px;
   background: white;
-  font-family: Roboto Condensed;
+  font-family: Roboto Condensed sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 12px;
 }
 
-h2.signupLogin-background {
+.signupLogin-background {
   position: relative;
   z-index: 1;
 

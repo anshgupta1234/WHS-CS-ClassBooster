@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/home">
+          <Route path="/dashboard">
             <Dashboard />
           </Route>
           <Route path="/editor">

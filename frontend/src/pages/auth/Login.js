@@ -11,11 +11,11 @@ import {
 
 export default class Login extends React.Component {
   state = {
-    username: "",
+    email: "",
     password: "",
   };
-  handleUsername = (event) => {
-    this.setState({ username: event.target.value });
+  handleEmail = (event) => {
+    this.setState({ email: event.target.value });
   };
   handlePassword = (event) => {
     this.setState({ password: event.target.value });
@@ -36,9 +36,7 @@ export default class Login extends React.Component {
         <section>
         <nav id="signupLogin-navbar">
 					<Link to="/landing" className="signupLogin-logoText">CLASSBOOSTER </Link>
-					<button className="signupLogin-support ">Support</button>
-          <button className="signupLogin-updates ">Updates</button>
-          <Link to="/Signup" className="signupLogin-ButtonA" >SIGN UP</Link>
+          <a href="mailto:classbooster.whs@gmail.com" className="signupLogin-support">Support</a>
 				</nav>
         </section> 
         <section className="signupLogin-basicBackground">
@@ -49,10 +47,10 @@ export default class Login extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
                 className="placeHolderTextLogin"
-                value={this.state.username}
-                onChange={this.handleUsername}
+                value={this.state.email}
+                onChange={this.handleEmail}
               />
               <br />
               <input

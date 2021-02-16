@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+.landing-support {
+  border: 0px;
+  background: transparent;
+  width: 156px;
+  font-family: "Chivo", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.6em;
+  line-height: 36px;
+  text-align: center;
+  padding: 10px;
+}
+#landing-navbar {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  background-color: white;
+}
+.landing-logoText,
+.landing-logoText:focus,
+.landing-logoText:hover {
+  text-decoration: none;
+  font-family: "Megrim", cursive;
+  color: $accent;
+  display: inline;
+  font-size: 2em;
+  user-select: none;
+  font-weight: normal;
+  margin: 10px 25px;
+  filter: drop-shadow(1px 1px 3px rgb(105, 105, 105));
+  text-rendering: geometricPrecision;
+}
+
+.landing-loginButton,
+.landing-loginButton:hover,
+.landing-loginButton:focus {
+  margin-left: auto;
+  display: block;
+  padding-top: 5px;
+  margin-top: 15px;
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.6em;
+  line-height: 29px;
+  text-align: center;
+  width: 120px;
+  border-radius: 10px;
+  background: #01ccc0;
+  outline: none;
+  color: #ffffff;
+  text-decoration: none;
+}
+.landing-signupButton,
+.landing-signupButton:hover,
+.landing-signupButton:focus {
+  display: block;
+  margin-right: 2%;
+  padding-top: 5px;
+  border: 0px;
+  height: 40px;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.6em;
+  line-height: 29px;
+  text-align: center;
+  width: 163px;
+  border-radius: 20px;
+  background: transparent;
+  margin-top: 15px;
+  margin-left: 15px;
+  outline: none;
+  color: #000000;
+  text-decoration: none;
+}
+.landing-mainSection {
+  background-image: url("../assets/classroomScene.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.landing-sectionEven {
+  background: #9fd0eb;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 60vh;
+}
+.landing-sectionOdd {
+  background: #b0ffff;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 60vh;
+}
+.landing-main {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+.landing-line {
+  border-bottom: 2px #01ccc0 solid;
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 102%;
+}
+.landing-footer {
+  background: #656565;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 30vh;
+}
+.landing-title {
+  margin-top: 5%;
+  font-size: 4em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+}
+.landing-titleLeft {
+  margin-top: 5%;
+  margin-left: 10%;
+  font-size: 4em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+  color: #000000;
+}
+
+.landing-infoLine {
+  font-size: 1.5em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+  margin-top: 2%;
+}
+.landing-infoLineLeft {
+  font-size: 1.5em;
+  margin-left: 10%;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+  color: #000000;
+  margin-top: 2%;
+}
+.landing-getStarted {
+  font-size: 2em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  color: #01ccc0;
+  margin: 2%;
+}
+.landing-video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+}
+.landing-gifTopRight {
+  display: flex;
+  align-items: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  width: 50%;
+  height: 50%;
+}
+.landing-gifTopLeft {
+  display: flex;
+  align-items: left;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  width: 100%;
+  height: 100%;
+}
+.landing-container {
+  display: flex;
+}
+.landing-leftColumn {
+  margin-left: 5%;
+  width: 60%;
+}
+.landing-rightColumn {
+  margin: auto;
+  width: auto;
+}
