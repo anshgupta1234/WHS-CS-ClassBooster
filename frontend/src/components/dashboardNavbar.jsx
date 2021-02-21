@@ -43,7 +43,7 @@ function ProfileDropdown() {
       <a href="#" id="dashboard-account-link">
         Account
       </a>
-      <a href="#" id="dashboard-support-link">
+      <a href="mailto:classbooster.whs@gmail.com" id="dashboard-support-link">
         Support
       </a>
     </div>

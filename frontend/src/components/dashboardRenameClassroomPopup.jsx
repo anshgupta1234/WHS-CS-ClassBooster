@@ -20,7 +20,7 @@ class DashboardRenameClassroomPopup extends Component {
     let indexOfClassroom = selectedClassroom.index;
     let header, classnameLabel, nicknameLabel, oldClassroomName, oldNickname;
     if (indexOfClassroom === -1) {
-      header = "Name classroom";
+      header = "Create classroom";
       classnameLabel = "Classname (required)";
       nicknameLabel = "Nickname";
       oldClassroomName = "";

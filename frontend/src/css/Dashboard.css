@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-#dashboard-page {
+#dashboard-container {
   background-color: #9fd0eb;
   position: absolute;
   overflow: auto;
@@ -43,9 +43,10 @@
   display: inline;
   font-size: 2em;
   padding: 0px 10px;
-  margin-left: 5px;
+  left: 5px;
   filter: drop-shadow(1px 1px 3px rgb(105, 105, 105));
   text-rendering: geometricPrecision;
+  user-select: none;
 }
 
 .dashboard-logo:link,

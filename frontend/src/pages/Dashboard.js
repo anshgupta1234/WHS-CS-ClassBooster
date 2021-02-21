@@ -94,7 +94,7 @@ export default class Dashboard extends Component {
       nickname: nickname,
       numOfStudents: 0,
       classroomOptionsVisible: false,
-      link: "#",
+      link: "/editor",
     });
     this.calculateRows(classrooms);
   };
@@ -193,9 +193,9 @@ export default class Dashboard extends Component {
     let heightOfRow = heightOfClassroom + 40; //40px is margin-top of row
     let totalHeightNeeded = heightOfRow * numOfRows + 65; //65px is height of navbar
     if (totalHeightNeeded > visualViewport.height) {
-      document.getElementById("dashboard-page").style.paddingBottom = "40px";
+      document.getElementById("dashboard-container").style.paddingBottom = "40px";
     } else {
-      document.getElementById("dashboard-page").style.paddingBottom = "0px";
+      document.getElementById("dashboard-container").style.paddingBottom = "0px";
     }
   }
 
@@ -225,7 +225,7 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div id="dashboard-page">
+      <div id="dashboard-container">
         <DashboardNavbar
           toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
           toggleProfileDropdown={this.toggleProfileDropdown}
