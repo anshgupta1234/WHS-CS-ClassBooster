@@ -552,8 +552,26 @@ button {
   height: 35px;
   border-radius: 13px;
   outline: none;
-  border: 0.5px solid #000000;
+  border: 0.5px solid black;
   margin: 8px;
+  color: black;
+  padding-left: 10px;
+  height: 40px;
+}
+
+.login-placeHolderTextError {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 2px solid red;
+  margin-top: 9px;
   color: black;
   padding-left: 10px;
   height: 40px;
@@ -571,7 +589,36 @@ button {
   border-radius: 13px;
   outline: none;
   border: 0.5px solid #000000;
-  margin: 5px;
+  margin-top: 9px;
+  color: black;
+  padding-left: 10px;
+  height: 40px;
+}
+
+.signupLogin-errorMessage {
+  font-family: Overpass;
+  font-style: normal;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 300;
+  color: red;
+  margin-bottom: 0%;
+  font-size: 0.8em;
+}
+
+.signup-placeHolderTextError {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 2px solid red;
+  margin-top: 8px;
   color: black;
   padding-left: 10px;
   height: 40px;
@@ -607,6 +654,7 @@ button {
   color: #000000;
   background: white;
   border: 0px;
+  outline: none;
 }
 
 .signupLogin-ButtonC,
@@ -676,6 +724,8 @@ button {
   overflow: hidden;
 }
 
+.landing-support:focus,
+.landing-support:hover,
 .landing-support {
   border: 0px;
   background: transparent;
@@ -686,7 +736,9 @@ button {
   font-size: 1.6em;
   line-height: 36px;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
+  text-decoration: none;
+  color: black;
 }
 
 #landing-navbar {
@@ -783,7 +835,7 @@ button {
           box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60vh;
+  height: 50vh;
 }
 
 .landing-sectionOdd {
@@ -792,7 +844,7 @@ button {
           box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60vh;
+  height: 50vh;
 }
 
 .landing-main {
@@ -850,7 +902,7 @@ button {
 }
 
 .landing-infoLineLeft {
-  font-size: 1.5em;
+  font-size: 1.75em;
   margin-left: 10%;
   font-family: Chivo;
   font-style: normal;
@@ -860,7 +912,9 @@ button {
   margin-top: 2%;
 }
 
-.landing-getStarted {
+.landing-getStarted,
+.landing-getStarted:hover,
+.landing-getStarted:focus {
   font-size: 2em;
   font-family: Chivo;
   font-style: normal;
@@ -868,6 +922,7 @@ button {
   text-align: center;
   color: #01ccc0;
   margin: 2%;
+  text-decoration: none;
 }
 
 .landing-video {
@@ -875,6 +930,42 @@ button {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
+  margin-top: 2%;
+  width: 30%;
+  height: 300px;
+}
+
+.landing-mediumText {
+  padding-top: 2%;
+  font-size: 4em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+  padding-bottom: 2%;
+}
+
+.landing-signupLink,
+.landing-signupLink:hover,
+.landing-signupLink:focus {
+  text-decoration: none;
+  color: #01ccc0;
+  font-size: 3em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.landing-loginLink,
+.landing-loginLink:hover,
+.landing-loginLink:focus {
+  text-decoration: none;
+  color: black;
+  font-size: 3em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .landing-gifTopRight {
@@ -888,7 +979,6 @@ button {
   margin-right: auto;
   margin-bottom: 2%;
   width: 50%;
-  height: 50%;
 }
 
 .landing-gifTopLeft {
@@ -901,8 +991,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
-  width: 100%;
-  height: 100%;
+  width: 50%;
 }
 
 .landing-container {
@@ -913,7 +1002,7 @@ button {
 
 .landing-leftColumn {
   margin-left: 5%;
-  width: 60%;
+  width: auto;
 }
 
 .landing-rightColumn {

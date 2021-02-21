@@ -12,6 +12,7 @@ export default class Signup extends React.Component {
     username: "",
     password: "",
     ConfirmPassword: "",
+    errorInput: undefined,
   };
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
@@ -27,6 +28,21 @@ export default class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
+    if(this.state.email == ""){
+      this.setState({errorInput: true });
+    }
+    else if(this.state.password == ""){
+      this.setState({errorInput: true });
+    }
+    else if(this.state.username == ""){
+      this.setState({errorInput: true });
+    }
+    else if(this.state.ConfirmPassword == ""){
+      this.setState({errorInput: true });
+    }
+    else {
+      this.setState({errorInput: false });
+    }
     event.preventDefault();
   };
   render() {
@@ -47,7 +63,44 @@ export default class Signup extends React.Component {
               <center>
                 <h1 className="loginTitle"
                 >Sign Up</h1>
-                <form onSubmit={this.handleSubmit}>
+                {this.state.errorInput ? (<form onSubmit={this.handleSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    className="signup-placeHolderTextError"
+                    value={this.state.email}
+                    onChange={this.handleEmail}
+                  />
+                  <br />
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="signup-placeHolderTextError"
+                    value={this.state.username}
+                    onChange={this.handleUsername}
+                  />
+                  <br />
+                  <input
+                    type="text"
+                    placeholder="Password"
+                    className="signup-placeHolderTextError"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Confirm Password"
+                    className="signup-placeHolderTextError"
+                    value={this.state.ConfirmPassword}
+                    onChange={this.handleConfirmPassword}
+                  />
+                  <br /><p className="signupLogin-errorMessage">Some fields are missing</p>
+                  <input type="submit"
+                    className="signupLogin-ButtonB"
+                    value="Sign Up" />
+
+                </form>) : (<form onSubmit={this.handleSubmit}>
                   <input
                     type="text"
                     placeholder="Email"
@@ -84,7 +137,8 @@ export default class Signup extends React.Component {
                     className="signupLogin-ButtonB"
                     value="Sign Up" />
 
-                </form>
+                </form>)}
+                
                 <button className="signupLogin-forgotPassword">
                   Forgot Password?
             </button>

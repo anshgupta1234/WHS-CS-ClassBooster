@@ -102,8 +102,26 @@
   height: 35px;
   border-radius: 13px;
   outline: none;
-  border: 0.5px solid #000000;
+  border: 0.5px solid black;
   margin: 8px;
+  color: black;
+  padding-left: 10px;
+  height: 40px;
+}
+
+.login-placeHolderTextError {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 2px solid red;
+  margin-top: 9px;
   color: black;
   padding-left: 10px;
   height: 40px;
@@ -120,7 +138,34 @@
   border-radius: 13px;
   outline: none;
   border: 0.5px solid #000000;
-  margin: 5px;
+  margin-top: 9px;
+  color: black;
+  padding-left: 10px;
+  height: 40px;
+}
+.signupLogin-errorMessage {
+  font-family: Overpass;
+  font-style: normal;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 300;
+  color: red;
+  margin-bottom: 0%;
+  font-size: 0.8em;
+}
+.signup-placeHolderTextError {
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 37px;
+  text-align: left;
+  width: 78%;
+  height: 35px;
+  border-radius: 13px;
+  outline: none;
+  border: 2px solid red;
+  margin-top: 8px;
   color: black;
   padding-left: 10px;
   height: 40px;
@@ -154,6 +199,7 @@
   color: #000000;
   background: white;
   border: 0px;
+  outline: none;
 }
 .signupLogin-ButtonC,
 .signupLogin-ButtonC:hover,

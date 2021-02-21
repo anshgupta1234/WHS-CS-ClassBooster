@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital;wght@;300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Megrim&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+.landing-support:focus,
+.landing-support:hover,
 .landing-support {
   border: 0px;
   background: transparent;
@@ -9,7 +11,9 @@
   font-size: 1.6em;
   line-height: 36px;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
+  text-decoration: none;
+  color: black;
 }
 #landing-navbar {
   display: flex;
@@ -90,14 +94,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60vh;
+  height: 50vh;
 }
 .landing-sectionOdd {
   background: #b0ffff;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60vh;
+  height: 50vh;
 }
 .landing-main {
   height: 100vh;
@@ -148,7 +152,7 @@
   margin-top: 2%;
 }
 .landing-infoLineLeft {
-  font-size: 1.5em;
+  font-size: 1.75em;
   margin-left: 10%;
   font-family: Chivo;
   font-style: normal;
@@ -157,7 +161,9 @@
   color: #000000;
   margin-top: 2%;
 }
-.landing-getStarted {
+.landing-getStarted,
+.landing-getStarted:hover,
+.landing-getStarted:focus {
   font-size: 2em;
   font-family: Chivo;
   font-style: normal;
@@ -165,12 +171,46 @@
   text-align: center;
   color: #01ccc0;
   margin: 2%;
+  text-decoration: none;
 }
 .landing-video {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
+  margin-top: 2%;
+  width: 30%;
+  height: 300px;
+}
+.landing-mediumText {
+  padding-top: 2%;
+  font-size: 4em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+  padding-bottom: 2%;
+}
+.landing-signupLink,
+.landing-signupLink:hover,
+.landing-signupLink:focus {
+  text-decoration: none;
+  color: #01ccc0;
+  font-size: 3em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+}
+.landing-loginLink,
+.landing-loginLink:hover,
+.landing-loginLink:focus {
+  text-decoration: none;
+  color: black;
+  font-size: 3em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
 }
 .landing-gifTopRight {
   display: flex;
@@ -179,7 +219,6 @@
   margin-right: auto;
   margin-bottom: 2%;
   width: 50%;
-  height: 50%;
 }
 .landing-gifTopLeft {
   display: flex;
@@ -187,15 +226,14 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%;
-  width: 100%;
-  height: 100%;
+  width: 50%;
 }
 .landing-container {
   display: flex;
 }
 .landing-leftColumn {
   margin-left: 5%;
-  width: 60%;
+  width: auto;
 }
 .landing-rightColumn {
   margin: auto;
