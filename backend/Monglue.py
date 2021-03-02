@@ -5,6 +5,7 @@ from signup import signup
 from verify import verifyGet,verifyPost
 from login import login
 from addclassroom import add
+from forgotPassword import forgotPassGet, ForgotPassPost
 from flask import Flask,request,render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 
@@ -21,5 +22,7 @@ api.add_resource(verifyGet,"/verify/<string:verifCode>")
 api.add_resource(login, "/login")
 api.add_resource(signup, "/signup")
 api.add_resource(add,"/classrooms/add")
+api.add_resource(forgotPassGet,"/forgotpassword")
+api.add_resource(ForgotPassPost,"/forgotpassword/<string:verifCode>")
 
 app.run(debug = True)

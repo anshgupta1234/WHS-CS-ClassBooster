@@ -2,7 +2,7 @@
 #         Setup/Imports         #
 #################################
 import random
-from verifyEmail import emailUser
+from forgotPasswordEmail import emailUser
 import string
 
 from flask import Flask,request,render_template, session
@@ -15,7 +15,7 @@ from pymongo import MongoClient
 client = MongoClient("mongodb+srv://ansh:ClassBooster@cluster0.uefsc.mongodb.net/Cluster0?retryWrites=true&w=majority")
 database = client["creds"] 
 auth = database["auth"]
-emailVerifCollection = database["verification"]
+emailVerifCollection = database["forgotPass"]
 
 app = Flask(__name__)
 app.secret_key = "7de9ca677c2eb20b961ee9cf8be15220"
@@ -27,26 +27,28 @@ resourcefields = {
 
 
 
-class verifyPost(Resource):
-    def post(self):
+class forgotPassGet(Resource):
+    def get(self):
         email = auth.find_one({"username":session.get('username')})["email"]
-        print(email)
         code = "".join(random.choices(string.ascii_letters + string.digits, k=16))
         emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":session.get('username')})
         print(code)
         user = auth.find_one({"username":session.get('username')})
         auth.update_one({"username":session.get('username')},{ '$set': { "email": email}})
         emailUser(email,'http://127.0.0.1:5000/verify/' + code)
+        return "email sent :)"
 
-class verifyGet(Resource):
-    def get(self,verifCode):
+class ForgotPassPost(Resource):
+    def post(self,verifCode):
+        args = request.get_json(force=True)
+        newpass = sha256.hash(args["password"])
         print(verifCode)
         print(emailVerifCollection.find_one({"randomCode":verifCode}))
         if emailVerifCollection.find_one({"randomCode":verifCode}) != None:
             user = auth.find_one({"username":session.get('username')})
-            auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "verified": True}})
-        print("verifyget")
+            auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "password": newpass}})
         print(auth.find_one({"username":session.get('username')}))
+        return "changed password lul"
 
         
         

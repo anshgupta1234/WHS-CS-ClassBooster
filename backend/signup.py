@@ -29,6 +29,11 @@ resourcefields = {
 class signup(Resource):
     def post(self):
         args = request.get_json(force=True)
+        if auth.find_one({"username":args["username"]}) != None:
+            return({"error":"An account already exists with that username."})
+        elif auth.find_one({"email":args["email"]}) != None:
+            return({"error":"An account already exists with that email."})
+
         encryptedPass1 = sha256.hash(args["password"])
-        auth.insert_one({"username":args["username"],"password":encryptedPass1, "email":"", "verified":False})
-        return "Signup Completed.",201
+        auth.insert_one({"username":args["username"],"password":encryptedPass1, "email":args["email"], "verified":False})
+        return {"Success":True},201
