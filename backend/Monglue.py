@@ -25,4 +25,4 @@ api.add_resource(add,"/classrooms/add")
 api.add_resource(forgotPassGet,"/forgotpassword")
 api.add_resource(ForgotPassPost,"/forgotpassword/<string:verifCode>")
 
-app.run(debug = True)
+app.run(debug = True, host=2022)
