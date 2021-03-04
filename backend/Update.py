@@ -25,9 +25,6 @@ def update():
 
     userid = session["userID"]
     print "ID: " +userid
-
-    whiteboard = updateInfo["whiteboard"]
-    teacher = updateInfo["teacher"]
     
     
     myClass = client["classrooms"][userid].find_one({'_id':id})
@@ -39,8 +36,6 @@ def update():
     #client["classrooms"][userid].insert_one(updateInfo)
     client["classrooms"][userid].update({'_id':id}, {"$set": {"desks":desks}})
     client["classrooms"][userid].update({'_id':id}, {"$set": {"students":students}})
-    client["classrooms"][userid].update({'_id':id}, {"$set": {"whiteboard":whiteboard}})
-    client["classrooms"][userid].update({'_id':id}, {"$set": {"teacher":teacher}})
     return {}
 
 
