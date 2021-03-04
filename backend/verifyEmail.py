@@ -1,5 +1,6 @@
 from __future__ import print_function
 import smtplib, ssl
+from creds import getCreds
 import pickle
 import os,os.path
 from email.mime.text import MIMEText
@@ -58,7 +59,8 @@ def emailUser(userEmail,verificationLink):
 
 
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-        server.login("peepee@gmail.com", "1234")
+        email, password = getCreds()
+        server.login(email, password)
         message = MIMEMultipart("alternative")
         message["Subject"] = f"ClassBooster Verification"
         message["From"] = "Jamesson Smith at ClassBooster Team"
