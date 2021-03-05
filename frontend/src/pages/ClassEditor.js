@@ -117,15 +117,7 @@ handleChange(para){
 						</div>
 					</section>
 					<section className={this.getClass(0)} id="studentSection">
-						<div className="container-fluid">
-							<div className="row">
-								<div className="col-md-5">
-									<h3 className="blackText chivo">
-										Class Name
-									</h3>
-								</div>
-							</div>
-						</div>
+						{StudentSelector}
 					</section>
 				</div>
 		</section>
