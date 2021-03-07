@@ -23,7 +23,8 @@ class login(Resource):
     def post(self):
         args = request.get_json(force=True)
         userCursor = auth.find_one({"username":args["username"]})
-        print(userCursor)
+        if userCursor is None:
+            userCursor = auth.find_one({"email":args["username"]})
         if not userCursor is None:
             print('"' + args["password"] + '"')
             print(sha256.verify(args["password"],userCursor["password"]))
