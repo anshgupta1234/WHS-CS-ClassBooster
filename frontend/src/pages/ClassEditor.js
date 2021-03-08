@@ -10,16 +10,35 @@ export default class ClassEditor extends Component {
 	state = {
 		onClassroom : true,
 		first: true,
-		profileDropdownVisible: false
+		profileDropdownVisible: false,
+		desks: {
+			"9pasdf09f8": {
+				"left": 75,
+				"top": 25,
+				"title": "monkey"
+			},
+			"akjdhf976": {
+				"left": 175,
+				"top": 25,
+				"title": "donkey"
+			},
+		}
 	}
-toggleProfileDropdown = () => {
+
+	toggleProfileDropdown = () => {
 		this.setState({
 		  profileDropdownVisible: !this.state.profileDropdownVisible,
 		});
 	};
-getClass(para){
-	const cs = document.getElementById('classSection');
-	const ss = document.getElementById('studentSection');
+
+	updateDesks = (desks) => {
+		this.setState({ desks: desks })
+		return "dogger"
+	}
+
+	getClass(para){
+		const cs = document.getElementById('classSection');
+		const ss = document.getElementById('studentSection');
 		if(para){
 			if(this.state.onClassroom){
 				if(cs)
@@ -107,7 +126,7 @@ handleChange(para){
 							<div className="whiteboard overpass">Whiteboard</div>
 							<div className="deskSpace">
 							<DndProvider backend={HTML5Backend}>
-								<Example />
+								<Example desks={this.state.desks} updateDesks={this.updateDesks}/>
 							</DndProvider>
 							</div>
 						</div>
@@ -117,7 +136,7 @@ handleChange(para){
 						</div>
 					</section>
 					<section className={this.getClass(0)} id="studentSection">
-						{StudentSelector}
+
 					</section>
 				</div>
 		</section>
