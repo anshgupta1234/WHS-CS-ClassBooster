@@ -6,23 +6,36 @@ import Example from './DnDComponents/example.js'
 import { DndProvider } from 'react-dnd';
 import { ReactComponent as DefaultProfile } from "../assets/defaultProfile.svg";
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DraggableBox } from "./DnDComponents/DraggableBox";
+
 export default class ClassEditor extends Component {
+
 	state = {
 		onClassroom : true,
 		first: true,
 		profileDropdownVisible: false,
 		desks: {
 			"9pasdf09f8": {
-				"left": 75,
-				"top": 25,
-				"title": "monkey"
+				"left": 30,
+				"top": 60,
 			},
 			"akjdhf976": {
-				"left": 175,
-				"top": 25,
-				"title": "donkey"
+				"left": 120,
+				"top": 60,
 			},
-		}
+		},
+		whiteboard: { top: 0, left: 450 },
+ 		teacherDesk: { top: 60, left: 700, title: "Teacher Desk" },
+		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" }
+	}
+
+	componentDidMount(){
+		let tempDesks = this.state.desks
+		Object.keys(tempDesks).forEach(key => {
+			tempDesks[key]["title"] = this.state.pairing[key]
+		})
+		tempDesks["teacherDesk"] = this.state.teacherDesk
+		this.setState({ desks: tempDesks })
 	}
 
 	toggleProfileDropdown = () => {
@@ -32,7 +45,13 @@ export default class ClassEditor extends Component {
 	};
 
 	updateDesks = (desks) => {
-		this.setState({ desks: desks })
+		console.log(this.state.desks)
+		this.setState({ desks: desks, teacherDesk: desks.teacherDesk })
+		return "dogger"
+	}
+
+	updateTeacher = (desks) => {
+		this.setState({ teacherDesk: desks.teacherDesk })
 		return "dogger"
 	}
 
