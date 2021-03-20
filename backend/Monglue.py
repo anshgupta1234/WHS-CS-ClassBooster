@@ -24,5 +24,6 @@ api.add_resource(signup, "/signup")
 api.add_resource(add,"/classrooms/add")
 api.add_resource(forgotPassGet,"/forgotpassword")
 api.add_resource(ForgotPassPost,"/forgotpassword/<string:verifCode>")
+api.add_resource(logout,"/logout")
 
 app.run(debug = True)
