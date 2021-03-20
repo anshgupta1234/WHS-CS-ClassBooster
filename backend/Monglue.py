@@ -4,6 +4,7 @@
 from signup import signup
 from verify import verifyGet,verifyPost
 from login import login
+from logout import logout
 from addclassroom import add
 from forgotPassword import forgotPassGet, ForgotPassPost
 from flask import Flask,request,render_template, session
