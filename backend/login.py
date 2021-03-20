@@ -36,7 +36,7 @@ class login(Resource):
             else:
                 return {"error":"Your password is wrong :("},401
         else:
-            return {"error":"No account found with that username :("},401
+            return {"error":"No account found with that email/username :("},401
     def get(self):
         if 'username' in session:
             return({"username":session.get("username"),"id":session.get("userID")})
