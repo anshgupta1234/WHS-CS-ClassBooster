@@ -23,18 +23,18 @@ class get(Resource):
         updateInfo = request.json
         classID = ObjectId(updateInfo["ID"])
         userid = session["userID"]
-        print "ID: " +userid
+        print ("ID: " +userid)
         
         
         myClass = client["classrooms"][userid].find_one({'_id':classID})
-        print myClass
+        print (myClass)
         return json.loads(json_util.dumps(myClass))
 
 
 class getAll(Resource):
     def get(self):
         userid = session.get("userID")
-        print "ID: " +userid
+        print ("ID: " +userid)
         classes = list(client["classrooms"][userid].find({}))
         classNames = list()
         for thing in classes:
@@ -43,6 +43,6 @@ class getAll(Resource):
             className = {"name": name, "nick": nick}
             
             
-            print className
+            print (className)
             classNames.append(className)
         return {"classes": classNames}
