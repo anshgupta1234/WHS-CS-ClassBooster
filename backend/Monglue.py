@@ -11,7 +11,7 @@ from flask import Flask,request,render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from Update import update
 from Rename import rename
-from delete import delete
+from Delete import delete
 from shuffle import shuffle
 from getClassrooms import get
 from getClassrooms import getAll 
