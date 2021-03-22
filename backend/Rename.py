@@ -19,17 +19,17 @@ resourcefields = {
 
 class rename(Resource):
     def post(self):
-    updateInfo = request.json
-    id = ObjectId(updateInfo["ID"])
-    name = updateInfo["name"]
-    nick = updateInfo["nick"]
-    userid = session["userID"]
-    print "ID: "+userid
- 
-    client["classrooms"][userid].update({'_id':id}, {"$set": {"name":name}})
-    client["classrooms"][userid].update({'_id':id}, {"$set": {"nick":nick}})
+        updateInfo = request.json
+        id = ObjectId(updateInfo["ID"])
+        name = updateInfo["name"]
+        nick = updateInfo["nick"]
+        userid = session["userID"]
+        print ("ID: "+userid)
+    
+        client["classrooms"][userid].update({'_id':id}, {"$set": {"name":name}})
+        client["classrooms"][userid].update({'_id':id}, {"$set": {"nick":nick}})
 
-    return {"success": "true"}
+        return {"success": "true"}
     
 
 
