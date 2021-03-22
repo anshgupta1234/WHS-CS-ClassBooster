@@ -29,5 +29,6 @@ api.add_resource(logout,"/logout")
 api.add_resource(update, "/classrooms/update")
 api.add_resource(rename, "/classrooms/rename)
 api.add_resource(delete, "/classrooms/delete")
+api.add_resource(delete, "/shuffle")
 
 app.run(debug = True)
