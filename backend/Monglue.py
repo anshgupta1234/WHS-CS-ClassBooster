@@ -30,5 +30,7 @@ api.add_resource(update, "/classrooms/update")
 api.add_resource(rename, "/classrooms/rename)
 api.add_resource(delete, "/classrooms/delete")
 api.add_resource(delete, "/shuffle")
+api.add_resource(get, "/classrooms/get")
+api.add_resource(getAll, "/classrooms/getAll")
 
 app.run(debug = True)
