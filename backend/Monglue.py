@@ -27,5 +27,6 @@ api.add_resource(forgotPassGet,"/forgotpassword")
 api.add_resource(ForgotPassPost,"/forgotpassword/<string:verifCode>")
 api.add_resource(logout,"/logout")
 api.add_resource(update, "/classrooms/update")
+api.add_resource(rename, "/classrooms/rename)
 
 app.run(debug = True)
