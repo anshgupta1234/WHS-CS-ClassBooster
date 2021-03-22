@@ -23,7 +23,7 @@ class shuffle(Resource):
         updateInfo = request.json
         id = ObjectId(updateInfo["ID"])
         userid = session["userID"]
-        print "ID: "+userid
+        print ("ID: "+userid)
         myClass = client["classrooms"][userid].find_one({'_id':id})
         desks = myClass["desks"]
         students = myClass["students"]
