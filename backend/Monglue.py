@@ -33,4 +33,4 @@ api.add_resource(delete, "/shuffle")
 api.add_resource(get, "/classrooms/get")
 api.add_resource(getAll, "/classrooms/getAll")
 
-app.run(debug = True)
+app.run(debug = False, host = '0.0.0.0', port = 2022)
