@@ -23,7 +23,7 @@ class delete(Resource):
         updateInfo = request.json
         id = ObjectId(updateInfo["ID"])
         userid = session["userID"]
-        print "ID: "+userid
+        print ("ID: "+userid)
         myClass = client["classrooms"][userid].find_one({'_id':id})
         client["classrooms"][userid].delete_one({'_id':id})
         return {"success": "true"}
