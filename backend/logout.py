@@ -20,7 +20,7 @@ emailVerifCollection = database["verification"]
 
 
 class logout(Resource):
-    def post(self):
+    def get(self):
         session={}    
         return {"Success":True},200
             
