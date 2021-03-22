@@ -19,28 +19,28 @@ resourcefields = {
 
 class update(Resource):
     def post(self):
-        print "Hello"
+        print ("Hello")
         
         updateInfo = request.json
 
         id = ObjectId(updateInfo["ID"])
         
         students = updateInfo["students"]
-        print students
+        print (students)
         desks = updateInfo["desks"]
-        print desks
+        print (desks)
         teacher = updateInfo["teacher"]
-        print teacher
+        print (teacher)
         whiteboard = updateInfo["whiteboard"]
-        print session
+        print (session)
         
 
         userid = session.get("userID")
-        print "ID: " +userid
+        print ("ID: " +userid)
         
         
         myClass = client["classrooms"][userid].find_one({'_id':id})
-        print myClass
+        print (myClass)
 
         
 
