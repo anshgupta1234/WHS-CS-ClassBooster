@@ -24,7 +24,7 @@ class add(Resource):
             userID = session.get("userID")
             print(userID)
         else:
-            print('You are not logged in')
+            return {"error": "You are not logged in"}
         classroomsdb[userID].insert_one(args)
         print(classroomsdb[userID].find_one())
         return "Classroom created.",201

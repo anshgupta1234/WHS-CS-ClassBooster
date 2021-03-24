@@ -23,14 +23,17 @@ class rename(Resource):
         id = ObjectId(updateInfo["ID"])
         name = updateInfo["name"]
         nick = updateInfo["nick"]
-        userid = session["userID"]
-        print ("ID: "+userid)
-        myClass = client["classrooms"][userid].find_one({'_id':id})
+       if 'username' in session:
+            userID = session.get("userID")
+            print(userID)
+        else:
+            return {"error": "You are not logged in"}
+        myClass = client["classrooms"][userID].find_one({'_id':id})
         if myClass is None:
             return {"error": "No class found with id given"}
     
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"name":name}})
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"nick":nick}})
+        client["classrooms"][userID].update({'_id':id}, {"$set": {"name":name}})
+        client["classrooms"][userID].update({'_id':id}, {"$set": {"nick":nick}})
 
         return {"success": "true"}
     

@@ -22,9 +22,12 @@ class shuffle(Resource):
     def post(self):
         updateInfo = request.json
         id = ObjectId(updateInfo["ID"])
-        userid = session["userID"]
-        print ("ID: "+userid)
-        myClass = client["classrooms"][userid].find_one({'_id':id})
+        if 'username' in session:
+            userID = session.get("userID")
+            print(userID)
+        else:
+            return {"error": "You are not logged in"}
+        myClass = client["classrooms"][userID].find_one({'_id':id})
         if myClass is None:
             return {"error": "No class found with id given"}
         desks = myClass["desks"]
@@ -32,7 +35,7 @@ class shuffle(Resource):
         whiteboard = myClass["whiteboard"]
         teacher = myClass["teacher"]
         pairing = main(desks, students, whiteboard, teacher)
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"pairings":pairing}})
+        client["classrooms"][userID].update({'_id':id}, {"$set": {"pairings":pairing}})
         return pairing
 
     
