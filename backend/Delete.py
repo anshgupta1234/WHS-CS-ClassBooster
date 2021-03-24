@@ -25,6 +25,8 @@ class delete(Resource):
         userid = session["userID"]
         print ("ID: "+userid)
         myClass = client["classrooms"][userid].find_one({'_id':id})
+        if myClass is None:
+            return {"error": "No class found with id given"}
         client["classrooms"][userid].delete_one({'_id':id})
         return {"success": "true"}
         
