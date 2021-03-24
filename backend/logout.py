@@ -5,7 +5,7 @@ import random
 from verifyEmail import emailUser
 import string
 
-from flask import Flask,request,render_template, session
+from flask import Flask, request, render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from passlib.hash import sha256_crypt as sha256
 import requests
@@ -21,6 +21,6 @@ emailVerifCollection = database["verification"]
 
 class logout(Resource):
     def get(self):
-        session={}    
+        session.clear()
         return {"Success":True},200
             
