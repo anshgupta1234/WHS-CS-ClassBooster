@@ -25,20 +25,6 @@ def emailUser(userEmail,resetLink):
     """
 
 
-
-    # Call the Gmail API
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
-
-    if not labels:
-        print('No labels found.')
-    else:
-        print('Labels:')
-        for label in labels:
-            print(label['name'])
-
-
-
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
         email, password = getCreds()
         server.login(email, password)
