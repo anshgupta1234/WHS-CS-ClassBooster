@@ -27,13 +27,14 @@ resourcefields = {
 
 
 class forgotPassGet(Resource):
-    def get(self):
-        email = auth.find_one({"username":session.get('username')})["email"]
+    def post(self):
+        args = request.get_json(force=True)
+        email = auth.find_one({"username":args["username"]})["email"]
         code = "".join(random.choices(string.ascii_letters + string.digits, k=16))
-        emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":session.get('username')})
+        emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":args['username']})
         print(code)
-        user = auth.find_one({"username":session.get('username')})
-        auth.update_one({"username":session.get('username')},{ '$set': { "email": email}})
+        user = auth.find_one({"username":args["username"]})
+        auth.update_one({"username":args["username"]},{ '$set': { "email": email}})
         emailUser(email,'http://127.0.0.1:5000/verify/' + code)
         return "email sent :)"
 
