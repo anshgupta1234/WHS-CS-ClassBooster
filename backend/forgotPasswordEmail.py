@@ -25,7 +25,6 @@ def emailUser(userEmail,resetLink):
     """
 
 
-    service = build('gmail', 'v1', credentials=creds)
 
     # Call the Gmail API
     results = service.users().labels().list(userId='me').execute()
