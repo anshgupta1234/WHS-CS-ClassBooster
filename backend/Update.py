@@ -40,6 +40,8 @@ class update(Resource):
         
         
         myClass = client["classrooms"][userid].find_one({'_id':id})
+        if myClass is None:
+            return {"error": "No class found with id given"}
         print (myClass)
 
         
