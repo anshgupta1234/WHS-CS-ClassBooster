@@ -34,8 +34,12 @@ class update(Resource):
         whiteboard = updateInfo["whiteboard"]
         print (session)
         
-
-        userid = session.get("userID")
+        
+        if 'username' in session:
+            userid = session.get("userID")
+            print(userid)
+        else:
+            return {"error": "You are not logged in"}
        
         
         
