@@ -23,4 +23,3 @@ class logout(Resource):
     def get(self):
         session.clear()
         return {"Success":True},200
-            
