@@ -23,7 +23,7 @@ class rename(Resource):
         id = ObjectId(updateInfo["ID"])
         name = updateInfo["name"]
         nick = updateInfo["nick"]
-       if 'username' in session:
+        if 'username' in session:
             userID = session.get("userID")
             print(userID)
         else:
