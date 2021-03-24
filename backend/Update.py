@@ -36,7 +36,7 @@ class update(Resource):
         
 
         userid = session.get("userID")
-        print ("ID: " +userid)
+       
         
         
         myClass = client["classrooms"][userid].find_one({'_id':id})
