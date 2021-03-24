@@ -22,18 +22,28 @@ class get(Resource):
     def post(self):
         updateInfo = request.json
         classID = ObjectId(updateInfo["ID"])
-        userid = session["userID"]
+        if 'username' in session:
+            userid = session.get("userID")
+            print(userid)
+        else:
+            return {"error": "You are not logged in"}
         print ("ID: " +userid)
         
         
         myClass = client["classrooms"][userid].find_one({'_id':classID})
+        if myClass is None:
+            return {"error": "No class found with id given"}
         print (myClass)
         return json.loads(json_util.dumps(myClass))
 
 
 class getAll(Resource):
     def get(self):
-        userid = session.get("userID")
+        if 'username' in session:
+            userid = session.get("userID")
+            print(userid)
+        else:
+            return {"error": "You are not logged in"}
         print ("ID: " +userid)
         classes = list(client["classrooms"][userid].find({}))
         classNames = list()
