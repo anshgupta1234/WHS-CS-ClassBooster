@@ -40,7 +40,7 @@ def emailUser(userEmail,resetLink):
         <html>
             <body>
                 <p>
-                Click the following link to verify your ClassBooster account: <br>
+                Click the following link to reset your ClassBooster password: <br>
                 {resetLink} <br>
                 Yours Truly,<br>
                 Jamesson Smith<br>
