@@ -45,10 +45,10 @@ class ForgotPassPost(Resource):
         print(verifCode)
         print(emailVerifCollection.find_one({"randomCode":verifCode}))
         if emailVerifCollection.find_one({"randomCode":verifCode}) != None:
-            user = auth.find_one({"username":session.get('username')})
+            user = auth.find_one({"username":args['username']})
             auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "password": newpass}})
-        print(auth.find_one({"username":session.get('username')}))
-        return "changed password lul"
+        print(auth.find_one({"username":args['username']}))
+        return {"Success": True}
 
         
         
