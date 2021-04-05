@@ -22,4 +22,4 @@ emailVerifCollection = database["verification"]
 class logout(Resource):
     def get(self):
         session.clear()
-        return {"Success":True},200
+        return {"success":True},200

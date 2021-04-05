@@ -44,4 +44,4 @@ class signup(Resource):
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": args["email"]}})
         emailUser(email,'http://127.0.0.1:5000/verify/' + code)
-        return {"Success":True},201
+        return {"success":True},201
