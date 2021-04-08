@@ -35,7 +35,8 @@ class verifyPost(Resource):
         print(code)
         user = auth.find_one({"username":session.get('username')})
         auth.update_one({"username":session.get('username')},{ '$set': { "email": email}})
-        emailUser(email,'http://127.0.0.1:5000/verify/' + code)
+        emailUser(email,"https://3bfbefeb2ea6.ngrok.io/verify/" + code)
+        return {"success": True}
 
 class verifyGet(Resource):
     def get(self,verifCode):

@@ -27,15 +27,16 @@ resourcefields = {
 
 
 class forgotPassGet(Resource):
-    def get(self):
-        email = auth.find_one({"username":session.get('username')})["email"]
+    def post(self):
+        args = request.get_json(force=True)
+        email = auth.find_one({"username":args["username"]})["email"]
         code = "".join(random.choices(string.ascii_letters + string.digits, k=16))
-        emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":session.get('username')})
+        emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":args['username']})
         print(code)
-        user = auth.find_one({"username":session.get('username')})
-        auth.update_one({"username":session.get('username')},{ '$set': { "email": email}})
-        emailUser(email,'http://127.0.0.1:5000/verify/' + code)
-        return "email sent :)"
+        user = auth.find_one({"username":args["username"]})
+        auth.update_one({"username":args["username"]},{ '$set': { "email": email}})
+        emailUser(email,"https://3bfbefeb2ea6.ngrok.io/forgotpassword/" + code)
+        return {"success": True}
 
 class ForgotPassPost(Resource):
     def post(self,verifCode):
@@ -44,10 +45,10 @@ class ForgotPassPost(Resource):
         print(verifCode)
         print(emailVerifCollection.find_one({"randomCode":verifCode}))
         if emailVerifCollection.find_one({"randomCode":verifCode}) != None:
-            user = auth.find_one({"username":session.get('username')})
+            user = auth.find_one({"username":args['username']})
             auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "password": newpass}})
-        print(auth.find_one({"username":session.get('username')}))
-        return "changed password lul"
+        print(auth.find_one({"username":args['username']}))
+        return {"success": True}
 
         
         

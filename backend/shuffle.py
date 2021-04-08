@@ -5,6 +5,7 @@ import requests
 import pymongo
 from pymongo import MongoClient
 from bson import ObjectId
+from algos import main
 
 
 client = MongoClient("mongodb+srv://ansh:ClassBooster@cluster0.uefsc.mongodb.net/Cluster0?retryWrites=true&w=majority")
@@ -17,12 +18,10 @@ resourcefields = {
     'password' : fields.String
 }
 
-class rename(Resource):
+class shuffle(Resource):
     def post(self):
         updateInfo = request.json
         id = ObjectId(updateInfo["ID"])
-        name = updateInfo["name"]
-        nick = updateInfo["nick"]
         if 'username' in session:
             userID = session.get("userID")
             print(userID)
@@ -31,16 +30,12 @@ class rename(Resource):
         myClass = client["classrooms"][userID].find_one({'_id':id})
         if myClass is None:
             return {"error": "No class found with id given"}
+        desks = myClass["desks"]
+        students = myClass["students"]
+        whiteboard = myClass["whiteboard"]
+        teacher = myClass["teacher"]
+        pairing = main(desks, students, whiteboard, teacher)
+        client["classrooms"][userID].update({'_id':id}, {"$set": {"pairings":pairing}})
+        return pairing
+
     
-        client["classrooms"][userID].update({'_id':id}, {"$set": {"name":name}})
-        client["classrooms"][userID].update({'_id':id}, {"$set": {"nick":nick}})
-
-        return {"success": "true"}
-    
-
-
-
-    
-
-
-

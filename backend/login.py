@@ -23,7 +23,8 @@ class login(Resource):
     def post(self):
         args = request.get_json(force=True)
         userCursor = auth.find_one({"username":args["username"]})
-        print(userCursor)
+        if userCursor is None:
+            userCursor = auth.find_one({"email":args["username"]})
         if not userCursor is None:
             print('"' + args["password"] + '"')
             print(sha256.verify(args["password"],userCursor["password"]))
@@ -35,7 +36,7 @@ class login(Resource):
             else:
                 return {"error":"Your password is wrong :("},401
         else:
-            return {"error":"No account found with that username :("},401
+            return {"error":"No account found with that email/username :("},401
     def get(self):
         if 'username' in session:
             return({"username":session.get("username"),"id":session.get("userID")})

@@ -12,20 +12,16 @@ const styles = {
 function renderBox(item, key) {
   return <DraggableBox key={key} id={key} {...item} />;
 }
-export const Container = ({ snapToGrid }) => {
-  const [boxes, setBoxes] = useState({
-    a: { top: 0, left: 0, title: "Teacher Desk" },
-    c: { top: 0, left: 0, title: "Student Desk" },
-    d: { top: 0, left: 0, title: "Student Desk" },
-    e: { top: 0, left: 0, title: "Student Desk" },
-    f: { top: 0, left: 0, title: "Student Desk" },
-    g: { top: 0, left: 0, title: "Student Desk" },
-    h: { top: 0, left: 0, title: "Student Desk" },
-    b: { top: 0, left: 0, title: "Student Desk" }
-  });
-  
+
+export const Container = ({ snapToGrid, desks }) => {
+  console.log("Hi")
+  const [boxes, setBoxes] = useState(desks.desks);
   const moveBox = useCallback(
     (id, left, top) => {
+      let tempBoxes = boxes
+      tempBoxes[id]["left"] = left
+      tempBoxes[id]["top"] = top
+      desks.updateDesks(tempBoxes)
       setBoxes(
         update(boxes, {
           [id]: {
@@ -33,6 +29,7 @@ export const Container = ({ snapToGrid }) => {
           }
         })
       );
+      
     },
     [boxes]
   );

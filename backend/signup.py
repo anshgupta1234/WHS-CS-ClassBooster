@@ -35,4 +35,13 @@ class signup(Resource):
 
         encryptedPass1 = sha256.hash(args["password"])
         auth.insert_one({"username":args["username"],"password":encryptedPass1, "email":args["email"], "verified":False})
-        return {"Success":True},201
+        #send verification email here vvv
+        email = auth.find_one({"username":args["username"]})["email"]
+        print(email)
+        code = "".join(random.choices(string.ascii_letters + string.digits, k=16))
+        emailVerifCollection.insert_one({"email":email,"randomCode":code,"username":args["username"]})
+        print(code)
+        user = auth.find_one({"username":args["username"]})
+        auth.update_one({"username":args["username"]},{ '$set': { "email": args["email"]}})
+        emailUser(email,'http://127.0.0.1:5000/verify/' + code)
+        return {"success":True},201

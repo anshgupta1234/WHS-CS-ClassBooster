@@ -2,8 +2,8 @@ import React from "react";
 const styles = {
   border: "none",
   cursor: "move",
-  width: "100px",
-  height: "50px",
+  width: "120px",
+  height: "60px",
   textAlign: "center",
 };
 export const Box = ({ title, yellow }) => {
