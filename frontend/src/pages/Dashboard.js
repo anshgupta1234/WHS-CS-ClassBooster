@@ -1,5 +1,5 @@
 // Sean Le
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import DashboardNavbar from "../components/dashboardNavbar";
 import DashboardClassroomGrid from "../components/dashboardClassroomGrid";
 import DashboardRenameClassroomPopup from "../components/dashboardRenameClassroomPopup";

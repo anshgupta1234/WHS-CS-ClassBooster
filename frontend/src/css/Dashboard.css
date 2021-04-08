@@ -280,12 +280,11 @@
   display: flex;
   justify-content: center;
   position: fixed;
+  height: 100vh;
+  width: 100%;
   top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 2;
-  background: rgba(70, 70, 70, 0.8);
+  background: rgba(70, 70, 70, 0.7);
 }
 
 .dashboard-popup-classname {
@@ -317,14 +316,14 @@
 }
 
 .dashboard-popup-classname input {
-  font: 18px Overpass, sans-serif;
+  font: 16px Overpass, sans-serif;
   margin-left: 20px;
   padding: 5px;
   width: 320px;
   border-radius: 3px;
   border: 2px solid #b3b3b3;
   box-sizing: border-box;
-  transition: border-color 450ms;
+  transition: border-color 300ms;
 }
 
 .dashboard-popup-classname input:focus {
@@ -335,7 +334,10 @@
   font: 20px Overpass, sans-serif;
   margin-top: 14px;
   border-radius: 10px;
-  height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
   cursor: pointer;
   transition-duration: 300ms;
 }
@@ -345,7 +347,6 @@
 }
 
 .dashboard-popup-classname-save {
-  width: 70px;
   background-color: #01ccc0;
   color: #ffff;
   border: none;
@@ -357,7 +358,6 @@
 }
 
 .dashboard-popup-classname-cancel {
-  width: 80px;
   border: 1px solid #9fd0eb;
   color: #808080;
   background-color: #ffff;
@@ -373,13 +373,15 @@
   background-color: #ffff;
   border-radius: 7px;
   width: 470px;
-  height: 220px;
+  padding-right: 10px;
+  padding-left: 10px;
   transform: translateY(250px);
   padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
 }
 
-.dashboard-popup-delete-classroom p {
+.dashboard-popup-delete-classroom h1 {
   font: 25px Chivo, sans-serif;
 }
 
@@ -390,7 +392,10 @@
 
 .dashboard-popup-delete-classroom button {
   font: 20px Overpass, sans-serif;
-  height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
   margin-top: 15px;
   border-radius: 10px;
   cursor: pointer;
@@ -403,7 +408,6 @@
 
 .dashboard-popup-delete-classroom-delete {
   margin-right: 20px;
-  width: 80px;
   background-color: #ffff;
   border: 1px solid #e60000;
   cursor: pointer;
@@ -415,7 +419,6 @@
 }
 
 .dashboard-popup-delete-classroom-cancel {
-  width: 80px;
   border: none;
   color: white;
   background-color: #01ccc0;

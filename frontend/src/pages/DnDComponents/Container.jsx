@@ -23,6 +23,7 @@ export const Container = ({ snapToGrid }) => {
     h: { top: 0, left: 0, title: "Student Desk" },
     b: { top: 0, left: 0, title: "Student Desk" }
   });
+  
   const moveBox = useCallback(
     (id, left, top) => {
       setBoxes(

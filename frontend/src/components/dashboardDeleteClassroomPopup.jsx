@@ -14,7 +14,7 @@ class DashboardDeleteClassroomPopup extends Component {
           rel="stylesheet"
         ></link>
         <div className="dashboard-popup-delete-classroom">
-          <p>Are you sure you want to delete this classroom?</p>
+          <h1>Are you sure you want to delete this classroom?</h1>
           <div className="dashboard-popup-delete-classroom-warning">
             This action cannot be reversed.
           </div>

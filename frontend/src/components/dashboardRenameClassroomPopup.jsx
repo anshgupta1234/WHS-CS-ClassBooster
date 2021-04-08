@@ -4,11 +4,11 @@ class DashboardRenameClassroomPopup extends Component {
   state = { noClassnameWarning: "" };
   checkInputs() {
     let indexOfClassroom = this.props.selectedClassroom.index;
-    if (document.getElementById("dashboard-classname").value.trim().length > 0) {
+    if (document.getElementById("dashboard-classnameInput").value.trim().length > 0) {
       this.props.setClassroomName(
         indexOfClassroom,
-        document.getElementById("dashboard-classname").value,
-        document.getElementById("dashboard-nickname").value
+        document.getElementById("dashboard-classnameInput").value,
+        document.getElementById("dashboard-nicknameInput").value
       );
       this.props.toggleClassroomOptions(indexOfClassroom);
     } else {
@@ -40,26 +40,23 @@ class DashboardRenameClassroomPopup extends Component {
         ></link>
         <div className="dashboard-popup-classname">
           <p>{header}</p>
-          <label htmlFor="classname">{classnameLabel}</label>
+          <label htmlFor="dashboard-classnameInput">{classnameLabel}</label>
           <span style={{ color: "#e60000" }}>
             {this.state.noClassnameWarning}
           </span>
           <br></br>
           <input
-            type="text"
-            id="dashboard-classname"
-            name="classname"
+            id="dashboard-classnameInput"
             maxLength="40"
             size="20"
             defaultValue={oldClassroomName}
             autoComplete="off"
+            spellCheck={false}
           ></input>
-          <label htmlFor="nickname" id="dashboard-nickname-label">{nicknameLabel}</label>
+          <label htmlFor="dashboard-nicknameInput" id="dashboard-nickname-label">{nicknameLabel}</label>
           <br></br>
           <input
-            type="text"
-            id="dashboard-nickname"
-            name="nickname"
+            id="dashboard-nicknameInput"
             maxLength="40"
             size="20"
             defaultValue={oldNickname}

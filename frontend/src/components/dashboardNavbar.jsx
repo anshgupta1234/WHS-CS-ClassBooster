@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { ReactComponent as PlusSign } from "../assets/PlusSign.svg";
 import { ReactComponent as DefaultProfile } from "../assets/defaultProfile.svg";
+import {Link} from "react-router-dom"
 
 class DashboardNavbar extends Component {
   render() {
     return (
       <nav className="dashboard-navbar-container">
         <div className="dashboard-navbar">
-          <a href="http://localhost:3000" className="dashboard-logo">
-            CLASSBOOSTER
-          </a>
+          <Link to="/landing" className="dashboard-logo">CLASSBOOSTER</Link>
           <button
             className="dashboard-plus"
             onClick={() => this.props.toggleRenameClassroomPopup(-1)}
