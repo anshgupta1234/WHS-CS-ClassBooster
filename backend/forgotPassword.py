@@ -35,7 +35,7 @@ class forgotPassGet(Resource):
         print(code)
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": email}})
-        emailUser(email,"https://3bfbefeb2ea6.ngrok.io/forgotpassword/" + code)
+        emailUser(email,"https://48165a895fdb.ngrok.io/forgotpassword/" + code)
         return {"success": True}
 
 class ForgotPassPost(Resource):
