@@ -29,16 +29,47 @@ export default class ClassEditor extends Component {
 		},
 		whiteboard: { top: 0, left: 450 },
  		teacherDesk: { top: 60, left: 700, title: "Teacher Desk" },
-		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" }
+		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" },
+		students: [
+			{
+				"name": "Ansh simp #1",
+				"visibility": false,
+				"extra_help": true,
+				"hate": ["Unch Gorpta", "Jim"],
+				"index": 0
+			},
+			{
+				"name": "Unch Gorpta",
+				"visibility": true,
+				"extra_help": false,
+				"hate": 0,
+				"index": 1
+			},
+			{
+				"name": "Jim",
+				"visibility": true,
+				"extra_help": true,
+				"hate": ["Ansh simp #1"],
+				"index": 2
+			},
+		],
+		addStudentPopupVisible: false,
+		deleteStudentPopupVisible: false,
+		selectedStudentIndex: -1,
 	}
 
-	componentDidMount(){
+	componentDidMount() {
+		document.addEventListener("mousedown", this.handleWindowClick)
 		let tempDesks = this.state.desks
 		Object.keys(tempDesks).forEach(key => {
 			tempDesks[key]["title"] = this.state.pairing[key]
 		})
 		tempDesks["teacherDesk"] = this.state.teacherDesk
 		this.setState({ desks: tempDesks })
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("mousedown", this.handleWindowClick)
 	}
 
 	toggleProfileDropdown = () => {
@@ -210,33 +241,60 @@ render() {
 					)}
 				</div>
 			</nav>
-				<nav className="secondaryNav">
-					<button onClick = {() => this.handleChange(1)} id="classroomNavButton" className="blackText" >Classroom</button>
-					<button onClick = {() => this.handleChange(0)} id="studentsNavButton" >Students</button>
-				</nav>
-				<span className="lineContainer">
-					<span className="line" id="line"></span>
-				</span>
-				<div className="tabContainer">
-					<section className={this.getClass(1)} id="classSection">
-						<span className="chivo classname">Class Name</span>
-						<div className="roomSpace">
-							<div className="whiteboard overpass">Whiteboard</div>
-							<div className="deskSpace">
-							<DndProvider backend={HTML5Backend}>
-								<Example desks={this.state.desks} updateDesks={this.updateDesks}/>
-							</DndProvider>
-							</div>
+			<nav className="secondaryNav">
+				<button onClick = {() => this.handleChange(1)} id="classroomNavButton" className="blackText" >Classroom</button>
+				<button onClick = {() => this.handleChange(0)} id="studentsNavButton" >Students</button>
+			</nav>
+			<span className="lineContainer">
+				<span className="line" id="line"></span>
+			</span>
+			<div className="tabContainer">
+				<section className={this.getClass(1)} id="classSection">
+					<span className="chivo classname">Class Name</span>
+					<div className="roomSpace">
+						<div className="whiteboard overpass">Whiteboard</div>
+						<div className="deskSpace">
+						<DndProvider backend={HTML5Backend}>
+							<Example desks={this.state.desks} updateDesks={this.updateDesks}/>
+						</DndProvider>
 						</div>
-						<div className="buttons">
-							<button className="blackButton">Save Seating Chart</button>
-							<button className="whiteButton">Create Seating Chart</button>
-						</div>
-					</section>
-					<section className={this.getClass(0)} id="studentSection">
-
-					</section>
-				</div>
+					</div>
+					<div className="buttons">
+						<button className="blackButton">Save Seating Chart</button>
+						<button className="whiteButton">Create Seating Chart</button>
+					</div>
+				</section>
+				<section className={this.getClass(0)} id="studentSection">
+					<StudentSelector
+						students={this.state.students}
+						deleteStudent={this.deleteStudent}
+						selectedStudentIndex={this.state.selectedStudentIndex}
+						handleInputChange={this.handleInputChange}
+						handleSelectChange={this.handleSelectChange}
+						handleStudentSelect={this.handleStudentSelect}
+						toggleAddStudentPopup={this.toggleAddStudentPopup}
+						toggleDeleteStudentPopup={this.toggleDeleteStudentPopup}
+						saveStudentEdit={this.saveStudentEdit}
+						nameInput={selectedStudent.name}
+						visibilityInput={selectedStudent.visibility}
+						extraHelpInput={selectedStudent.extra_help}
+						hate={selectedStudent.hate}
+					></StudentSelector>
+				</section>
+			</div>
+			{this.state.addStudentPopupVisible && 
+			<EditorAddStudentPopup
+				students={this.state.students}
+				addStudent={this.addStudent}
+				toggleAddStudentPopup={this.toggleAddStudentPopup}
+			/>}
+			{this.state.deleteStudentPopupVisible && 
+			<EditorDeleteStudentPopup
+				students={this.state.students}
+				selectedStudentIndex={this.state.selectedStudentIndex}
+				deleteStudent={this.deleteStudent}
+				toggleDeleteStudentPopup={this.toggleDeleteStudentPopup}
+			/>}
 		</section>
 		)
   }
