@@ -13,6 +13,7 @@ export default class Signup extends React.Component {
     password: "",
     ConfirmPassword: "",
     errorInput: undefined,
+    errorMsg: undefined
   };
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
@@ -28,21 +29,35 @@ export default class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
-    if(this.state.email == ""){
-      this.setState({errorInput: true });
-    }
-    else if(this.state.password == ""){
-      this.setState({errorInput: true });
-    }
-    else if(this.state.username == ""){
-      this.setState({errorInput: true });
-    }
-    else if(this.state.ConfirmPassword == ""){
+    if(this.state.email === ""|| this.state.password === ""|| this.state.username === ""|| this.state.ConfirmPassword === ""){
       this.setState({errorInput: true });
     }
     else {
       this.setState({errorInput: false });
+      fetch('https://48165a895fdb.ngrok.io/signup', {
+        method: 'POST',
+        mode: 'no-cors',
+        header: 'Access-Control-Allow-Origin',
+        body: JSON.stringify({
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        })
+    }).then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if(res.success) {
+          this.props.history.push('/dashboard');
+          
+        } else {
+          this.setState({ errorMsg: JSON.stringify(res.error) });
+          this.setState({errorInput: true });
+          console.log(JSON.stringify(res.error));
+
+        }
     }
+  )
+}
     event.preventDefault();
   };
   render() {
@@ -63,7 +78,7 @@ export default class Signup extends React.Component {
               <center>
                 <h1 className="loginTitle"
                 >Sign Up</h1>
-                {this.state.errorInput ? (<form onSubmit={this.handleSubmit}>
+                {this.state.errorInput || this.state.errorMsg !== undefined ? (<form onSubmit={this.handleSubmit}>
                   <input
                     type="text"
                     placeholder="Email"
@@ -95,7 +110,7 @@ export default class Signup extends React.Component {
                     value={this.state.ConfirmPassword}
                     onChange={this.handleConfirmPassword}
                   />
-                  <br /><p className="signupLogin-errorMessage">Some fields are missing</p>
+                  <br /><p className="signupLogin-errorMessage">Some fields are missing or incorrect</p>
                   <input type="submit"
                     className="signupLogin-ButtonB"
                     value="Sign Up" />
@@ -155,10 +170,4 @@ export default class Signup extends React.Component {
     );
   }
 }
-
-
-
-
-
-
 
