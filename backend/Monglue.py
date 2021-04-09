@@ -9,6 +9,7 @@ from addclassroom import add
 from forgotPassword import forgotPassGet, ForgotPassPost
 from flask import Flask,request,render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_cors import CORS
 from Update import update
 from Rename import rename
 from Delete import delete
@@ -17,6 +18,7 @@ from getClassrooms import get
 from getClassrooms import getAll 
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "7de9ca677c2eb20b961ee9cf8be15220"
 api = Api(app)
 resourcefields = {
