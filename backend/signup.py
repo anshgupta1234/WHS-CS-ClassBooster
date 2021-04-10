@@ -43,5 +43,5 @@ class signup(Resource):
         print(code)
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": args["email"]}})
-        emailUser(email,'http://127.0.0.1:5000/verify/' + code)
+        emailUser(email,'https://fcc11b77e607.ngrok.io/verify/' + code)
         return {"success":True},201
