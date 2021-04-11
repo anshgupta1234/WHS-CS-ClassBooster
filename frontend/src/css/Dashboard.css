@@ -379,6 +379,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+  height: fit-content;
 }
 
 .dashboard-popup-delete-classroom h1 {

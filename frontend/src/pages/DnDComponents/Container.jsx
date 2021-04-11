@@ -9,12 +9,12 @@ const styles = {
   height: "600px",
   position: "relative"
 };
-function renderBox(item, key) {
-  return <DraggableBox key={key} id={key} {...item} />;
+
+function renderBox(item, key, deleteDesk) {
+  return <DraggableBox onClick={() => deleteDesk(key)} key={key} id={key} {...item} />;
 }
 
 export const Container = ({ snapToGrid, desks }) => {
-  console.log("Hi")
   const [boxes, setBoxes] = useState(desks.desks);
   const moveBox = useCallback(
     (id, left, top) => {
@@ -46,9 +46,10 @@ export const Container = ({ snapToGrid, desks }) => {
       return undefined;
     }
   });
+  
   return (
     <div ref={drop} style={styles}>
-      {Object.keys(boxes).map((key) => renderBox(boxes[key], key))}
+      {Object.keys(boxes).map((key) => renderBox(boxes[key], key, desks.deleteDesk))}
     </div>
   );
 };

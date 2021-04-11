@@ -12,21 +12,13 @@ import EditorDeleteStudentPopup from "../components/editorDeleteStudentPopup"
 import { DraggableBox } from "./DnDComponents/DraggableBox";
 
 export default class ClassEditor extends Component {
-
 	state = {
+		isLoaded : true,
 		onClassroom : true,
 		first: true,
+		numDesks: null,
 		profileDropdownVisible: false,
-		desks: {
-			"9pasdf09f8": {
-				"left": 30,
-				"top": 60,
-			},
-			"akjdhf976": {
-				"left": 120,
-				"top": 60,
-			},
-		},
+		desks: {},
 		whiteboard: { top: 0, left: 450 },
  		teacherDesk: { top: 60, left: 700, title: "Teacher Desk" },
 		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" },
@@ -79,15 +71,18 @@ export default class ClassEditor extends Component {
 	};
 
 	updateDesks = (desks) => {
-		console.log(this.state.desks)
 		this.setState({ desks: desks, teacherDesk: desks.teacherDesk })
-		return "dogger"
 	}
 
-	updateTeacher = (desks) => {
-		this.setState({ teacherDesk: desks.teacherDesk })
-		return "dogger"
+	deleteDesk = (id) => {
+		let desks = this.state.desks
+		delete desks[id]
+		this.setState({ desks: desks})
 	}
+
+	// updateTeacher = (desks) => {
+	// 	this.setState({ teacherDesk: desks.teacherDesk })
+	// }
 
 	getClass(para){
 		const cs = document.getElementById('classSection');
@@ -118,7 +113,7 @@ export default class ClassEditor extends Component {
 			}
 		}
 	}
-handleChange(para){
+	handleChange(para){
 	this.setState({ first : false })
 		if(para){
 			this.setState({onClassroom : true});
@@ -135,6 +130,7 @@ handleChange(para){
 			document.getElementById('line').classList.add("forward");
 		}
 	}
+
 
 addStudent = (student) => {
 	this.setState({students: [...this.state.students, student]}, () => {
@@ -209,36 +205,61 @@ handleStudentSelect = (studentIndex) => {
 	}, () => document.getElementById("editor-student" + studentIndex).classList.add("editor-focus"))
 }
 
+handleDesk = () => {
+	const deskNumber = document.getElementById("deskInput").value
+	if (parseInt(deskNumber) >= 0) {
+	  this.setState({
+		numDesks: deskNumber
+	  });
+	} else {
+	  this.setState({
+		numDesks: 0,
+	  });
+	}
+	const x = document.getElementById("snackbar");
+	  x.className = "show";
+	  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	
+	let tempDesks = this.state.desks
+	for (let index = 0; index < deskNumber; index++) {
+		let result = "";
+		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for ( let i = 0; i < Math.floor((Math.random() * 5)) + 8 ; i++ ) {
+		result += characters.charAt(Math.floor(Math.random() * 62));
+		}
+		tempDesks[result] = {"top" : 0, "left" : 0}
+	}
+	this.setState({ desks: tempDesks })
+  };
+
 render() {
 	const selectedStudent = this.state.selectedStudentIndex > -1 ? this.state.students[this.state.selectedStudentIndex] : 
 		{name: "", visibility: false, extra_help: false, hate: 0};
+
     return (
+		this.state.isLoaded && (
 		<section className="bgSection">				
 			<nav className="dashboard-navbar-container">
 				<div className="dashboard-navbar">
-					<a href="http://localhost:3000" className="dashboard-logo">
-						CLASSBOOSTER
+				<a href="http://localhost:3000" className="dashboard-logo">
+					CLASSBOOSTER
+				</a>
+				<button
+					id="dashboard-profile"
+					onClick={this.toggleProfileDropdown}
+				>
+					{<DefaultProfile />}
+				</button>
+				{this.state.profileDropdownVisible && (
+					<div id="dashboard-profile-dropdown">
+					<a href="#" id="dashboard-account-link">
+					  Logout
 					</a>
-					<button
-						id="dashboard-profile"
-						onClick={this.toggleProfileDropdown}
-					>
-						{<DefaultProfile />}
-					</button>
-					{this.state.profileDropdownVisible && (
-						<div id="dashboard-profile-dropdown">
-						<link
-						href="https://fonts.googleapis.com/css2?family=Chivo&family=Overpass:wght@300&display=swap"
-						rel="stylesheet"
-						></link>
-						<a href="#" id="dashboard-account-link">
-						Account
-						</a>
-						<a href="#" id="dashboard-support-link">
-						Support
-						</a>
-						</div>
-					)}
+					<a href="#" id="dashboard-support-link">
+					  Support
+					</a>
+				  	</div>
+				)}
 				</div>
 			</nav>
 			<nav className="secondaryNav">
@@ -255,14 +276,35 @@ render() {
 						<div className="whiteboard overpass">Whiteboard</div>
 						<div className="deskSpace">
 						<DndProvider backend={HTML5Backend}>
-							<Example desks={this.state.desks} updateDesks={this.updateDesks}/>
+							<Example desks={this.state.desks} updateDesks={this.updateDesks} deleteDesk={this.deleteDesk}/>
 						</DndProvider>
 						</div>
 					</div>
 					<div className="buttons">
-						<button className="blackButton">Save Seating Chart</button>
-						<button className="whiteButton">Create Seating Chart</button>
-					</div>
+					<div className="group">
+								<input type="text" id="deskInput" className="input" maxLength="2" placeholder=" " />
+								<span className="highlight"></span>
+								<span className="bar"></span>
+								<label className="label">Add Desks</label>
+								<button className="pure-material-button-contained" onClick={this.handleDesk}>
+									<svg xmlns="http://www.w3.org/2000/svg" className="checkMark" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+										<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+										<line x1="12" y1="5" x2="12" y2="19" />
+										<line x1="5" y1="12" x2="19" y2="12" />
+									</svg>
+								</button>
+							</div>
+							<button className="blackButton">Save Seating Chart</button>
+							<button className="whiteButton">Create Seating Chart</button>
+						</div>
+						<div id="snackbar">
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								<circle cx="12" cy="12" r="9" />
+								<path d="M9 12l2 2l4 -4" />
+							</svg>
+							{this.state.numDesks} more desk(s) were added
+						</div>
 				</section>
 				<section className={this.getClass(0)} id="studentSection">
 					<StudentSelector
@@ -297,5 +339,6 @@ render() {
 			/>}
 		</section>
 		)
+	)
   }
 }

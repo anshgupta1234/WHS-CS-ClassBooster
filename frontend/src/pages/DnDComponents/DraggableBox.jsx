@@ -27,6 +27,6 @@ export const DraggableBox = (props) => {
         preview(getEmptyImage(), { captureDraggingState: true });
     }, []);
     return (<div ref={drag} style={getStyles(left, top, isDragging)}>
-			<Box title={title}/>
+			<Box title={title} onClick={props.onClick} />
 		</div>);
 };
