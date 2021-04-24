@@ -4,6 +4,7 @@
 import random
 from forgotPasswordEmail import emailUser
 import string
+from myNgrok import getNgrok
 
 from flask import Flask,request,render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
@@ -11,6 +12,7 @@ from passlib.hash import sha256_crypt as sha256
 import requests
 from pymongo import MongoClient
 
+ngrokURL = getNgrok()
 client = MongoClient("mongodb+srv://ansh:ClassBooster@cluster0.uefsc.mongodb.net/Cluster0?retryWrites=true&w=majority")
 database = client["creds"] 
 auth = database["auth"]
@@ -35,7 +37,7 @@ class forgotPassGet(Resource):
         print(code)
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": email}})
-        emailUser(email,"https://fcc11b77e607.ngrok.io/forgotpassword/" + code)
+        emailUser(email,ngrokURL+"/forgotpassword/" + code)
         return {"success": True}
 
 class ForgotPassPost(Resource):
