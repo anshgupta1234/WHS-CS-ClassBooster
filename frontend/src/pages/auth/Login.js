@@ -1,18 +1,13 @@
 // Aryan Vora
 import React, { Component } from "react";
 import "../../css/style.css";
-
-
-import { BrowserRouter as Router, Route, Link  } from 'react-router-dom';
 import Dashboard from '../../pages/Dashboard';
+import { BrowserRouter as Router, Route, Link  } from 'react-router-dom';
+import history from '../../history';
 
-const Routes = () => (
-  <Router>     
-          <Route path="/Dashboard"/>
-  </Router>
-);
 
 export default class Login extends React.Component {
+  
   state = {
     email: "",
     password: "",
@@ -20,16 +15,8 @@ export default class Login extends React.Component {
     errorMsg: undefined
   };
 
-  componentDidMount(){
-    this.setState({errorInput: false });
-    fetch('https://bf4df9369820.ngrok.io/login', {
-    method: 'GET',
-  }).then(res => res.json())
-    .then(res => {
-      console.log(res); 
-        this.props.history.push('/Dashboard'); 
-      
-    })  }
+  
+  
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
   };
@@ -47,24 +34,25 @@ export default class Login extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://bf4df9369820.ngrok.io/login', {
+      fetch('https://4dd9e76c2a29.ngrok.io/login', {
       method: 'POST',
-      mode: 'no-cors',
       header: 'Access-Control-Allow-Origin',
 
-      body: {
+      body: JSON.stringify({
         email: this.state.username,
         password: this.state.password
-      }
+      })
     }).then(res => res.json())
       .then(res => {
         console.log(res);
         if(res.success) {
-          this.props.history.push('/Dashboard');
+          history.push("/dashboard"); 
+          console.log("Success");
           
         } else {
-          this.setState({ errorMsg: res.error });
-        }
+          this.setState({ errorMsg: JSON.stringify(res.error) });
+          this.setState({errorInput: true });
+          console.log(JSON.stringify(res.error));       }
       })
     }
     
@@ -72,6 +60,7 @@ export default class Login extends React.Component {
   };
 
   render() {
+
     return (
       <section className="signupLogin-main" >
         <section>
@@ -86,7 +75,7 @@ export default class Login extends React.Component {
             <h1 className="loginTitle"
             >LOGIN</h1>
               {
-              this.state.errorInput ? ( 
+              this.state.errorInput || this.state.errorMsg !== undefined ? ( 
               <form onSubmit={this.handleSubmit}>
                 <input
                   type="text"
@@ -103,7 +92,7 @@ export default class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handlePassword}
                 />
-                <br/><p className="signupLogin-errorMessage">Some fields are missing</p>
+                <br/><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}

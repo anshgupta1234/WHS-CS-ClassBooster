@@ -20,27 +20,6 @@ export default class ConfirmEmail extends React.Component {
       };
     
       
-      handleEmail = (event) => {
-        this.setState({ email: event.target.value });
-      };
-      handlePassword = (event) => {
-        this.setState({ password: event.target.value });
-        
-      };
-    
-      handleSubmit = (event) => {
-        if(this.state.email === ""){
-          this.setState({errorInput: true });
-        }
-        else if(this.state.password === ""){
-          this.setState({errorInput: true });
-        }
-        else {
-          this.setState({errorInput: false });
-        }
-        
-        event.preventDefault();
-      };
     render() {
         return (
         
@@ -56,67 +35,12 @@ export default class ConfirmEmail extends React.Component {
           <center>
             <h1 className="loginTitle"
             >Confirm Email</h1>
-              {
-              this.state.errorInput ? ( 
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Email/Username"
-                  className="login-placeHolderTextError"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
-                />
-                <br />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className="login-placeHolderTextError"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-                <br/><p className="signupLogin-errorMessage">Some fields are missing</p>
-                <input type="submit"  
-                className = "signupLogin-ButtonB"
-                onClick  = {this.handleSubmit}
-                value="Login"/>
-              </form>
-              
-              
-              ) 
-              : ( 
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Email/Username"
-                  className="placeHolderTextLogin"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
-                />
-                <br />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className="placeHolderTextLogin"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-                <br/>
-                <input type="submit"  
-                className = "signupLogin-ButtonB"
-                onClick  = {this.handleSubmit}
-                value="Login"/>
-              </form>
-         
-              )
-  }
-  
-            
-                
-            <button className="signupLogin-forgotPassword">Forgot Password?</button>
-            <h2 className="signupLogin-background"><span className="signupLogin-orLine">or</span></h2>
+   
+            <h4 className="landing-infoLine">Make sure to check your <br></br>email and click the link on it <br></br>to confirm your signup.<br></br>Once you are done click <br></br> the button below and login <br></br> to your newly created account</h4>
 
+            <Link to="/Login" className="signupLogin-ButtonC">Login</Link>
 
-          <Link to="/Signup" className="signupLogin-ButtonC">Sign Up</Link>
+           
           </center>
           </section>
           </section>

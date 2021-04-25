@@ -1,12 +1,12 @@
 // Aryan Vora
 import React, { Component } from "react";
 import "../../css/style.css";
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import {Link} from "react-router-dom";
+import history from '../../history';
+import ConfirmEmail from "./ConfirmEmail";
 
 export default class Signup extends React.Component {
+
   state = {
     email: "",
     username: "",
@@ -29,14 +29,14 @@ export default class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
+
     if(this.state.email === ""|| this.state.password === ""|| this.state.username === ""|| this.state.ConfirmPassword === ""){
       this.setState({errorInput: true });
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://48165a895fdb.ngrok.io/signup', {
+      fetch('https://4dd9e76c2a29.ngrok.io/signup', {
         method: 'POST',
-        mode: 'no-cors',
         header: 'Access-Control-Allow-Origin',
         body: JSON.stringify({
           username: this.state.username,
@@ -47,8 +47,8 @@ export default class Signup extends React.Component {
       .then(res => {
         console.log(res);
         if(res.success) {
-          this.props.history.push('/dashboard');
-          
+          history.push('/confirmEmail');
+          console.log("success");
         } else {
           this.setState({ errorMsg: JSON.stringify(res.error) });
           this.setState({errorInput: true });
@@ -58,9 +58,11 @@ export default class Signup extends React.Component {
     }
   )
 }
-    event.preventDefault();
-  };
+event.preventDefault();
+
+};
   render() {
+
     return (
       <div className="signupLogin-main">
         <div>
@@ -110,7 +112,7 @@ export default class Signup extends React.Component {
                     value={this.state.ConfirmPassword}
                     onChange={this.handleConfirmPassword}
                   />
-                  <br /><p className="signupLogin-errorMessage">Some fields are missing or incorrect</p>
+                  <br /><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                   <input type="submit"
                     className="signupLogin-ButtonB"
                     value="Sign Up" />
