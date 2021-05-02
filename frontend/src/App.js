@@ -2,10 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 import history from './history';
 import ClassEditor from './pages/ClassEditor';

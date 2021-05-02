@@ -34,12 +34,12 @@ export default class Login extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://4dd9e76c2a29.ngrok.io/login', {
+      fetch('https://839a3d56f94d.ngrok.io/login', {
       method: 'POST',
       header: 'Access-Control-Allow-Origin',
 
       body: JSON.stringify({
-        email: this.state.username,
+        username: this.state.email,
         password: this.state.password
       })
     }).then(res => res.json())

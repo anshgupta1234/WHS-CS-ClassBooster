@@ -139,7 +139,6 @@ button {
   background-color: #9fd0eb;
   min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .classname {
@@ -430,6 +429,7 @@ button {
     transform: translateX(0em);
   }
 }
+
 /* form starting stylings ------------------------------- */
 .group {
   position: relative;
@@ -766,328 +766,6 @@ button {
 .deskButton svg {
   visibility: hidden;
 }
-.editor-studentList {
-  top: 60px;
-  position: absolute;
-  border-top: 3px solid #000;
-  border-right: 3px solid #000;
-  width: 50%;
-  height: 1000px;
-  overflow-y: auto;
-}
-
-.editor-headerBar {
-  height: 60px;
-  line-height: 60px;
-}
-
-.editor-headerBar span {
-  position: absolute;
-  font-size: 32px;
-}
-
-.editor-className {
-  left: 50px;
-}
-
-.editor-studentAttributesHeader {
-  right: 80px;
-}
-
-.editor-addStudentButton {
-  font-size: 25px;
-  border-radius: 8px;
-  background-color: #E0FFF0;
-  border: none;
-  transition: 200ms filter;
-  margin-left: 30px;
-  padding: 8px;
-  font: 26px Overpass, sans-serif;
-}
-
-.editor-addStudentButton:focus {
-  outline: none;
-}
-
-.editor-addStudentButton:hover {
-  filter: brightness(0.9)
-}
-
-.editor-studentListNavbar {
-  width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: #01ccc0;
-  box-shadow: 0 10px 8px 0px rgba(0, 0, 0, 0.1);
-}
-
-.editor-student {
-  position: relative;
-  padding-left: 4px;
-  padding-right: 4px;
-  width: 100%;
-  height: 80px;
-  font-size: 25px;
-  white-space: pre;
-  background-color: #fff;
-  border-bottom: 3px solid #929292;
-  border-top: 3px solid #fff;
-  border-right: 8px solid #fff;
-  border-left: 8px solid #fff;
-  transition: 300ms border;
-}
-
-.editor-focus {
-  border: 3px solid #2794d3;
-}
-
-.editor-deleteStudent {
-  position: absolute;
-  right: 4px;
-  border: none;
-  background-color: #fff;
-  transition-duration: 300ms;
-  border-radius: 50%;
-  margin-top: 4px;
-  height: 40px;
-  width: 40px;
-}
-
-.editor-deleteStudent:focus {
-  outline: none;
-}
-
-.editor-deleteStudent:hover {
-  filter: brightness(0.85);
-}
-
-#editor-addStudentPopup {
-  width: 360px;
-  height: 400px;
-  background-color: #fff;
-  transform: translateY(200px);
-  padding-top: 20px;
-  border-radius: 7px;
-  padding-bottom: 20px;
-}
-
-.editor-popupHeader {
-  font: 25px Chivo, sans-serif;
-  text-align: center;
-}
-
-.editor-popupStudentLabel {
-  font: 16px Overpass, sans-serif;
-  margin-left: 20px;
-}
-
-#editor-popupStudentNameInput {
-  font: 16px Overpass, sans-serif;
-  margin-left: 20px;
-  padding: 5px;
-  width: 320px;
-  border-radius: 3px;
-  border: 2px solid #b3b3b3;
-  box-sizing: border-box;
-  transition: border-color 300ms;
-}
-
-#editor-popupStudentNameInput:focus {
-  outline: none;
-  border-color: #01ccc0;
-}
-
-.editor-popupCheckboxContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 35px;
-  margin-top: 20px;
-}
-
-.editor-popupCheckboxContainer label {
-  font: 16px Overpass, sans-serif;
-  margin-left: 15px;
-}
-
-.editor-popupCheckboxContainer span {
-  font: 12px Overpass, sans-serif;
-}
-
-.editor-popupCheckboxInput {
-  appearance: none;
-  margin-left: 30px;
-  border: 2px solid #b3b3b3;
-  line-height: 35px;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.editor-popupCheckboxInput:checked:after {
-  content: url(../assets/checkmark.svg);
-}
-
-.editor-popupCheckboxInput:focus {
-  outline: none;
-}
-
-.editor-popupCheckboxInput:hover {
-  background-color: #e0e0e0;
-}
-
-.editor-popupSelectContainer {
-  width: 320px;
-  margin-top: 20px;
-  margin-left: 20px;
-  font: 16px Overpass, sans-serif;
-}
-
-.editor-popupSelectIncompatibleLabel {
-  font: 16px Overpass, sans-serif;
-}
-
-#editor-addStudentPopup button {
-  margin-top: 20px;
-  border-radius: 10px;
-  height: 30px;
-  font: 16px Overpass, sans-serif;
-  transition-duration: 300ms; 
-  user-select: none;
-}
-
-#editor-addStudentPopup button:focus {
-  outline: none;
-}
-
-#editor-confirmAddStudentButton {
-  width: 50px;
-  background-color: #01ccc0;
-  color: #ffff;
-  border: none;
-  margin-left: 25px;
-}
-
-#editor-confirmAddStudentButton:hover {
-  filter: brightness(0.9);
-}
-
-#editor-cancelButton {
-  width: 70px;
-  border: 1px solid #9fd0eb;
-  color: #808080;
-  background-color: #ffff;
-  margin-left: 15px;
-}
-
-#editor-cancelButton:hover {
-  background-color: #9fd0eb;
-  color: #ffff;
-}
-
-.editor-studentOptionsPanel {
-  top: 60px;
-  right: 0;
-  position: absolute;
-  border-top: 3px solid #000;
-  width: 50%;
-  height: 1000px;
-}
-
-.editor-editOptionsForm {
-  width: 400px;
-  margin: auto;
-}
-
-.editor-panelNameInputContainer {
-  margin-top: 20px;
-}
-
-#editor-panelNameLabel {
-  font: 20px Overpass, sans-serif;
-}
-
-#editor-panelNameInput {
-  width: 100%;
-  padding: 8px;
-  font: 28px Overpass, sans-serif;
-  border: 3px solid #b3b3b3;
-  border-radius: 5px;
-  transition-duration: 300ms;
-}
-
-#editor-panelNameInput:focus {
-  outline: none;
-  border-color: #01ccc0;
-}
-
-.editor-panelCheckboxContainer {
-  position: relative;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.editor-panelCheckboxInput {
-  appearance: none;
-  margin-left: 20px;
-  border: 3px solid #b3b3b3;
-  background-color: #fff;
-  line-height: 50px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.editor-panelCheckboxInput:checked:after {
-  content: url(../assets/checkmark.svg);
-}
-
-.editor-panelCheckboxInput:focus {
-  outline: none;
-}
-
-.editor-panelCheckboxInput:hover {
-  background-color: #e0e0e0;
-}
-
-.editor-panelCheckboxContainer label {
-  font: 20px Overpass, sans-serif;
-  margin-left: 15px;
-}
-
-.editor-panelCheckboxContainer span {
-  font: 15px Overpass, sans-serif;
-}
-
-.editor-panelSelectContainer {
-  font: 20px Overpass, sans-serif;
-  margin-top: 20px;
-}
-
-#editor-panelSave {
-  border-radius: 10px;
-  margin-left: 25px;
-  margin-top: 20px;
-  height: 40px;
-  width: 60px;
-  border: none;
-  font: 20px Overpass, sans-serif;
-  background-color: #01ccc0;
-  color: #fff;
-  transition: filter 300ms;
-}
-
-#editor-panelSave:focus {
-  outline: none;
-}
-
-#editor-panelSave:hover {
-  filter: brightness(0.85)
-}
 
 .signupLogin-support,
 .signupLogin-support:hover,
@@ -1263,6 +941,16 @@ button {
   color: red;
   margin-bottom: 0%;
   font-size: 0.8em;
+}
+
+.confirmEmail-infoLine {
+  font-size: 1.5em;
+  font-family: Chivo;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+  margin: 8%;
 }
 
 .signup-placeHolderTextError {

@@ -36,7 +36,7 @@ export default class ConfirmEmail extends React.Component {
             <h1 className="loginTitle"
             >Confirm Email</h1>
    
-            <h4 className="landing-infoLine">Make sure to check your <br></br>email and click the link on it <br></br>to confirm your signup.<br></br>Once you are done click <br></br> the button below and login <br></br> to your newly created account</h4>
+            <h4 className="confirmEmail-infoLine">Make sure to check your <br></br>email and click the link on it <br></br>to confirm your signup.<br></br>Once you are done click <br></br> the button below and login <br></br> to your newly created account</h4>
 
             <Link to="/Login" className="signupLogin-ButtonC">Login</Link>
 
