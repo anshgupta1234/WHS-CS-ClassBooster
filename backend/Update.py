@@ -56,7 +56,7 @@ class update(Resource):
         client["classrooms"][userid].update({'_id':id}, {"$set": {"students":students}})
         client["classrooms"][userid].update({'_id':id}, {"$set": {"teacher":teacher}})
         client["classrooms"][userid].update({'_id':id}, {"$set": {"whiteboard":whiteboard}})
-        return {"success": "true"}
+        return {"success": "true"}, 201, [('Access-Control-Allow-Origin', '*')]
     
 
 
