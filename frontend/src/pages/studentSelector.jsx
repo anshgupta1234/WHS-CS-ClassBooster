@@ -6,43 +6,47 @@ class StudentSelector extends Component {
 
     renderStudentsList = () => {
         const {students, handleStudentSelect, toggleDeleteStudentPopup} = this.props;
-        return students.map(student => (
-            <div className="editor-student overpass" onClick={() => handleStudentSelect(student.index)} tabIndex="-1" key={student.index} id={"editor-student" + student.index}>
-                {student.name}
+        let studentsList = [];
+        for (let id in students) {
+            studentsList.push(
+            <div className="editor-student overpass" onClick={() => handleStudentSelect(id)} tabIndex="-1" key={id} id={"editor-student" + id}>
+                {students[id].name}
                 <button className="editor-deleteStudent" onClick={toggleDeleteStudentPopup}><TrashcanIcon/></button>
             </div>
-        ))
+            )
+        }
+        return studentsList;
     }
 
     render() { 
-        const {students, selectedStudentIndex, toggleAddStudentPopup, handleInputChange, handleSelectChange, nameInput, visibilityInput, extraHelpInput, hate} = this.props;
-        const options = [];
-        students.filter(function (student) {
-            return student !== students[selectedStudentIndex]
-        }).map(student => (
-            options.push({value: student.name, label: student.name})
-        ))
+        const {students, selectedStudentId, toggleAddStudentPopup, handleInputChange, handleSelectChange, handleSaveStudentsAndDesks, nameInput, visibilityInput, extraHelpInput, hate} = this.props;
+        const selectOptions = [];
+        for (let id in students) {
+            if (id !== selectedStudentId) {
+                selectOptions.push({value: id, label: students[id].name})
+            }
+        }
         const customStyles = {
             option: (provided) => ({
             ...provided,
             padding: "5px",
             })}
         const hateSelect = [];
-        for (let i=0; i<hate.length; i++) { //need to convert hate array from ClassEditor state to an array that the Select Component can use
-            hateSelect.push({label: hate[i], value: hate[i]})
+        for (let i=0; i<hate.length; i++) { //need to convert student hate array to an array that the Select Component can use
+            hateSelect.push({value: hate[i], label: students[hate[i]].name})
         }
         return ( 
             <div id="editor-studentSection">
                 <div className="editor-headerBar">
-                    <span className="editor-className chivo">Class Name</span>
-                    <span className="editor-studentAttributesHeader chivo">Student attributes</span>
+                    <span>Class Name</span>
+                    <span className="editor-studentAttributesHeader">Student attributes</span>
                 </div>
 				<section className="editor-studentList">
 					<div className="editor-studentListNavbar">
 						<button className="editor-addStudentButton" onClick={() => toggleAddStudentPopup()}>Add Student</button>
 					</div>
                     {this.renderStudentsList()}
-                    <button className="editor-saveAllStudentsButton"></button>
+                    <button className="editor-saveStudentsButton" onClick={handleSaveStudentsAndDesks}>Save all students</button>   
 				</section>
                 <section className="editor-studentOptionsPanel">
                     <form className="editor-editOptionsForm">
@@ -96,7 +100,7 @@ class StudentSelector extends Component {
                                 onChange={handleSelectChange}
                                 value={hateSelect}
                                 styles={customStyles}
-                                options={options}
+                                options={selectOptions}
                                 isMulti={true}
                                 closeMenuOnSelect={false}
                                 maxMenuHeight="180px"

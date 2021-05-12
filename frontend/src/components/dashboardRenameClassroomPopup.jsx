@@ -1,37 +1,38 @@
 import React, { Component } from "react";
 
 class DashboardRenameClassroomPopup extends Component {
-  state = { noClassnameWarning: "" };
+  state = {
+    noClassnameWarning: "",
+  };
+
   checkInputs() {
-    let indexOfClassroom = this.props.selectedClassroom.index;
+    const {selectedClassroomIndex, setClassroomName, addClassroom, toggleRenameClassroomPopup} = this.props;
     if (document.getElementById("dashboard-classnameInput").value.trim().length > 0) {
-      this.props.setClassroomName(
-        indexOfClassroom,
-        document.getElementById("dashboard-classnameInput").value,
-        document.getElementById("dashboard-nicknameInput").value
-      );
-      this.props.toggleClassroomOptions(indexOfClassroom);
+      if (selectedClassroomIndex === -1) {
+        addClassroom();
+        toggleRenameClassroomPopup(-1);
+      } else {
+        setClassroomName(selectedClassroomIndex);
+        toggleRenameClassroomPopup(-1);
+      }
     } else {
       this.setState({ noClassnameWarning: "This field is required" });
     }
   }
+
   render() {
-    const selectedClassroom = this.props.selectedClassroom;
-    let indexOfClassroom = selectedClassroom.index;
-    let header, classnameLabel, nicknameLabel, oldClassroomName, oldNickname;
-    if (indexOfClassroom === -1) {
+    const {selectedClassroomIndex, handleInputChange, toggleRenameClassroomPopup, nameInput, nicknameInput} = this.props;
+    let header, classnameLabel, nicknameLabel;
+    if (selectedClassroomIndex === -1) {
       header = "Create classroom";
       classnameLabel = "Classname (required)";
       nicknameLabel = "Nickname";
-      oldClassroomName = "";
-      oldNickname = "";
     } else {
       header = "Rename classroom";
       classnameLabel = "Classname";
       nicknameLabel = "Nickname";
-      oldClassroomName = selectedClassroom.name;
-      oldNickname = selectedClassroom.nickname;
     }
+
     return (
       <div className="dashboard-popup-background">
         <link
@@ -46,21 +47,24 @@ class DashboardRenameClassroomPopup extends Component {
           </span>
           <br></br>
           <input
+            name="dashboard-nameInput"
             id="dashboard-classnameInput"
             maxLength="40"
-            size="20"
-            defaultValue={oldClassroomName}
+            value={nameInput}
+            onChange={handleInputChange}
             autoComplete="off"
             spellCheck={false}
           ></input>
           <label htmlFor="dashboard-nicknameInput" id="dashboard-nickname-label">{nicknameLabel}</label>
           <br></br>
           <input
+            name="dashboard-nicknameInput"
             id="dashboard-nicknameInput"
             maxLength="40"
-            size="20"
-            defaultValue={oldNickname}
+            value={nicknameInput}
+            onChange={handleInputChange}
             autoComplete="off"
+            spellCheck={false}
           ></input>
           <br></br>
           <button
@@ -71,7 +75,7 @@ class DashboardRenameClassroomPopup extends Component {
           </button>
           <button
             className="dashboard-popup-classname-cancel"
-            onClick={this.props.toggleRenameClassroomPopup}
+            onClick={toggleRenameClassroomPopup}
           >
             Cancel
           </button>

@@ -12,6 +12,7 @@ import EditorDeleteStudentPopup from "../components/editorDeleteStudentPopup"
 import { DraggableBox } from "./DnDComponents/DraggableBox";
 
 export default class ClassEditor extends Component {
+
 	state = {
 		isLoaded : true,
 		onClassroom : true,
@@ -22,32 +23,31 @@ export default class ClassEditor extends Component {
 		whiteboard: { top: 0, left: 450 },
  		teacherDesk: { top: 60, left: 700, title: "Teacher Desk" },
 		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" },
-		students: [
-			{
+		students: {
+			"fmlYPiNMeO": {
 				"name": "Ansh simp #1",
 				"visibility": false,
 				"extra_help": true,
-				"hate": ["Unch Gorpta", "Jim"],
-				"index": 0
+				"hate": ["t1bxYxBdy", "CjNqiFXyX"],
 			},
-			{
+			"t1bxYxBdy": {
 				"name": "Unch Gorpta",
 				"visibility": true,
 				"extra_help": false,
-				"hate": 0,
-				"index": 1
+				"hate": [],
 			},
-			{
+			"CjNqiFXyX": {
 				"name": "Jim",
 				"visibility": true,
 				"extra_help": true,
-				"hate": ["Ansh simp #1"],
-				"index": 2
-			},
-		],
+				"hate": ["fmlYPiNMeO"],
+			}
+		},
 		addStudentPopupVisible: false,
 		deleteStudentPopupVisible: false,
-		selectedStudentIndex: -1,
+		selectedStudentId: -1,
+		classroomId: 0,
+		isLoaded: true,
 	}
 
 	componentDidMount() {
@@ -58,6 +58,10 @@ export default class ClassEditor extends Component {
 		})
 		tempDesks["teacherDesk"] = this.state.teacherDesk
 		this.setState({ desks: tempDesks })
+		const id = new URLSearchParams(window.location.search).get("id");
+		console.log("ID from URL: " + id);
+		this.setState({classroomId: id})
+		this.getStudentsAndDesks();
 	}
 
 	componentWillUnmount() {
@@ -70,8 +74,35 @@ export default class ClassEditor extends Component {
 		});
 	};
 
+	getStudentsAndDesks = () => {
+		fetch("http://classbooster.loca.lt/classrooms/get", {
+			method: "POST",
+			body: this.state.classroomId,
+			headers: {
+				'Bypass-Tunnel-Reminder': 'better work'
+			  }
+		}).then(response => response.json()).then(response => {
+			if (response.success) {
+				this.setState({
+					students: response.students, 
+					desks: response.desks, 
+					teacherDesk: response.teacher, 
+					pairing: response.pairing, 
+					isLoaded: true,
+				})
+			}
+		})
+	}
+
 	updateDesks = (desks) => {
+		console.log(this.state.desks)
 		this.setState({ desks: desks, teacherDesk: desks.teacherDesk })
+		return "dogger"
+	}
+
+	updateTeacher = (desks) => {
+		this.setState({ teacherDesk: desks.teacherDesk })
+		return "dogger"
 	}
 
 	deleteDesk = (id) => {
@@ -113,7 +144,7 @@ export default class ClassEditor extends Component {
 			}
 		}
 	}
-	handleChange(para){
+handleChange(para){
 	this.setState({ first : false })
 		if(para){
 			this.setState({onClassroom : true});
@@ -131,20 +162,30 @@ export default class ClassEditor extends Component {
 		}
 	}
 
-
-addStudent = (student) => {
-	this.setState({students: [...this.state.students, student]}, () => {
+addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate) => {
+	if (this.state.selectedStudentId !== -1) {
+		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
+	}
+	let students = this.state.students;
+	students[studentId] = {
+		"name": nameInput, 
+		"visibility": visibilityInput, 
+		"extra_help": extraHelpInput, 
+		"hate": hate,
+	}
+	this.setState({students, selectedStudentId: -1}, () => {
 	this.toggleAddStudentPopup();
 	})
 }
 
-deleteStudent = (index) => {
-	let students = this.state.students; 
-	students.splice(index, 1);
-	for (let i=index; i<students.length; i++) {
-		students[i].index = students[i].index - 1;
+deleteStudent = (id) => {
+	let students = {...this.state.students}; 
+	delete students[id];
+	for (let studentId in students) {
+		students[studentId].hate = students[studentId].hate.filter((hateStudentId) => hateStudentId !== id)
 	}
-	this.setState({students, deleteStudentPopupVisible: false})
+	document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
+	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1})
 }
 
 toggleAddStudentPopup = () => {
@@ -152,21 +193,20 @@ toggleAddStudentPopup = () => {
 }
 
 toggleDeleteStudentPopup = () => {
-	console.log("Toggle delete just entered")
-	this.setState({deleteStudentPopupVisible: !this.state.deleteStudentPopupVisible}, () => console.log("Delete student popup visible: " + this.state.deleteStudentPopupVisible))
+	this.setState({deleteStudentPopupVisible: !this.state.deleteStudentPopupVisible})
 }
 
 handleInputChange = (e) => {
-	if (this.state.selectedStudentIndex > -1) {
+	if (this.state.selectedStudentId !== -1) {
 		let inputTarget = e.target
 		let inputName = inputTarget.name
 		let students = this.state.students;
 		if (inputName === "nameInput") {
-			students[this.state.selectedStudentIndex].name = inputTarget.value;
+			students[this.state.selectedStudentId].name = inputTarget.value;
 		} else if (inputName === "visibilityInput") {
-			students[this.state.selectedStudentIndex].visibility = inputTarget.checked;
+			students[this.state.selectedStudentId].visibility = inputTarget.checked;
 		} else {
-			students[this.state.selectedStudentIndex].extra_help = inputTarget.checked;
+			students[this.state.selectedStudentId].extra_help = inputTarget.checked;
 		}
 		this.setState({students})
 	}
@@ -174,35 +214,54 @@ handleInputChange = (e) => {
 }
 
 handleSelectChange = (selectedOptions) => {
-	if (this.state.selectedStudentIndex > -1) {
+	if (this.state.selectedStudentId !== -1) {
 		let students = this.state.students;
-		students[this.state.selectedStudentIndex].hate = [];
+		students[this.state.selectedStudentId].hate = [];
 		for (let i=0; i<selectedOptions.length; i++) {
-			students[this.state.selectedStudentIndex].hate.push(selectedOptions[i].value)
+			students[this.state.selectedStudentId].hate.push(selectedOptions[i].value)
 		}
 		this.setState({students})
 	}
 }
 
+handleSaveStudentsAndDesks = () => {
+	fetch("http://classbooster.loca.lt/classrooms/update", {
+		method: "POST",
+		body: {
+		"ID": this.state.classroomId, 
+		"students": this.state.students,
+		"desks": this.state.desks,
+		"whiteboard": this.state.whiteboard,
+		"teacher": this.state.teacherDesk,
+		"pairing": this.state.pairing,
+		},
+		headers: {
+			'Bypass-Tunnel-Reminder': 'better work'
+		  }
+	}).then(response => response.json()).then(response => {
+		if (response.success) {
+			console.log("Classroom students updated");
+		} else {
+			console.log("Error: classroom students not updated");
+		}
+	})
+}
+
 handleWindowClick = (e) => {
-	if (this.state.selectedStudentIndex > -1 && 
-		!this.state.onClassroom && (e.target.className === "dashboard-navbar" || e.target.className === "secondaryNav")) {
-			document.getElementById("editor-student" + this.state.selectedStudentIndex).classList.remove("editor-focus")
-			this.setState({selectedStudentIndex: -1, nameInput: "", visibilityInput: false, extraHelpInput: false, hate: []})
+	if (!this.state.onClassroom && this.state.selectedStudentId !== -1 && 
+			(e.target.className === "dashboard-navbar" || e.target.className === "secondaryNav")) {
+			document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
+			this.setState({selectedStudentId: -1})
 		}
 }
 
-saveStudentEdit = (students) => {
-	this.setState({students})
-}
-
-handleStudentSelect = (studentIndex) => {
-	if (this.state.selectedStudentIndex > -1) {
-		document.getElementById("editor-student" + this.state.selectedStudentIndex).classList.remove("editor-focus")
+handleStudentSelect = (studentId) => {
+	if (this.state.selectedStudentId !== -1) {
+		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus")
 	}
 	this.setState({
-		selectedStudentIndex: studentIndex,
-	}, () => document.getElementById("editor-student" + studentIndex).classList.add("editor-focus"))
+		selectedStudentId: studentId,
+	}, () => document.getElementById("editor-student" + studentId).classList.add("editor-focus"))
 }
 
 handleDesk = () => {
@@ -233,10 +292,9 @@ handleDesk = () => {
   };
 
 render() {
-	const selectedStudent = this.state.selectedStudentIndex > -1 ? this.state.students[this.state.selectedStudentIndex] : 
-		{name: "", visibility: false, extra_help: false, hate: 0};
-
-    return (
+	const selectedStudent = this.state.selectedStudentId !== -1 ? this.state.students[this.state.selectedStudentId] : 
+	{name: "", visibility: false, extra_help: false, hate: []};
+	return (
 		this.state.isLoaded && (
 		<section className="bgSection">				
 			<nav className="dashboard-navbar-container">
@@ -258,7 +316,7 @@ render() {
 					<a href="#" id="dashboard-support-link">
 					  Support
 					</a>
-				  	</div>
+					  </div>
 				)}
 				</div>
 			</nav>
@@ -309,14 +367,13 @@ render() {
 				<section className={this.getClass(0)} id="studentSection">
 					<StudentSelector
 						students={this.state.students}
-						deleteStudent={this.deleteStudent}
-						selectedStudentIndex={this.state.selectedStudentIndex}
-						handleInputChange={this.handleInputChange}
-						handleSelectChange={this.handleSelectChange}
-						handleStudentSelect={this.handleStudentSelect}
+						selectedStudentId={this.state.selectedStudentId}
 						toggleAddStudentPopup={this.toggleAddStudentPopup}
 						toggleDeleteStudentPopup={this.toggleDeleteStudentPopup}
-						saveStudentEdit={this.saveStudentEdit}
+						handleStudentSelect={this.handleStudentSelect}
+						handleInputChange={this.handleInputChange}
+						handleSelectChange={this.handleSelectChange}
+						handleSaveStudentsAndDesks={this.handleSaveStudentsAndDesks}
 						nameInput={selectedStudent.name}
 						visibilityInput={selectedStudent.visibility}
 						extraHelpInput={selectedStudent.extra_help}
@@ -333,12 +390,11 @@ render() {
 			{this.state.deleteStudentPopupVisible && 
 			<EditorDeleteStudentPopup
 				students={this.state.students}
-				selectedStudentIndex={this.state.selectedStudentIndex}
+				selectedStudentId={this.state.selectedStudentId}
 				deleteStudent={this.deleteStudent}
 				toggleDeleteStudentPopup={this.toggleDeleteStudentPopup}
 			/>}
-		</section>
+		</section>)
 		)
-	)
-  }
+	}
 }

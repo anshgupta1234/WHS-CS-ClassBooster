@@ -10,19 +10,19 @@ class EditorAddStudentPopup extends Component {
     }
     
     checkInputs() {
-        let nameInput = this.state.nameInput.trim()
+        const nameInput = this.state.nameInput.trim()
         const {visibilityInput, extraHelpInput, hateInput} = this.state;
         if (nameInput.length > 0) {
             let hate = [];
             for (let i=0; i<hateInput.length; i++) {
-                 hate.push(hateInput[i].label)
+                 hate.push(hateInput[i].value)
             }
-            this.props.addStudent({
-                "name": nameInput, 
-                "visibility": visibilityInput, 
-                "extra_help": extraHelpInput, 
-                "hate": hate, 
-                "index": this.props.students.length})
+            let studentID = "";
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for ( let i = 0; i < Math.floor((Math.random() * 5)) + 8 ; i++ ) {
+                studentID += characters.charAt(Math.floor(Math.random() * 62));
+            }
+            this.props.addStudent(studentID, nameInput, visibilityInput, extraHelpInput, hate)
         }
     }
 
@@ -39,21 +39,23 @@ class EditorAddStudentPopup extends Component {
     handleSelectChange = (selectedOptions) => {
         let hateInput = [];
         for (let i=0; i<selectedOptions.length; i++) {
-            hateInput.push({label: selectedOptions[i].label, value: selectedOptions[i].value})
+            hateInput.push(selectedOptions[i]);
         }
-        this.setState({ hateInput })
+        this.setState({ hateInput });
     }
+    
     render() { 
-        const options = [];
-        this.props.students.map(student => (
-            options.push({value: student.name, label: student.name})
-        ))
+        const selectOptions = [];
+        const {nameInput, visibilityInput, extraHelpInput, hateInput} = this.state;
+        const students = this.props.students;
+        for (let id in students) {
+           selectOptions.push({value: id, label: students[id].name})
+        }
         const customStyles = {
             option: (provided) => ({
             ...provided,
             padding: "5px",
             })}
-        const {nameInput, visibilityInput, extraHelpInput, hateInput} = this.state;
         return ( 
             <div className="dashboard-popup-background">
                 <div id="editor-addStudentPopup">
@@ -105,7 +107,7 @@ class EditorAddStudentPopup extends Component {
                             id="editor-popupSelectInput"
                             onChange={this.handleSelectChange}
                             styles={customStyles}
-                            options={options}
+                            options={selectOptions}
                             value={hateInput}
                             isMulti={true}
                             closeMenuOnSelect={false}
@@ -119,5 +121,5 @@ class EditorAddStudentPopup extends Component {
          );
     }
 }
- 
+
 export default EditorAddStudentPopup;

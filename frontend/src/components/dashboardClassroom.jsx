@@ -4,11 +4,12 @@ import { ReactComponent as VerticalEllipsis } from "../assets/VerticalEllipsis.s
 class DashboardClassroom extends Component {
   render() {
     const {
-      index,
+      id,
       classroomName,
       nickname,
       numOfStudents,
       classroomOptionsVisible,
+      selectedClassroomIndex,
       toggleClassroomOptions,
       toggleRenameClassroomPopup,
       toggleDeleteClassroomPopup,
@@ -25,9 +26,9 @@ class DashboardClassroom extends Component {
             {classroomName}
           </a>
           <button
-            id={"verticalEllipsisButton" + index}
+            id={"verticalEllipsisButton" + id}
             className="dashboard-vertical-ellipsis"
-            onClick={() => toggleClassroomOptions(index)}
+            onClick={() => toggleClassroomOptions(id)}
           >
             {<VerticalEllipsis />}
           </button>
@@ -36,7 +37,8 @@ class DashboardClassroom extends Component {
             <ClassroomOptionsDropdown
               toggleRenameClassroomPopup={toggleRenameClassroomPopup}
               toggleDeleteClassroomPopup={toggleDeleteClassroomPopup}
-              classroomIndex={index}
+              id={id}
+              selectedClassroomIndex={selectedClassroomIndex}
             ></ClassroomOptionsDropdown>
           )}
         </div>
@@ -50,19 +52,20 @@ class DashboardClassroom extends Component {
 export default DashboardClassroom;
 
 function ClassroomOptionsDropdown(props) {
+  const{id, selectedClassroomIndex, toggleRenameClassroomPopup, toggleDeleteClassroomPopup} = props;
   return (
     <div className="dashboard-classroom-options-dropdown">
       <button
-        id={"renameClassroomOption" + props.classroomIndex}
+        id={"renameClassroomOption" + id}
         className="dashboard-rename-classroom"
-        onClick={() => props.toggleRenameClassroomPopup(props.classroomIndex)}
+        onClick={() => toggleRenameClassroomPopup(selectedClassroomIndex)}
       >
         Rename classroom
       </button>
       <button
-        id={"deleteClassroomOption" + props.classroomIndex}
+        id={"deleteClassroomOption" + id}
         className="dashboard-delete-classroom"
-        onClick={() => props.toggleDeleteClassroomPopup(props.classroomIndex)}
+        onClick={() => toggleDeleteClassroomPopup(selectedClassroomIndex)}
       >
         Delete classroom
       </button>

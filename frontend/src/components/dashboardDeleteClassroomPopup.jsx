@@ -4,7 +4,7 @@ class DashboardDeleteClassroomPopup extends Component {
   render() {
     const {
       deleteClassroom,
-      selectedClassroom,
+      selectedClassroomIndex,
       toggleDeleteClassroomPopup,
     } = this.props;
     return (
@@ -20,7 +20,7 @@ class DashboardDeleteClassroomPopup extends Component {
           </div>
           <button
             className="dashboard-popup-delete-classroom-delete"
-            onClick={() => deleteClassroom(selectedClassroom.index)}
+            onClick={() => deleteClassroom(selectedClassroomIndex)}
           >
             Delete
           </button>

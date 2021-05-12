@@ -7,19 +7,20 @@ class DashboardClassroomGrid extends Component {
       columnsPerRow, //each # in this array represents the # of columns in a Row
       maxNumOfColumns,
       classrooms,
+      selectedClassroomIndex,
       toggleRenameClassroomPopup,
       toggleClassroomOptions,
       toggleDeleteClassroomPopup,
     } = this.props;
-    let rows = []; //array containing each Row component
+    let rows = [];
     for (let i = 0; i < columnsPerRow.length; i++) {
-      //for number n in the array, add a Row component with n # of columns
       rows.push(
         <Row
           key={i}
           rowNumber={i}
           columns={columnsPerRow[i]}
           maxNumOfColumns={maxNumOfColumns}
+          selectedClassroomIndex={selectedClassroomIndex}
           classrooms={classrooms}
           toggleRenameClassroomPopup={toggleRenameClassroomPopup}
           toggleClassroomOptions={toggleClassroomOptions}
@@ -34,24 +35,22 @@ class DashboardClassroomGrid extends Component {
 export default DashboardClassroomGrid;
 
 function Row(props) {
+  let {classrooms, columns, maxNumOfColumns, rowNumber, selectedClassroomIndex} = props;
   let classroomsInThisRow = [];
-  let allClassrooms = props.classrooms;
-  let rowLength = props.columns;
-  let maxNumOfColumns = props.maxNumOfColumns;
-  let rowNumber = props.rowNumber;
-  for (let i = 0; i < rowLength; i++) {
+  for (let i = 0; i < columns; i++) {
     classroomsInThisRow.push(
-      allClassrooms[rowNumber * maxNumOfColumns + i] // (rowNumber * maxNumOfColumns) + i = index of corresponding classroom in classrooms array
+      classrooms[rowNumber * maxNumOfColumns + i] // (rowNumber * maxNumOfColumns) + i = index of corresponding classroom in classrooms array
     );
   }
   return (
     <div className="dashboard-classroom-row">
       {classroomsInThisRow.map((classroom) => (
         <Classroom
-          key={classroom.index}
-          index={classroom.index}
+          key={classroom.id}
+          id={classroom.id}
           classroomName={classroom.name}
           nickname={classroom.nickname}
+          selectedClassroomIndex={selectedClassroomIndex}
           numOfStudents={classroom.numOfStudents}
           classroomOptionsVisible={classroom.classroomOptionsVisible}
           toggleClassroomOptions={props.toggleClassroomOptions}
