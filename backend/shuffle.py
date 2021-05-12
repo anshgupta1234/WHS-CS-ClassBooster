@@ -26,7 +26,7 @@ class shuffle(Resource):
             userID = session.get("userID")
             print(userID)
         else:
-            return {"error": "You are not logged in"}
+            return {"error": "You are not logged in"}, 201, [('Access-Control-Allow-Origin', '*')]
         myClass = client["classrooms"][userID].find_one({'_id':id})
         if myClass is None:
             return {"error": "No class found with id given"}
@@ -36,6 +36,6 @@ class shuffle(Resource):
         teacher = myClass["teacher"]
         pairing = main(desks, students, whiteboard, teacher)
         client["classrooms"][userID].update({'_id':id}, {"$set": {"pairings":pairing}})
-        return pairing
+        return pairing, 201, [('Access-Control-Allow-Origin', '*')]
 
     
