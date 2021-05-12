@@ -55,4 +55,4 @@ class getAll(Resource):
             
             print (className)
             classNames.append(className)
-        return {"classes": classNames}
+        return {"classes": classNames}, 201, [('Access-Control-Allow-Origin', '*')]
