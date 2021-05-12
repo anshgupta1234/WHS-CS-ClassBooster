@@ -46,4 +46,4 @@ class signup(Resource):
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": args["email"]}})
         emailUser(email,ngrokURL+'/verify/' + code)
-        return {"success":True},201, [('Access-Control-Allow-Origin', '*')]
+        return {"success":True},201

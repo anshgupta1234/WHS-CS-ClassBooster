@@ -22,4 +22,4 @@ emailVerifCollection = database["verification"]
 class logout(Resource):
     def get(self):
         session.clear()
-        return {"success":True},200, [('Access-Control-Allow-Origin', '*')]
+        return {"success":True},200

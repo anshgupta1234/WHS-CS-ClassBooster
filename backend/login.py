@@ -32,14 +32,14 @@ class login(Resource):
                 session['username'] = args["username"]
                 session['userID'] = str(userCursor['_id'])
                 print("session username is "+session.get('username'))
-                return {"success":True}, 201, [('Access-Control-Allow-Origin', '*')]
+                return {"success":True},201
             else:
-                return {"error":"Your password is wrong :("},401, [('Access-Control-Allow-Origin', '*')]
+                return {"error":"Your password is wrong :("},401
         else:
-            return {"error":"No account found with that email/username :("},401, [('Access-Control-Allow-Origin', '*')]
+            return {"error":"No account found with that email/username :("},401
     def get(self):
         if 'username' in session:
-            return {"username":session.get("username"),"id":session.get("userID")}, 201, [('Access-Control-Allow-Origin', '*')]
+            return({"username":session.get("username"),"id":session.get("userID")})
         else:
             print('You are not logged in')
 

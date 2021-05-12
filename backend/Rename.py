@@ -27,15 +27,15 @@ class rename(Resource):
             userID = session.get("userID")
             print(userID)
         else:
-            return {"error": "You are not logged in"}, 500, [('Access-Control-Allow-Origin', '*')]
+            return {"error": "You are not logged in"}
         myClass = client["classrooms"][userID].find_one({'_id':id})
         if myClass is None:
-            return {"error": "No class found with id given"}, 500, [('Access-Control-Allow-Origin', '*')]
+            return {"error": "No class found with id given"}
     
         client["classrooms"][userID].update({'_id':id}, {"$set": {"name":name}})
         client["classrooms"][userID].update({'_id':id}, {"$set": {"nick":nick}})
 
-        return {"success": "true"}, 201, [('Access-Control-Allow-Origin', '*')]
+        return {"success": "true"}
     
 
 
