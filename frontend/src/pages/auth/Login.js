@@ -34,10 +34,13 @@ export default class Login extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://839a3d56f94d.ngrok.io/login', {
+      fetch('https://monkey.loca.lt/login', {
       method: 'POST',
-      header: 'Access-Control-Allow-Origin',
-
+      credentials: 'include',
+      headers: {
+        'Bypass-Tunnel-Reminder': 'better work',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         username: this.state.email,
         password: this.state.password

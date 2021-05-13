@@ -14,7 +14,7 @@ import { DraggableBox } from "./DnDComponents/DraggableBox";
 export default class ClassEditor extends Component {
 
 	state = {
-		isLoaded : true,
+		isLoaded : false,
 		onClassroom : true,
 		first: true,
 		numDesks: null,
@@ -23,45 +23,19 @@ export default class ClassEditor extends Component {
 		whiteboard: { top: 0, left: 450 },
  		teacherDesk: { top: 60, left: 700, title: "Teacher Desk" },
 		pairing: { "9pasdf09f8": "monkey", "akjdhf976": "donkey" },
-		students: {
-			"fmlYPiNMeO": {
-				"name": "Ansh simp #1",
-				"visibility": false,
-				"extra_help": true,
-				"hate": ["t1bxYxBdy", "CjNqiFXyX"],
-			},
-			"t1bxYxBdy": {
-				"name": "Unch Gorpta",
-				"visibility": true,
-				"extra_help": false,
-				"hate": [],
-			},
-			"CjNqiFXyX": {
-				"name": "Jim",
-				"visibility": true,
-				"extra_help": true,
-				"hate": ["fmlYPiNMeO"],
-			}
-		},
+		students: {},
 		addStudentPopupVisible: false,
 		deleteStudentPopupVisible: false,
 		selectedStudentId: -1,
 		classroomId: 0,
-		isLoaded: true,
 	}
 
 	componentDidMount() {
 		document.addEventListener("mousedown", this.handleWindowClick)
-		let tempDesks = this.state.desks
-		Object.keys(tempDesks).forEach(key => {
-			tempDesks[key]["title"] = this.state.pairing[key]
-		})
-		tempDesks["teacherDesk"] = this.state.teacherDesk
-		this.setState({ desks: tempDesks })
 		const id = new URLSearchParams(window.location.search).get("id");
 		console.log("ID from URL: " + id);
 		this.setState({classroomId: id})
-		this.getStudentsAndDesks();
+		this.getStudentsAndDesks(id);
 	}
 
 	componentWillUnmount() {
@@ -74,23 +48,33 @@ export default class ClassEditor extends Component {
 		});
 	};
 
-	getStudentsAndDesks = () => {
-		fetch("http://classbooster.loca.lt/classrooms/get", {
+	getStudentsAndDesks = (id) => {
+		fetch("https://monkey.loca.lt/classrooms/get", {
 			method: "POST",
-			body: this.state.classroomId,
+			body: JSON.stringify({ "tag": id }),
 			headers: {
-				'Bypass-Tunnel-Reminder': 'better work'
-			  }
+				'Bypass-Tunnel-Reminder': 'better work',
+				'Content-Type': 'application/json'
+			  },
+			credentials: 'include',
 		}).then(response => response.json()).then(response => {
-			if (response.success) {
+			if (response.name) {
+				let tempDesks = response.desks
+				Object.keys(tempDesks).forEach(key => {
+					if (key !== "teacherDesk" && key in tempDesks) {
+						tempDesks[key]["title"] = response.pairings[key]	
+					}
+				})
+				tempDesks["teacherDesk"] = this.state.teacherDesk
+				console.log(tempDesks)
 				this.setState({
 					students: response.students, 
-					desks: response.desks, 
-					teacherDesk: response.teacher, 
-					pairing: response.pairing, 
+					desks: tempDesks, 
+					pairing: response.pairings, 
 					isLoaded: true,
 				})
 			}
+			console.log(response)
 		})
 	}
 
@@ -225,26 +209,44 @@ handleSelectChange = (selectedOptions) => {
 }
 
 handleSaveStudentsAndDesks = () => {
-	fetch("http://classbooster.loca.lt/classrooms/update", {
+	fetch("https://monkey.loca.lt/classrooms/update", {
 		method: "POST",
-		body: {
-		"ID": this.state.classroomId, 
+		body: JSON.stringify({
+		"tag": this.state.classroomId, 
 		"students": this.state.students,
 		"desks": this.state.desks,
 		"whiteboard": this.state.whiteboard,
 		"teacher": this.state.teacherDesk,
 		"pairing": this.state.pairing,
-		},
+		}),
 		headers: {
-			'Bypass-Tunnel-Reminder': 'better work'
-		  }
+			'Bypass-Tunnel-Reminder': 'better work',
+			'Content-Type': 'application/json'
+		  },
+		credentials: 'include',
 	}).then(response => response.json()).then(response => {
 		if (response.success) {
 			console.log("Classroom students updated");
 		} else {
 			console.log("Error: classroom students not updated");
+			console.log(response)
 		}
 	})
+}
+
+handleShuffle = () => {
+	fetch("https://monkey.loca.lt/shuffle", {
+			method: "POST",
+			body: JSON.stringify({ "tag": this.state.classroomId }),
+			headers: {
+				'Bypass-Tunnel-Reminder': 'better work',
+				'Content-Type': 'application/json'
+			  },
+			credentials: 'include',
+		}).then(response => response.json()).then(response => {
+			this.getStudentsAndDesks(this.state.classroomId)
+			console.log(response)
+		})
 }
 
 handleWindowClick = (e) => {
@@ -280,6 +282,7 @@ handleDesk = () => {
 	  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	
 	let tempDesks = this.state.desks
+	console.log(tempDesks)
 	for (let index = 0; index < deskNumber; index++) {
 		let result = "";
 		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -352,11 +355,11 @@ render() {
 									</svg>
 								</button>
 							</div>
-							<button className="blackButton">Save Seating Chart</button>
-							<button className="whiteButton">Create Seating Chart</button>
+							<button className="blackButton" onClick={() => this.handleSaveStudentsAndDesks()}>Save Seating Chart</button>
+							<button className="whiteButton" onClick={() => this.handleShuffle()}>Create Seating Chart</button>
 						</div>
 						<div id="snackbar">
-							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+							<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
 								<circle cx="12" cy="12" r="9" />
 								<path d="M9 12l2 2l4 -4" />

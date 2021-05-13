@@ -23,7 +23,7 @@ class update(Resource):
         
         updateInfo = request.json
 
-        id = ObjectId(updateInfo["ID"])
+        tag = updateInfo["tag"].upper()
         
         students = updateInfo["students"]
         print (students)
@@ -36,26 +36,26 @@ class update(Resource):
         
         
         if 'username' in session:
-            userid = session.get("userID")
-            print(userid)
+            usertag = session.get("userID")
+            print(usertag)
         else:
             return {"error": "You are not logged in"}
        
         
         
-        myClass = client["classrooms"][userid].find_one({'_id':id})
+        myClass = client["classrooms"][usertag].find_one({'tag':tag})
         if myClass is None:
-            return {"error": "No class found with id given"}
+            return {"error": "No class found withtag given"}
         print (myClass)
 
         
 
 
-        #client["classrooms"][userid].insert_one(updateInfo)
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"desks":desks}})
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"students":students}})
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"teacher":teacher}})
-        client["classrooms"][userid].update({'_id':id}, {"$set": {"whiteboard":whiteboard}})
+        #client["classrooms"][usertag].insert_one(updateInfo)
+        client["classrooms"][usertag].update({'tag':tag}, {"$set": {"desks":desks}})
+        client["classrooms"][usertag].update({'tag':tag}, {"$set": {"students":students}})
+        client["classrooms"][usertag].update({'tag':tag}, {"$set": {"teacher":teacher}})
+        client["classrooms"][usertag].update({'tag':tag}, {"$set": {"whiteboard":whiteboard}})
         return {"success": "true"}, 201, [('Access-Control-Allow-Origin', '*')]
     
 

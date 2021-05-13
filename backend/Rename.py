@@ -20,7 +20,8 @@ resourcefields = {
 class rename(Resource):
     def post(self):
         updateInfo = request.json
-        id = ObjectId(updateInfo["ID"])
+        tag = updateInfo["tag"].upper()
+        print(tag)
         name = updateInfo["name"]
         nick = updateInfo["nick"]
         if 'username' in session:
@@ -28,12 +29,12 @@ class rename(Resource):
             print(userID)
         else:
             return {"error": "You are not logged in"}, 500, [('Access-Control-Allow-Origin', '*')]
-        myClass = client["classrooms"][userID].find_one({'_id':id})
+        myClass = client["classrooms"][userID].find_one({'tag':tag})
         if myClass is None:
             return {"error": "No class found with id given"}, 500, [('Access-Control-Allow-Origin', '*')]
     
-        client["classrooms"][userID].update({'_id':id}, {"$set": {"name":name}})
-        client["classrooms"][userID].update({'_id':id}, {"$set": {"nick":nick}})
+        client["classrooms"][userID].update({'tag':tag}, {"$set": {"name":name}})
+        client["classrooms"][userID].update({'tag':tag}, {"$set": {"nick":nick}})
 
         return {"success": "true"}, 201, [('Access-Control-Allow-Origin', '*')]
     

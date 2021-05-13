@@ -46,10 +46,10 @@ function Row(props) {
     <div className="dashboard-classroom-row">
       {classroomsInThisRow.map((classroom) => (
         <Classroom
-          key={classroom.id}
-          id={classroom.id}
+          key={classroom.tag}
+          id={classroom.tag}
           classroomName={classroom.name}
-          nickname={classroom.nickname}
+          nickname={classroom.nick}
           selectedClassroomIndex={selectedClassroomIndex}
           numOfStudents={classroom.numOfStudents}
           classroomOptionsVisible={classroom.classroomOptionsVisible}

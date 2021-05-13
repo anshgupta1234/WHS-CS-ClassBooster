@@ -40,19 +40,21 @@ export default class Dashboard extends Component {
   }
 
   getClassrooms = () => {
-    fetch("http://classbooster.loca.lt/classrooms/getAll", {
+    fetch("https://monkey.loca.lt/classrooms/getAll", {
       method: "GET",
       headers: {
         'Bypass-Tunnel-Reminder': 'better work',
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'include',
     }).then(response => response.json()).then(response => {
-      if (response.success) {
-        this.setState({classrooms: response.classrooms, isLoaded: true}, () => this.calculateRows)
+      if (response.classes) {
+        this.setState({classrooms: response.classes, isLoaded: true})
       } else {
         console.log("Error: Couldn't get classrooms list")
+        console.log(response)
       }
-    })
+    }).then(() => this.calculateRows(this.state.classrooms))
   }
 
   handleClick = (e) => {
@@ -60,7 +62,7 @@ export default class Dashboard extends Component {
     if (this.state.selectedClassroomIndex > -1) {
       //closing classroom options dropdown
       let classrooms = [...this.state.classrooms];
-      let selectedClassroomId = {...classrooms[this.state.selectedClassroomIndex]}.id;
+      let selectedClassroomId = {...classrooms[this.state.selectedClassroomIndex]}.tag;
       if (
         targetedElement !==
           document.getElementById(
@@ -107,41 +109,48 @@ export default class Dashboard extends Component {
     });
   };
 
+  genHexString(len) {
+    const hex = '0123456789ABCDEF';
+    let output = '';
+    for (let i = 0; i < len; ++i) {
+        output += hex.charAt(Math.floor(Math.random() * hex.length));
+    }
+    return output;
+  }
+
   addClassroom = () => {
-    let newClassroomId = "";
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      for ( let i = 0; i < Math.floor((Math.random() * 5)) + 8 ; i++ ) {
-        newClassroomId += characters.charAt(Math.floor(Math.random() * 62));
-      }
-    fetch("http://classbooster.loca.lt/classrooms/add", {
+    let newClassroomId = this.genHexString(24);
+    fetch("https://monkey.loca.lt/classrooms/add", {
       method: "POST",
-      body: {
-        id: newClassroomId,
+      body: JSON.stringify({
+        tag: newClassroomId,
         name: this.state.nameInput,
-        nickname: this.state.nicknameInput,
+        nick: this.state.nicknameInput,
         link: "/editor/?id=" + newClassroomId,
-        numberOfStudents: 0,
-        classroomOptionsVisible: false,
-      },
+      }),
+      credentials: 'include',
       headers: {
-        'Bypass-Tunnel-Reminder': 'better work'
+        'Bypass-Tunnel-Reminder': 'better work',
+        'Content-Type': 'application/json'
       }
     }).then(response => response.json()).then(response => {
       if (response.success) {
         this.getClassrooms();
       } else {
-        console.log("Error: Classroom not added")
+        console.log(response)
       }
     })
   };
 
   deleteClassroom = (classroomIndex) => {
     this.toggleDeleteClassroomPopup();
-    fetch("http://classbooster.loca.lt/classrooms/delete", {
+    fetch("https://monkey.loca.lt/classrooms/delete", {
       method: "POST",
-      body: {ID: this.state.classrooms[classroomIndex].id},
+      body: JSON.stringify({tag: this.state.classrooms[classroomIndex].tag}),
+      credentials: 'include',
       headers: {
-        'Bypass-Tunnel-Reminder': 'better work'
+        'Bypass-Tunnel-Reminder': 'better work',
+        'Content-Type': 'application/json'
       }
     }).then(response => response.json()).then(response => {
       if (response.success) {
@@ -161,7 +170,7 @@ export default class Dashboard extends Component {
     let currentClassroomIndex = -1;
     if (classroomId !== -1) {
       for (let i=0; i<classrooms.length; i++) {
-        if (classrooms[i].id === classroomId) {
+        if (classrooms[i].tag === classroomId) {
           currentClassroomIndex = i;
         }
       }
@@ -244,17 +253,24 @@ export default class Dashboard extends Component {
 
   setClassroomName = (classroomIndex) => {
     let currentClassroom = this.state.classrooms[classroomIndex]
-    fetch("http://classbooster.loca.lt/classrooms/rename", {
+    fetch("https://monkey.loca.lt/classrooms/rename", {
       method: "POST",
-      body: {ID: currentClassroom.id, name: this.state.nameInput.trim(), nickname: this.state.nicknameInput.trim()},
+      body: JSON.stringify({
+        tag: currentClassroom.tag, 
+        name: this.state.nameInput.trim(), 
+        nick: this.state.nicknameInput ? this.state.nicknameInput.trim() : null
+      }),
+      credentials: 'include',
       headers: {
-        'Bypass-Tunnel-Reminder': 'better work'
+        'Bypass-Tunnel-Reminder': 'better work',
+        'Content-Type': 'application/json'
       }
     }).then(response => response.json()).then(response => {
       if (response.success) {
         this.getClassrooms();
       } else {
         console.log("Error: Couldn't rename classroom");
+        console.log(response)
       }
     })
   };

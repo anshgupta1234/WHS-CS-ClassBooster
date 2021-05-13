@@ -20,6 +20,7 @@ class add(Resource):
     def post(self):
         args = request.get_json(force=True)
         userID = None
+        print(session)
         if 'username' in session:
             userID = session.get("userID")
             print(userID)
@@ -27,4 +28,4 @@ class add(Resource):
             return {"error": "You are not logged in"}
         classroomsdb[userID].insert_one(args)
         print(classroomsdb[userID].find_one())
-        return "Classroom created.",201
+        return { "success": True }, 201

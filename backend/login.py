@@ -31,7 +31,8 @@ class login(Resource):
             if sha256.verify(args["password"],userCursor["password"]):
                 session['username'] = args["username"]
                 session['userID'] = str(userCursor['_id'])
-                print("session username is "+session.get('username'))
+                print("session userID is "+session.get('userID'))
+                print(session)
                 return {"success":True}, 201, [('Access-Control-Allow-Origin', '*')]
             else:
                 return {"error":"Your password is wrong :("},401, [('Access-Control-Allow-Origin', '*')]

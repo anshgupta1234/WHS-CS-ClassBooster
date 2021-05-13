@@ -21,7 +21,7 @@ resourcefields = {
 class get(Resource):
     def post(self):
         updateInfo = request.json
-        classID = ObjectId(updateInfo["ID"])
+        classID = updateInfo["tag"]
         if 'username' in session:
             userid = session.get("userID")
             print(userid)
@@ -30,7 +30,7 @@ class get(Resource):
         print ("ID: " +userid)
         
         
-        myClass = client["classrooms"][userid].find_one({'_id':classID})
+        myClass = client["classrooms"][userid].find_one({'tag':classID})
         if myClass is None:
             return {"error": "No class found with id given"}
         print (myClass)
@@ -43,16 +43,19 @@ class getAll(Resource):
             userid = session.get("userID")
             print(userid)
         else:
+            print(session)
             return {"error": "You are not logged in"}
+        print(session)
         print ("ID: " +userid)
         classes = list(client["classrooms"][userid].find({}))
         classNames = list()
         for thing in classes:
             name = thing.get("name")
             nick = thing.get("nick")
-            className = {"name": name, "nick": nick}
+            num = thing.get("tag")
+            className = {"name": name, "nick": nick, "tag": num, "link": thing.get("link")}
             
             
             print (className)
             classNames.append(className)
-        return {"classes": classNames}, 201, [('Access-Control-Allow-Origin', '*')]
+        return {"classes": classNames}, 201

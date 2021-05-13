@@ -35,9 +35,13 @@ export default class Signup extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://839a3d56f94d.ngrok.io/signup', {
+      fetch('https://monkey.loca.lt/signup', {
         method: 'POST',
-        header: 'Access-Control-Allow-Origin',
+        headers: {
+          'Bypass-Tunnel-Reminder': 'better work',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
         body: JSON.stringify({
           username: this.state.username,
           email: this.state.email,

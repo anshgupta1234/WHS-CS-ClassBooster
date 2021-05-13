@@ -21,21 +21,23 @@ resourcefields = {
 class shuffle(Resource):
     def post(self):
         updateInfo = request.json
-        id = ObjectId(updateInfo["ID"])
+        tag = updateInfo["tag"].upper()
         if 'username' in session:
             userID = session.get("userID")
             print(userID)
         else:
             return {"error": "You are not logged in"}, 201, [('Access-Control-Allow-Origin', '*')]
-        myClass = client["classrooms"][userID].find_one({'_id':id})
+        myClass = client["classrooms"][userID].find_one({'tag': tag})
         if myClass is None:
             return {"error": "No class found with id given"}
         desks = myClass["desks"]
-        students = myClass["students"]
+        desks.pop('teacherDesk')
+        students = []
+        for key in myClass["students"]:
+            students.append(myClass["students"][key])
         whiteboard = myClass["whiteboard"]
         teacher = myClass["teacher"]
+        print(students)
         pairing = main(desks, students, whiteboard, teacher)
-        client["classrooms"][userID].update({'_id':id}, {"$set": {"pairings":pairing}})
+        client["classrooms"][userID].update({'tag':tag}, {"$set": {"pairings":pairing}})
         return pairing, 201, [('Access-Control-Allow-Origin', '*')]
-
-    
