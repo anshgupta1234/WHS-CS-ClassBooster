@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Route, Link  } from 'react-router-dom';
 import history from '../../history';
 
 
-export default class Login extends React.Component {
+export default class forgotPassword extends React.Component {
   
   state = {
     email: "",
-    password: "",
+    newPassword: "",
     errorInput: undefined,
-    errorMsg: undefined
+    errorMsg: undefined,
+    page: 0
   };
 
   
@@ -20,8 +21,8 @@ export default class Login extends React.Component {
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
   };
-  handlePassword = (event) => {
-    this.setState({ password: event.target.value });
+  handlenewPassword = (event) => {
+    this.setState({ newPassword: event.target.value });
     
   };
 
@@ -35,21 +36,20 @@ export default class Login extends React.Component {
     else {
       this.setState({errorInput: false });
       fetch('https://monkey.loca.lt/login', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Bypass-Tunnel-Reminder': 'better work',
-        'Content-Type': 'application/json'
-      },
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Bypass-Tunnel-Reminder': 'better work',
+          'Content-Type': 'application/json'
+        },
       body: JSON.stringify({
         username: this.state.email,
-        password: this.state.password
       })
     }).then(res => res.json())
       .then(res => {
         console.log(res);
         if(res.success) {
-          history.push("/dashboard"); 
+          this.state.page = 1;
           console.log("Success");
           
         } else {
@@ -76,7 +76,7 @@ export default class Login extends React.Component {
       <section  className = "loginContainer">
           <center>
             <h1 className="loginTitle"
-            >LOGIN</h1>
+            >FORGOT PASSWORD</h1>
               {
               this.state.errorInput || this.state.errorMsg !== undefined ? ( 
               <form onSubmit={this.handleSubmit}>
@@ -88,18 +88,11 @@ export default class Login extends React.Component {
                   onChange={this.handleEmail}
                 />
                 <br />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className="login-placeHolderTextError"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
                 <br/><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}
-                value="Login"/>
+                value="Next"/>
               </form>
               
               
@@ -114,18 +107,12 @@ export default class Login extends React.Component {
                   onChange={this.handleEmail}
                 />
                 <br />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className="placeHolderTextLogin"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
+              
                 <br/>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}
-                value="Login"/>
+                value="Next"/>
               </form>
          
               )
@@ -133,7 +120,7 @@ export default class Login extends React.Component {
   
             
                 
-  <Link to="/forgotPassword" className="signupLogin-forgotPassword">Forgot Password</Link>                <h2 className="signupLogin-background"><span className="signupLogin-orLine">or</span></h2>
+            <h2 className="signupLogin-background"><span className="signupLogin-orLine">or</span></h2>
 
 
           <Link to="/Signup" className="signupLogin-ButtonC">Sign Up</Link>
@@ -146,4 +133,3 @@ export default class Login extends React.Component {
     
   }
 }
-

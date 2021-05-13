@@ -15,6 +15,8 @@ import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
 import Landing from './pages/Landing';
 import ConfirmEmail from './pages/auth/ConfirmEmail';
+import ForgotPassword from './pages/auth/ForgotPassword';
+
 export default function App() {
   return (
     <Router history={history}>
@@ -25,6 +27,9 @@ export default function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/forgotPassword">
+            <ForgotPassword />
           </Route>
           <Route path="/confirmEmail">
             <ConfirmEmail />

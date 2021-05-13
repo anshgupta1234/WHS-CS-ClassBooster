@@ -160,9 +160,7 @@ event.preventDefault();
 
                 </form>)}
                 
-                <button className="signupLogin-forgotPassword">
-                  Forgot Password?
-            </button>
+           
 
                 <h2 class="signupLogin-background"><span className="signupLogin-orLine">or</span></h2>
 

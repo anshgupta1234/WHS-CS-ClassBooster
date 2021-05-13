@@ -194,7 +194,10 @@
   margin: 10px;
   outline: none;
 }
-.signupLogin-forgotPassword {
+.signupLogin-forgotPassword,
+.signupLogin-forgotPassword:hover,
+.signupLogin-forgotPassword:focus {
+  text-decoration: none;
   width: 163px;
   height: 20px;
   left: 630px;
