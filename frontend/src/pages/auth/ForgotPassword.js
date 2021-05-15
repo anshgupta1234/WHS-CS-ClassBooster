@@ -35,7 +35,7 @@ export default class forgotPassword extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://monkey.loca.lt/login', {
+      fetch('https://classbooster.loca.lt/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

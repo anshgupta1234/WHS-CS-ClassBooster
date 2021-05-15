@@ -35,7 +35,7 @@ export default class Signup extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://monkey.loca.lt/signup', {
+      fetch('https://classbooster.loca.lt/signup', {
         method: 'POST',
         headers: {
           'Bypass-Tunnel-Reminder': 'better work',
