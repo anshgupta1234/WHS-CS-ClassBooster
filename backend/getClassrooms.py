@@ -59,3 +59,4 @@ class getAll(Resource):
             print (className)
             classNames.append(className)
         return {"classes": classNames}, 201
+
