@@ -1,6 +1,7 @@
 // Raj Nawal
 import React, { Component } from 'react'
 import "../css/style.css";
+import "../css/studentSelector.css"
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import Example from './DnDComponents/example.js'
 import { DndProvider } from 'react-dnd';

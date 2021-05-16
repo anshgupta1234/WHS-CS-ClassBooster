@@ -15,6 +15,7 @@ class DashboardClassroom extends Component {
       toggleDeleteClassroomPopup,
       link,
     } = this.props;
+    // console.log("Classroom: " + classroomName + ", number of students: " + numOfStudents)
     return (
       <div className="dashboard-classroom">
         <link
@@ -43,7 +44,7 @@ class DashboardClassroom extends Component {
           )}
         </div>
         <div className="dashboard-classroom-bottom-section">
-          <span className="dashboard-students">{numOfStudents} students</span>
+          {/* <span className="dashboard-students">{numOfStudents} students</span> */}
         </div>
       </div>
     );
