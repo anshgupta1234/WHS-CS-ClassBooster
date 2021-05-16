@@ -28,6 +28,7 @@ export default class ClassEditor extends Component {
 		deleteStudentPopupVisible: false,
 		selectedStudentId: -1,
 		classroomId: 0,
+		unsaved: false,
 	}
 
 	componentDidMount() {
@@ -49,7 +50,7 @@ export default class ClassEditor extends Component {
 	};
 
 	getStudentsAndDesks = (id) => {
-		fetch("https://monkey.loca.lt/classrooms/get", {
+		fetch("https://classbooster.loca.lt/classrooms/get", {
 			method: "POST",
 			body: JSON.stringify({ "tag": id }),
 			headers: {
@@ -66,7 +67,6 @@ export default class ClassEditor extends Component {
 					}
 				})
 				tempDesks["teacherDesk"] = this.state.teacherDesk
-				console.log(tempDesks)
 				this.setState({
 					students: response.students, 
 					desks: tempDesks, 
@@ -80,19 +80,19 @@ export default class ClassEditor extends Component {
 
 	updateDesks = (desks) => {
 		console.log(this.state.desks)
-		this.setState({ desks: desks, teacherDesk: desks.teacherDesk })
+		this.setState({ desks: desks, teacherDesk: desks.teacherDesk, unsaved: true })
 		return "dogger"
 	}
 
 	updateTeacher = (desks) => {
-		this.setState({ teacherDesk: desks.teacherDesk })
+		this.setState({ teacherDesk: desks.teacherDesk, unsaved: true })
 		return "dogger"
 	}
 
 	deleteDesk = (id) => {
 		let desks = this.state.desks
 		delete desks[id]
-		this.setState({ desks: desks})
+		this.setState({ desks: desks, unsaved: true })
 	}
 
 	// updateTeacher = (desks) => {
@@ -105,7 +105,7 @@ export default class ClassEditor extends Component {
 		if(para){
 			if(this.state.onClassroom){
 				if(cs)
-					setTimeout(function(){cs.classList.remove("hidden"); }, 300);
+					setTimeout(function(){cs.classList.remove("hidden");}, 300);
 				return "classRoomSection fade-in-left";
 			}
 			else{
@@ -169,7 +169,7 @@ deleteStudent = (id) => {
 		students[studentId].hate = students[studentId].hate.filter((hateStudentId) => hateStudentId !== id)
 	}
 	document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
-	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1})
+	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1, unsaved: true})
 }
 
 toggleAddStudentPopup = () => {
@@ -192,7 +192,7 @@ handleInputChange = (e) => {
 		} else {
 			students[this.state.selectedStudentId].extra_help = inputTarget.checked;
 		}
-		this.setState({students})
+		this.setState({students, unsaved: true})
 	}
 	
 }
@@ -204,12 +204,12 @@ handleSelectChange = (selectedOptions) => {
 		for (let i=0; i<selectedOptions.length; i++) {
 			students[this.state.selectedStudentId].hate.push(selectedOptions[i].value)
 		}
-		this.setState({students})
+		this.setState({students, unsaved: true})
 	}
 }
 
 handleSaveStudentsAndDesks = () => {
-	fetch("https://monkey.loca.lt/classrooms/update", {
+	fetch("https://classbooster.loca.lt/classrooms/update", {
 		method: "POST",
 		body: JSON.stringify({
 		"tag": this.state.classroomId, 
@@ -227,6 +227,7 @@ handleSaveStudentsAndDesks = () => {
 	}).then(response => response.json()).then(response => {
 		if (response.success) {
 			console.log("Classroom students updated");
+			this.setState({ unsaved: false })
 		} else {
 			console.log("Error: classroom students not updated");
 			console.log(response)
@@ -235,7 +236,7 @@ handleSaveStudentsAndDesks = () => {
 }
 
 handleShuffle = () => {
-	fetch("https://monkey.loca.lt/shuffle", {
+	fetch("https://classbooster.loca.lt/shuffle", {
 			method: "POST",
 			body: JSON.stringify({ "tag": this.state.classroomId }),
 			headers: {
@@ -244,7 +245,16 @@ handleShuffle = () => {
 			  },
 			credentials: 'include',
 		}).then(response => response.json()).then(response => {
-			this.getStudentsAndDesks(this.state.classroomId)
+			let tempDesks = this.state.desks
+			Object.keys(tempDesks).forEach(key => {
+				if (key !== "teacherDesk" && key in tempDesks) {
+					tempDesks[key]["title"] = response[key]	
+				}
+			})
+			this.setState({
+				desks: tempDesks, 
+				pairing: response, 
+			})
 			console.log(response)
 		})
 }
@@ -282,7 +292,6 @@ handleDesk = () => {
 	  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	
 	let tempDesks = this.state.desks
-	console.log(tempDesks)
 	for (let index = 0; index < deskNumber; index++) {
 		let result = "";
 		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -291,7 +300,7 @@ handleDesk = () => {
 		}
 		tempDesks[result] = {"top" : 0, "left" : 0}
 	}
-	this.setState({ desks: tempDesks })
+	this.setState({ desks: tempDesks, unsaved: true })
   };
 
 render() {

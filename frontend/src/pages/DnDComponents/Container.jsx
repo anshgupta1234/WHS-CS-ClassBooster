@@ -16,6 +16,7 @@ function renderBox(item, key, deleteDesk) {
 
 export const Container = ({ snapToGrid, desks }) => {
   const [boxes, setBoxes] = useState(desks.desks);
+  console.log(boxes)
   const moveBox = useCallback(
     (id, left, top) => {
       let tempBoxes = boxes

@@ -40,7 +40,7 @@ export default class Dashboard extends Component {
   }
 
   getClassrooms = () => {
-    fetch("https://monkey.loca.lt/classrooms/getAll", {
+    fetch("https://classbooster.loca.lt/classrooms/getAll", {
       method: "GET",
       headers: {
         'Bypass-Tunnel-Reminder': 'better work',
@@ -120,7 +120,7 @@ export default class Dashboard extends Component {
 
   addClassroom = () => {
     let newClassroomId = this.genHexString(24);
-    fetch("https://monkey.loca.lt/classrooms/add", {
+    fetch("https://classbooster.loca.lt/classrooms/add", {
       method: "POST",
       body: JSON.stringify({
         tag: newClassroomId,
@@ -144,7 +144,7 @@ export default class Dashboard extends Component {
 
   deleteClassroom = (classroomIndex) => {
     this.toggleDeleteClassroomPopup();
-    fetch("https://monkey.loca.lt/classrooms/delete", {
+    fetch("https://classbooster.loca.lt/classrooms/delete", {
       method: "POST",
       body: JSON.stringify({tag: this.state.classrooms[classroomIndex].tag}),
       credentials: 'include',
@@ -244,7 +244,7 @@ export default class Dashboard extends Component {
         this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: "", nicknameInput: ""})
       } else { //else means editing existing classroom name
         const selectedClassroom = this.state.classrooms[classroomIndex];
-        this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: selectedClassroom.name, nicknameInput: selectedClassroom.nickname})
+        this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: selectedClassroom.name, nicknameInput: selectedClassroom.nick})
       }
     } else {
       this.setState({renameClassroomPopupVisible: false})
@@ -253,7 +253,7 @@ export default class Dashboard extends Component {
 
   setClassroomName = (classroomIndex) => {
     let currentClassroom = this.state.classrooms[classroomIndex]
-    fetch("https://monkey.loca.lt/classrooms/rename", {
+    fetch("https://classbooster.loca.lt/classrooms/rename", {
       method: "POST",
       body: JSON.stringify({
         tag: currentClassroom.tag, 
