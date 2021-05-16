@@ -1,6 +1,7 @@
 // Raj Nawal
 import React, { Component } from 'react'
 import "../css/style.css";
+import "../css/studentSelector.css"
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import Example from './DnDComponents/example.js'
 import { DndProvider } from 'react-dnd';
@@ -49,7 +50,7 @@ export default class ClassEditor extends Component {
 	};
 
 	getStudentsAndDesks = (id) => {
-		fetch("https://monkey.loca.lt/classrooms/get", {
+		fetch("https://classbooster.loca.lt/classrooms/get", {
 			method: "POST",
 			body: JSON.stringify({ "tag": id }),
 			headers: {
@@ -169,7 +170,7 @@ deleteStudent = (id) => {
 		students[studentId].hate = students[studentId].hate.filter((hateStudentId) => hateStudentId !== id)
 	}
 	document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
-	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1})
+	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1});
 }
 
 toggleAddStudentPopup = () => {
@@ -209,7 +210,7 @@ handleSelectChange = (selectedOptions) => {
 }
 
 handleSaveStudentsAndDesks = () => {
-	fetch("https://monkey.loca.lt/classrooms/update", {
+	fetch("https://classbooster.loca.lt/classrooms/update", {
 		method: "POST",
 		body: JSON.stringify({
 		"tag": this.state.classroomId, 
@@ -235,7 +236,7 @@ handleSaveStudentsAndDesks = () => {
 }
 
 handleShuffle = () => {
-	fetch("https://monkey.loca.lt/shuffle", {
+	fetch("https://classbooster.loca.lt/shuffle", {
 			method: "POST",
 			body: JSON.stringify({ "tag": this.state.classroomId }),
 			headers: {

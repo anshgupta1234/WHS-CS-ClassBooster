@@ -40,7 +40,7 @@ export default class Dashboard extends Component {
   }
 
   getClassrooms = () => {
-    fetch("https://monkey.loca.lt/classrooms/getAll", {
+    fetch("https://classbooster.loca.lt/classrooms/getAll", {
       method: "GET",
       headers: {
         'Bypass-Tunnel-Reminder': 'better work',
@@ -49,12 +49,13 @@ export default class Dashboard extends Component {
       credentials: 'include',
     }).then(response => response.json()).then(response => {
       if (response.classes) {
-        this.setState({classrooms: response.classes, isLoaded: true})
+        console.log("Classrooms got successfully");
+        this.calculateRows(response.classes);
       } else {
         console.log("Error: Couldn't get classrooms list")
         console.log(response)
       }
-    }).then(() => this.calculateRows(this.state.classrooms))
+    })
   }
 
   handleClick = (e) => {
@@ -119,8 +120,9 @@ export default class Dashboard extends Component {
   }
 
   addClassroom = () => {
+    console.log("Entered add classroom")
     let newClassroomId = this.genHexString(24);
-    fetch("https://monkey.loca.lt/classrooms/add", {
+    fetch("https://classbooster.loca.lt/classrooms/add", {
       method: "POST",
       body: JSON.stringify({
         tag: newClassroomId,
@@ -136,6 +138,7 @@ export default class Dashboard extends Component {
     }).then(response => response.json()).then(response => {
       if (response.success) {
         this.getClassrooms();
+        console.log("Classroom added successfully")
       } else {
         console.log(response)
       }
@@ -144,7 +147,7 @@ export default class Dashboard extends Component {
 
   deleteClassroom = (classroomIndex) => {
     this.toggleDeleteClassroomPopup();
-    fetch("https://monkey.loca.lt/classrooms/delete", {
+    fetch("https://classbooster.loca.lt/classrooms/delete", {
       method: "POST",
       body: JSON.stringify({tag: this.state.classrooms[classroomIndex].tag}),
       credentials: 'include',
@@ -176,7 +179,7 @@ export default class Dashboard extends Component {
       }
       classrooms[currentClassroomIndex].classroomOptionsVisible = !classrooms[currentClassroomIndex].classroomOptionsVisible;
       if (classrooms[currentClassroomIndex].classroomOptionsVisible) {
-        this.setState({ classrooms, selectedClassroomIndex: currentClassroomIndex });
+        this.setState({ classrooms, selectedClassroomIndex: currentClassroomIndex, });
       } else {
         this.setState({ classrooms, selectedClassroomIndex: -1 });
       }
@@ -185,8 +188,7 @@ export default class Dashboard extends Component {
 
   handleInputChange = (e) => {
     let inputTarget = e.target;
-    let inputName = inputTarget.name;
-    if (inputName === "dashboard-nameInput") {
+    if (inputTarget.name === "dashboard-nameInput") {
       this.setState({nameInput: inputTarget.value})
     } else {
       this.setState({nicknameInput: inputTarget.value})
@@ -194,6 +196,10 @@ export default class Dashboard extends Component {
   }
 
   calculateRows = (newClassroomList) => {
+    console.log("Calculate rows:")
+    for (let i=0; i<this.state.classrooms.length; i++) {
+      console.log("Classroom: " + this.state.classrooms[i].name + ", number of students: " + this.state.classrooms[i].numOfStudents)
+    }
     //calculate how many classrooms can fit in each row, how many rows are needed, and how many classrooms are in the last row since it's not always full
     let classroomTotalWidthInPx = 350;
     let viewportWidth = window.innerWidth - 50; // -50 to allow for a 50px padding on the right side
@@ -244,7 +250,8 @@ export default class Dashboard extends Component {
         this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: "", nicknameInput: ""})
       } else { //else means editing existing classroom name
         const selectedClassroom = this.state.classrooms[classroomIndex];
-        this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: selectedClassroom.name, nicknameInput: selectedClassroom.nickname})
+        console.log("Nickname: " + selectedClassroom.nick)
+        this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: selectedClassroom.name, nicknameInput: selectedClassroom.nick})
       }
     } else {
       this.setState({renameClassroomPopupVisible: false})
@@ -253,7 +260,7 @@ export default class Dashboard extends Component {
 
   setClassroomName = (classroomIndex) => {
     let currentClassroom = this.state.classrooms[classroomIndex]
-    fetch("https://monkey.loca.lt/classrooms/rename", {
+    fetch("https://classbooster.loca.lt/classrooms/rename", {
       method: "POST",
       body: JSON.stringify({
         tag: currentClassroom.tag, 
