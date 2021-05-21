@@ -96,10 +96,6 @@ export default class ClassEditor extends Component {
 		this.setState({ desks: desks, unsaved: true })
 	}
 
-	// updateTeacher = (desks) => {
-	// 	this.setState({ teacherDesk: desks.teacherDesk })
-	// }
-
 	getClass(para){
 		const cs = document.getElementById('classSection');
 		const ss = document.getElementById('studentSection');
@@ -310,7 +306,7 @@ render() {
 	return (
 		this.state.isLoaded && (
 		<section className="bgSection">				
-			<nav className="dashboard-navbar-container">
+			<nav className="dashboard-navbar-container" style={{ zIndex: "2" }} >
 				<div className="dashboard-navbar">
 				<a href="http://localhost:3000" className="dashboard-logo">
 					CLASSBOOSTER
@@ -352,7 +348,7 @@ render() {
 						</div>
 					</div>
 					<div className="buttons">
-					<div className="group">
+							<div className="group">
 								<input type="text" id="deskInput" className="input" maxLength="2" placeholder=" " />
 								<span className="highlight"></span>
 								<span className="bar"></span>
@@ -367,7 +363,7 @@ render() {
 							</div>
 							<button className="blackButton" onClick={() => this.handleSaveStudentsAndDesks()}>Save Seating Chart</button>
 							<button className="whiteButton" onClick={() => this.handleShuffle()}>Create Seating Chart</button>
-						</div>
+					</div>
 						<div id="snackbar">
 							<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"/>

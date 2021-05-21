@@ -5,6 +5,7 @@ const styles = {
   width: "120px",
   height: "60px",
   textAlign: "center",
+  lineHeight: "40px"
 };
 export const Box = ({ title, yellow, onClick }) => {
   const backgroundColor = title === "Teacher Desk" ? "#00c2cb" : "white";

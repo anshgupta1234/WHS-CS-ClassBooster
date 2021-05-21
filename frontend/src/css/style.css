@@ -98,7 +98,7 @@ button {
   position: absolute;
   height: 0.2em;
   background-color: #000;
-  z-index: 9;
+  z-index: 1;
   margin: 0;
 }
 
@@ -120,20 +120,13 @@ button {
   display: none;
 }
 
-/* .tabContainer {
+.tabContainer {
   position: relative;
 }
 
 .classroomSection {
   position: relative;
-} */
-
-/* .studentSection {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-} */
+}
 
 .bgSection {
   background-color: #9fd0eb;
@@ -263,7 +256,9 @@ button {
           flex-direction: column;
   padding-top: 2em;
   position: absolute;
-  top: 7em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 
 @-webkit-keyframes fade-out-left {
