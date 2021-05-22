@@ -12,7 +12,8 @@ export default class Login extends React.Component {
     email: "",
     password: "",
     errorInput: undefined,
-    errorMsg: undefined
+    errorMsg: undefined,
+    showPassword: false
   };
 
   
@@ -22,6 +23,15 @@ export default class Login extends React.Component {
   };
   handlePassword = (event) => {
     this.setState({ password: event.target.value });
+    
+  };
+  showPassword = () => {
+    if (this.state.showPassword===true){
+    this.setState({ showPassword: false });
+    }
+    else {
+      this.setState({ showPassword: true });
+    }
     
   };
 
@@ -89,18 +99,25 @@ export default class Login extends React.Component {
                 />
                 <br />
                 <input
-                  type="text"
-                  placeholder="Password"
+                    type={this.state.showPassword ? "text" : "password"}
+                    placeholder="Password"
                   className="login-placeHolderTextError"
                   value={this.state.password}
-                  onChange={this.handlePassword}
+                  onChange={this.handlePassword}                 
                 />
+                <br></br>
+                <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
+
                 <br/><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}
                 value="Login"/>
               </form>
+
               
               
               ) 
@@ -115,13 +132,19 @@ export default class Login extends React.Component {
                 />
                 <br />
                 <input
-                  type="text"
-                  placeholder="Password"
+                    type={this.state.showPassword ? "text" : "password"}
+                    placeholder="Password"
                   className="placeHolderTextLogin"
                   value={this.state.password}
                   onChange={this.handlePassword}
                 />
+                   <br></br>
+                <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
                 <br/>
+                
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}

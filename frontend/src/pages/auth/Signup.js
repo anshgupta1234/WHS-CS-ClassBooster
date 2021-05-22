@@ -13,7 +13,8 @@ export default class Signup extends React.Component {
     password: "",
     ConfirmPassword: "",
     errorInput: undefined,
-    errorMsg: undefined
+    errorMsg: undefined,
+    showPassword: false
   };
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
@@ -26,6 +27,15 @@ export default class Signup extends React.Component {
   };
   handleConfirmPassword = (event) => {
     this.setState({ ConfirmPassword: event.target.value });
+  };
+  showPassword = () => {
+    if (this.state.showPassword===true){
+    this.setState({ showPassword: false });
+    }
+    else {
+      this.setState({ showPassword: true });
+    }
+    
   };
 
   handleSubmit = (event) => {
@@ -65,6 +75,7 @@ export default class Signup extends React.Component {
 event.preventDefault();
 
 };
+
   render() {
 
     return (
@@ -102,20 +113,24 @@ event.preventDefault();
                   />
                   <br />
                   <input
-                    type="text"
+                    type={this.state.showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="signup-placeHolderTextError"
                     value={this.state.password}
                     onChange={this.handlePassword}
                   />
-
                   <input
-                    type="text"
+                    type={this.state.showPassword ? "text" : "password"}
                     placeholder="Confirm Password"
                     className="signup-placeHolderTextError"
                     value={this.state.ConfirmPassword}
                     onChange={this.handleConfirmPassword}
                   />
+                     <br></br>
+                <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
                   <br /><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                   <input type="submit"
                     className="signupLogin-ButtonB"
@@ -139,7 +154,7 @@ event.preventDefault();
                   />
                   <br />
                   <input
-                    type="text"
+                    type={this.state.showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="placeHolderTextSignup"
                     value={this.state.password}
@@ -147,12 +162,17 @@ event.preventDefault();
                   />
 
                   <input
-                    type="text"
+                    type={this.state.showPassword ? "text" : "password"}
                     placeholder="Confirm Password"
                     className="placeHolderTextSignup"
                     value={this.state.ConfirmPassword}
                     onChange={this.handleConfirmPassword}
                   />
+                     <br></br>
+                <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
                   <br />
                   <input type="submit"
                     className="signupLogin-ButtonB"
