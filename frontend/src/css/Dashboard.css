@@ -154,20 +154,24 @@
 }
 
 .dashboard-classroom-top-section {
+  display: block;
   position: relative;
   width: var(--classroom-width);
   height: 40%;
   border-top-left-radius: var(--classroom-card-border-radius);
   border-top-right-radius: var(--classroom-card-border-radius);
+  cursor: pointer;
   background-color: #b0ffff;
 }
 
 .dashboard-classroom-bottom-section {
+  display: block;
   position: relative;
   width: var(--classroom-width);
   height: 60%;
   border-bottom-left-radius: var(--classroom-card-border-radius);
   border-bottom-right-radius: var(--classroom-card-border-radius);
+  cursor: pointer;
   background-color: white;
 }
 
@@ -201,12 +205,19 @@
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.dashboard-nickname:visited,:active,:link {
+  text-decoration: none;
 }
 
 .dashboard-vertical-ellipsis {
   border: none;
   float: right;
-  margin-top: 6px;
+  width: 24px;
+  height: 42px;
+  margin-top: 4px;
   margin-right: 10px;
   cursor: pointer;
   display: block;

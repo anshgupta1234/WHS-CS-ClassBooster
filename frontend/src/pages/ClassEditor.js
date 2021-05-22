@@ -35,7 +35,6 @@ export default class ClassEditor extends Component {
 	componentDidMount() {
 		document.addEventListener("mousedown", this.handleWindowClick)
 		const id = new URLSearchParams(window.location.search).get("id");
-		console.log("ID from URL: " + id);
 		this.setState({classroomId: id})
 		this.getStudentsAndDesks(id);
 	}
@@ -61,6 +60,8 @@ export default class ClassEditor extends Component {
 			credentials: 'include',
 		}).then(response => response.json()).then(response => {
 			if (response.name) {
+				console.log("Response name: " + response.name);
+				console.log("Response desks: " + response.desks);
 				let tempDesks = response.desks
 				Object.keys(tempDesks).forEach(key => {
 					if (key !== "teacherDesk" && key in tempDesks) {
@@ -143,7 +144,7 @@ handleChange(para){
 		}
 	}
 
-addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate) => {
+addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate, hateNames) => {
 	if (this.state.selectedStudentId !== -1) {
 		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
 	}
@@ -153,6 +154,7 @@ addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate) => {
 		"visibility": visibilityInput, 
 		"extra_help": extraHelpInput, 
 		"hate": hate,
+		"hateNames": hateNames,
 	}
 	this.setState({students, selectedStudentId: -1}, () => {
 	this.toggleAddStudentPopup();
@@ -196,12 +198,16 @@ handleInputChange = (e) => {
 
 handleSelectChange = (selectedOptions) => {
 	if (this.state.selectedStudentId !== -1) {
-		let students = this.state.students;
-		students[this.state.selectedStudentId].hate = [];
+		let students = {...this.state.students};
+		let selectedStudent = {...students[this.state.selectedStudentId]}
+		selectedStudent.hate = [];
+		selectedStudent.hateNames = [];
 		for (let i=0; i<selectedOptions.length; i++) {
-			students[this.state.selectedStudentId].hate.push(selectedOptions[i].value)
+			selectedStudent.hate.push(selectedOptions[i].value);
+			selectedStudent.hateNames.push(selectedOptions[i].label);
 		}
-		this.setState({students, unsaved: true})
+		students[this.state.selectedStudentId] = selectedStudent;
+		this.setState({students, unsaved: true});
 	}
 }
 

@@ -48,8 +48,8 @@ function Row(props) {
         <Classroom
           key={classroom.tag}
           id={classroom.tag}
-          classroomName={classroom.name}
-          nickname={classroom.nick}
+          name={classroom.name}
+          nick={classroom.nick}
           selectedClassroomIndex={selectedClassroomIndex}
           numOfStudents={classroom.numOfStudents}
           classroomOptionsVisible={classroom.classroomOptionsVisible}

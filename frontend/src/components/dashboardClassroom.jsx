@@ -1,13 +1,37 @@
 import React, { Component } from "react";
 import { ReactComponent as VerticalEllipsis } from "../assets/VerticalEllipsis.svg";
+import {Link} from "react-router-dom"
+import history from '../history';
 
 class DashboardClassroom extends Component {
+  handleCardClick = (e) => {
+    const targetedElement = e.target;
+    const {id, link} = this.props;
+    if (
+      targetedElement !==
+        document.getElementById(
+          "renameClassroomOption" + id
+        ) &&
+      targetedElement !==
+        document.getElementById(
+          "deleteClassroomOption" + id
+        ) &&
+      targetedElement !==
+        document.getElementById(
+          "verticalEllipsisButton" + id
+        ) &&
+      !document
+        .getElementById("verticalEllipsisButton" + id)
+        .contains(targetedElement)
+    ) {
+      history.push(link);
+    }
+  }
   render() {
     const {
       id,
-      classroomName,
-      nickname,
-      numOfStudents,
+      name,
+      nick,
       classroomOptionsVisible,
       selectedClassroomIndex,
       toggleClassroomOptions,
@@ -15,17 +39,14 @@ class DashboardClassroom extends Component {
       toggleDeleteClassroomPopup,
       link,
     } = this.props;
-    // console.log("Classroom: " + classroomName + ", number of students: " + numOfStudents)
     return (
       <div className="dashboard-classroom">
         <link
           href="https://fonts.googleapis.com/css2?family=Chivo&family=Overpass:wght@300&display=swap"
           rel="stylesheet"
         ></link>
-        <div className="dashboard-classroom-top-section">
-          <a href={link} className="dashboard-classroom-name">
-            {classroomName}
-          </a>
+        <div className="dashboard-classroom-top-section" onClick={this.handleCardClick}>
+          <Link to={link} className="dashboard-classroom-name">{name}</Link>
           <button
             id={"verticalEllipsisButton" + id}
             className="dashboard-vertical-ellipsis"
@@ -33,7 +54,7 @@ class DashboardClassroom extends Component {
           >
             {<VerticalEllipsis />}
           </button>
-          <div className="dashboard-nickname">{nickname}</div>
+          <div className="dashboard-nickname">{nick}</div>
           {classroomOptionsVisible && (
             <ClassroomOptionsDropdown
               toggleRenameClassroomPopup={toggleRenameClassroomPopup}
@@ -43,9 +64,7 @@ class DashboardClassroom extends Component {
             ></ClassroomOptionsDropdown>
           )}
         </div>
-        <div className="dashboard-classroom-bottom-section">
-          {/* <span className="dashboard-students">{numOfStudents} students</span> */}
-        </div>
+        <div className="dashboard-classroom-bottom-section" onClick={this.handleCardClick}></div>
       </div>
     );
   }

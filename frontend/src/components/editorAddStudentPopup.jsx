@@ -14,15 +14,17 @@ class EditorAddStudentPopup extends Component {
         const {visibilityInput, extraHelpInput, hateInput} = this.state;
         if (nameInput.length > 0) {
             let hate = [];
+            let hateNames = [];
             for (let i=0; i<hateInput.length; i++) {
-                 hate.push(hateInput[i].value)
+                 hate.push(hateInput[i].value);
+                 hateNames.push(hateInput[i].label);
             }
             let studentID = "";
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             for ( let i = 0; i < Math.floor((Math.random() * 5)) + 8 ; i++ ) {
                 studentID += characters.charAt(Math.floor(Math.random() * 62));
             }
-            this.props.addStudent(studentID, nameInput, visibilityInput, extraHelpInput, hate)
+            this.props.addStudent(studentID, nameInput, visibilityInput, extraHelpInput, hate, hateNames)
         }
     }
 
@@ -53,9 +55,15 @@ class EditorAddStudentPopup extends Component {
         }
         const customStyles = {
             option: (provided) => ({
-            ...provided,
-            padding: "5px",
-            })}
+                ...provided,
+                padding: "5px",
+                whiteSpace: "pre",
+            }),
+            multiValueLabel: (provided) => ({
+                ...provided,
+                whiteSpace: "pre",
+            })
+            }
         return ( 
             <div className="dashboard-popup-background">
                 <div id="editor-addStudentPopup">
@@ -70,6 +78,7 @@ class EditorAddStudentPopup extends Component {
                         maxLength="30"
                         autoComplete="off"
                         spellCheck={false}
+                        autoFocus={true}
                     ></input>
                     <div className="editor-popupCheckboxContainer">
                         <input

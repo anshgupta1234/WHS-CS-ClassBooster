@@ -83,8 +83,8 @@ export default class Dashboard extends Component {
         !this.state.renameClassroomPopupVisible &&
         !this.state.deleteClassroomPopupVisible
       ) {
-        let selectedClassroom = classrooms[this.state.selectedClassroomIndex];
-        selectedClassroom.classroomOptionsVisible = false;
+        let selectedClassroom = {...classrooms[this.state.selectedClassroomIndex], classroomOptionsVisible: false};
+        classrooms[this.state.selectedClassroomIndex] = selectedClassroom;
         this.setState({ classrooms, selectedClassroomIndex: -1 });
       }
     }
@@ -120,7 +120,6 @@ export default class Dashboard extends Component {
   }
 
   addClassroom = () => {
-    console.log("Entered add classroom")
     let newClassroomId = this.genHexString(24);
     fetch("https://classbooster.loca.lt/classrooms/add", {
       method: "POST",
@@ -129,6 +128,9 @@ export default class Dashboard extends Component {
         name: this.state.nameInput,
         nick: this.state.nicknameInput,
         link: "/editor/?id=" + newClassroomId,
+        students: {},
+        desks: {},
+        pairing: {},
       }),
       credentials: 'include',
       headers: {
@@ -196,10 +198,6 @@ export default class Dashboard extends Component {
   }
 
   calculateRows = (newClassroomList) => {
-    console.log("Calculate rows:")
-    for (let i=0; i<this.state.classrooms.length; i++) {
-      console.log("Classroom: " + this.state.classrooms[i].name + ", number of students: " + this.state.classrooms[i].numOfStudents)
-    }
     //calculate how many classrooms can fit in each row, how many rows are needed, and how many classrooms are in the last row since it's not always full
     let classroomTotalWidthInPx = 350;
     let viewportWidth = window.innerWidth - 50; // -50 to allow for a 50px padding on the right side
@@ -229,6 +227,8 @@ export default class Dashboard extends Component {
           },
           () => this.checkForVerticalScrollbar(columnsPerRow.length)
         );
+      } else {
+        this.setState({ classrooms: newClassroomList });
       }
     }
   };
@@ -250,7 +250,6 @@ export default class Dashboard extends Component {
         this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: "", nicknameInput: ""})
       } else { //else means editing existing classroom name
         const selectedClassroom = this.state.classrooms[classroomIndex];
-        console.log("Nickname: " + selectedClassroom.nick)
         this.setState({renameClassroomPopupVisible: true, selectedClassroomIndex: classroomIndex, nameInput: selectedClassroom.name, nicknameInput: selectedClassroom.nick})
       }
     } else {
@@ -274,6 +273,7 @@ export default class Dashboard extends Component {
       }
     }).then(response => response.json()).then(response => {
       if (response.success) {
+        console.log("Renamed classroom successfully");
         this.getClassrooms();
       } else {
         console.log("Error: Couldn't rename classroom");
@@ -308,7 +308,7 @@ export default class Dashboard extends Component {
             nicknameInput={this.state.nicknameInput}
             setClassroomName={this.setClassroomName}
             toggleRenameClassroomPopup={this.toggleRenameClassroomPopup}
-            toggleClassroomOptions={this.toggleClassroomOptions}
+            
             addClassroom={this.addClassroom}
           ></DashboardRenameClassroomPopup>
         )}

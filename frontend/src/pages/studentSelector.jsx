@@ -28,9 +28,15 @@ class StudentSelector extends Component {
         }
         const customStyles = {
             option: (provided) => ({
-            ...provided,
-            padding: "5px",
-            })}
+                ...provided,
+                padding: "5px",
+                whiteSpace: "pre",
+            }),
+            multiValueLabel: (provided) => ({
+                ...provided,
+                whiteSpace: "pre",
+            })
+            }
         const hateSelect = [];
         for (let i=0; i<hate.length; i++) { //need to convert student hate array to an array that the Select Component can use
             hateSelect.push({value: hate[i], label: students[hate[i]].name})
