@@ -144,7 +144,7 @@ handleChange(para){
 		}
 	}
 
-addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate, hateNames) => {
+addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hateId, hate) => {
 	if (this.state.selectedStudentId !== -1) {
 		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
 	}
@@ -153,8 +153,8 @@ addStudent = (studentId, nameInput, visibilityInput, extraHelpInput, hate, hateN
 		"name": nameInput, 
 		"visibility": visibilityInput, 
 		"extra_help": extraHelpInput, 
+		"hateId": hateId,
 		"hate": hate,
-		"hateNames": hateNames,
 	}
 	this.setState({students, selectedStudentId: -1}, () => {
 	this.toggleAddStudentPopup();
@@ -165,7 +165,7 @@ deleteStudent = (id) => {
 	let students = {...this.state.students}; 
 	delete students[id];
 	for (let studentId in students) {
-		students[studentId].hate = students[studentId].hate.filter((hateStudentId) => hateStudentId !== id)
+		students[studentId].hateId = students[studentId].hateId.filter((hateStudentId) => hateStudentId !== id);
 	}
 	document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
 	this.setState({students, deleteStudentPopupVisible: false, selectedStudentId: -1, unsaved: true})
@@ -181,16 +181,25 @@ toggleDeleteStudentPopup = () => {
 
 handleInputChange = (e) => {
 	if (this.state.selectedStudentId !== -1) {
-		let inputTarget = e.target
-		let inputName = inputTarget.name
-		let students = this.state.students;
+		let inputTarget = e.target;
+		let inputName = inputTarget.name;
+		let students = {...this.state.students};
+		let selectedStudent = {...students[this.state.selectedStudentId]};
 		if (inputName === "nameInput") {
-			students[this.state.selectedStudentId].name = inputTarget.value;
+			selectedStudent.name = inputTarget.value;
+			for (let studentId in students) { //update hate
+				students[studentId].hate = [];
+				for (let i=0; i<students[studentId].hateId.length; i++) {
+					let studentName = students[students[studentId].hateId[i]].name
+					students[studentId].hate.push(studentName);
+				}
+			}
 		} else if (inputName === "visibilityInput") {
-			students[this.state.selectedStudentId].visibility = inputTarget.checked;
+			selectedStudent.visibility = inputTarget.checked;
 		} else {
-			students[this.state.selectedStudentId].extra_help = inputTarget.checked;
+			selectedStudent.extra_help = inputTarget.checked;
 		}
+		students[this.state.selectedStudentId] = selectedStudent;
 		this.setState({students, unsaved: true})
 	}
 	
@@ -200,11 +209,11 @@ handleSelectChange = (selectedOptions) => {
 	if (this.state.selectedStudentId !== -1) {
 		let students = {...this.state.students};
 		let selectedStudent = {...students[this.state.selectedStudentId]}
+		selectedStudent.hateId = [];
 		selectedStudent.hate = [];
-		selectedStudent.hateNames = [];
 		for (let i=0; i<selectedOptions.length; i++) {
-			selectedStudent.hate.push(selectedOptions[i].value);
-			selectedStudent.hateNames.push(selectedOptions[i].label);
+			selectedStudent.hateId.push(selectedOptions[i].value);
+			selectedStudent.hate.push(selectedOptions[i].label);
 		}
 		students[this.state.selectedStudentId] = selectedStudent;
 		this.setState({students, unsaved: true});
@@ -272,11 +281,11 @@ handleWindowClick = (e) => {
 
 handleStudentSelect = (studentId) => {
 	if (this.state.selectedStudentId !== -1) {
-		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus")
+		document.getElementById("editor-student" + this.state.selectedStudentId).classList.remove("editor-focus");
 	}
 	this.setState({
 		selectedStudentId: studentId,
-	}, () => document.getElementById("editor-student" + studentId).classList.add("editor-focus"))
+	}, () => document.getElementById("editor-student" + studentId).classList.add("editor-focus"));
 }
 
 handleDesk = () => {
@@ -308,7 +317,7 @@ handleDesk = () => {
 
 render() {
 	const selectedStudent = this.state.selectedStudentId !== -1 ? this.state.students[this.state.selectedStudentId] : 
-	{name: "", visibility: false, extra_help: false, hate: []};
+	{name: "", visibility: false, extra_help: false, hateId: [], hate: []};
 	return (
 		this.state.isLoaded && (
 		<section className="bgSection">				
@@ -392,6 +401,7 @@ render() {
 						nameInput={selectedStudent.name}
 						visibilityInput={selectedStudent.visibility}
 						extraHelpInput={selectedStudent.extra_help}
+						hateId={selectedStudent.hateId}
 						hate={selectedStudent.hate}
 					></StudentSelector>
 				</section>

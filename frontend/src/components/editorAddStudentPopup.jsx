@@ -6,25 +6,25 @@ class EditorAddStudentPopup extends Component {
         nameInput: "",
         visibilityInput: false,
         extraHelpInput: false,
-        hateInput: [], 
+        hateSelectInput: [], 
     }
     
     checkInputs() {
         const nameInput = this.state.nameInput.trim()
-        const {visibilityInput, extraHelpInput, hateInput} = this.state;
+        const {visibilityInput, extraHelpInput, hateSelectInput} = this.state;
         if (nameInput.length > 0) {
+            let hateId = [];
             let hate = [];
-            let hateNames = [];
-            for (let i=0; i<hateInput.length; i++) {
-                 hate.push(hateInput[i].value);
-                 hateNames.push(hateInput[i].label);
+            for (let i=0; i<hateSelectInput.length; i++) {
+                hateId.push(hateSelectInput[i].value);
+                hate.push(hateSelectInput[i].label);
             }
             let studentID = "";
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             for ( let i = 0; i < Math.floor((Math.random() * 5)) + 8 ; i++ ) {
                 studentID += characters.charAt(Math.floor(Math.random() * 62));
             }
-            this.props.addStudent(studentID, nameInput, visibilityInput, extraHelpInput, hate, hateNames)
+            this.props.addStudent(studentID, nameInput, visibilityInput, extraHelpInput, hateId, hate)
         }
     }
 
@@ -39,16 +39,16 @@ class EditorAddStudentPopup extends Component {
     }
 
     handleSelectChange = (selectedOptions) => {
-        let hateInput = [];
+        let hateSelectInput = [];
         for (let i=0; i<selectedOptions.length; i++) {
-            hateInput.push(selectedOptions[i]);
+            hateSelectInput.push(selectedOptions[i]);
         }
-        this.setState({ hateInput });
+        this.setState({ hateSelectInput });
     }
     
     render() { 
         const selectOptions = [];
-        const {nameInput, visibilityInput, extraHelpInput, hateInput} = this.state;
+        const {nameInput, visibilityInput, extraHelpInput, hateSelectInput} = this.state;
         const students = this.props.students;
         for (let id in students) {
            selectOptions.push({value: id, label: students[id].name})
@@ -117,7 +117,7 @@ class EditorAddStudentPopup extends Component {
                             onChange={this.handleSelectChange}
                             styles={customStyles}
                             options={selectOptions}
-                            value={hateInput}
+                            value={hateSelectInput}
                             isMulti={true}
                             closeMenuOnSelect={false}
                             maxMenuHeight="140px"

@@ -19,7 +19,7 @@ class StudentSelector extends Component {
     }
 
     render() { 
-        const {students, selectedStudentId, toggleAddStudentPopup, handleInputChange, handleSelectChange, handleSaveStudentsAndDesks, nameInput, visibilityInput, extraHelpInput, hate} = this.props;
+        const {students, selectedStudentId, toggleAddStudentPopup, handleInputChange, handleSelectChange, handleSaveStudentsAndDesks, nameInput, visibilityInput, extraHelpInput, hateId, hate} = this.props;
         const selectOptions = [];
         for (let id in students) {
             if (id !== selectedStudentId) {
@@ -38,8 +38,11 @@ class StudentSelector extends Component {
             })
             }
         const hateSelect = [];
-        for (let i=0; i<hate.length; i++) { //need to convert student hate array to an array that the Select Component can use
-            hateSelect.push({value: hate[i], label: students[hate[i]].name})
+        for (let i=0; i<hateId.length; i++) { //need to convert student hateId array to an array that the Select Component can use
+            let studentName = students[hateId[i]].name
+            hate.length = 0;
+            hate.push(studentName);
+            hateSelect.push({value: hateId[i], label: studentName});
         }
         return ( 
             <div id="editor-studentSection">
