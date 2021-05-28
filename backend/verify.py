@@ -4,7 +4,6 @@
 import random
 from verifyEmail import emailUser
 import string
-from myNgrok import getNgrok
 
 from flask import Flask,request,render_template, session
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
@@ -17,7 +16,6 @@ database = client["creds"]
 auth = database["auth"]
 emailVerifCollection = database["verification"]
 
-ngrokURL = getNgrok()
 app = Flask(__name__)
 app.secret_key = "7de9ca677c2eb20b961ee9cf8be15220"
 api = Api(app)
@@ -37,7 +35,7 @@ class verifyPost(Resource):
         print(code)
         user = auth.find_one({"username":session.get('username')})
         auth.update_one({"username":session.get('username')},{ '$set': { "email": email}})
-        emailUser(email,ngrokURL+"/verify/" + code)
+        emailUser(email,"https://classbooster.loca.lt/verify/" + code)
         return {"success": True}, 201, [('Access-Control-Allow-Origin', '*')]
 
 class verifyGet(Resource):
@@ -47,6 +45,7 @@ class verifyGet(Resource):
         if emailVerifCollection.find_one({"randomCode":verifCode}) != None:
             user = auth.find_one({"username":session.get('username')})
             auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "verified": True}})
+            return "Verified", 201, [('Access-Control-Allow-Origin', '*')]
         print("verifyget")
         print(auth.find_one({"username":session.get('username')}))
 
