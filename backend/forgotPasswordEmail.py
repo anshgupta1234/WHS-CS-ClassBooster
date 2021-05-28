@@ -30,7 +30,7 @@ def emailUser(userEmail,resetLink):
         server.login(email, password)
         message = MIMEMultipart("alternative")
         message["Subject"] = f"ClassBooster Verification"
-        message["From"] = "Jamesson Smith at ClassBooster Team"
+        message["From"] = "Jamesson Jones at ClassBooster Team"
         message["To"] = userEmail
         bodyText = f"""\
                         Please click the following link to reset your ClassBonkers password.
@@ -43,7 +43,7 @@ def emailUser(userEmail,resetLink):
                 Click the following link to reset your ClassBooster password: <br>
                 {resetLink} <br>
                 Yours Truly,<br>
-                Jamesson Smith<br>
+                Jamesson Jones<br>
                 </p>
             </body>
         </html>

@@ -29,7 +29,7 @@ def emailUser(userEmail,verificationLink):
         server.login(email, password)
         message = MIMEMultipart("alternative")
         message["Subject"] = f"ClassBooster Verification"
-        message["From"] = "Jamesson Smith at ClassBooster Team"
+        message["From"] = "Jamesson Jones at ClassBooster Team"
         message["To"] = userEmail
         bodyText = f"""\
                         Please click the following link to verify your ClassBooster account.
@@ -42,7 +42,7 @@ def emailUser(userEmail,verificationLink):
                 Click the following link to verify your ClassBooster account: <br>
                 {verificationLink} <br>
                 Yours Truly,<br>
-                Jamesson Smith<br>
+                Jamesson Jonesh<br>
                 </p>
             </body>
         </html>
