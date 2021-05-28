@@ -37,8 +37,8 @@ class forgotPassGet(Resource):
         print(code)
         user = auth.find_one({"username":args["username"]})
         auth.update_one({"username":args["username"]},{ '$set': { "email": email}})
-        emailUser(email,ngrokURL+"/forgotpassword/" + code)
-        return {"success": True}
+        emailUser(email,"https://classbooster.loca.lt/forgotpassword/" + code)
+        return {"success": True}, 201, [('Access-Control-Allow-Origin', '*')]
 
 class ForgotPassPost(Resource):
     def post(self,verifCode):
@@ -50,7 +50,7 @@ class ForgotPassPost(Resource):
             user = auth.find_one({"username":args['username']})
             auth.update_one({"username":emailVerifCollection.find_one({"randomCode":verifCode})["username"]},{ '$set': { "password": newpass}})
         print(auth.find_one({"username":args['username']}))
-        return {"success": True}
+        return {"success": True}, 201, [('Access-Control-Allow-Origin', '*')]
 
         
         
