@@ -28,7 +28,7 @@ api = Api(app)
 @app.after_request
 def apply_caching(response):
     response.headers['Access-Control-Allow-Credentials'] = 'true'
-    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    response.headers['Access-Control-Allow-Origin'] = 'https://classbooster.tech/'
     response.headers['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept, x-auth, Bypass-Tunnel-Reminder"
     return response
 resourcefields = {
