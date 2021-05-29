@@ -9,25 +9,34 @@ import history from '../../history';
 export default class forgotPassword extends React.Component {
   
   state = {
-    email: "",
-    newPassword: "",
+    username: "",
+    pasword: "",
     errorInput: undefined,
     errorMsg: undefined,
-    page: 0
+    succcess: false
   };
 
   
-  
-  handleEmail = (event) => {
-    this.setState({ email: event.target.value });
+  showPassword = () => {
+    if (this.state.showPassword===true){
+    this.setState({ showPassword: false });
+    }
+    else {
+      this.setState({ showPassword: true });
+    }
+    
   };
-  handlenewPassword = (event) => {
-    this.setState({ newPassword: event.target.value });
+
+  handleUsername = (event) => {
+    this.setState({ username: event.target.value });
+  };
+  handlePassword = (event) => {
+    this.setState({ password: event.target.value });
     
   };
 
   handleSubmit = (event) => {
-    if(this.state.email === ""){
+    if(this.state.username === ""){
       this.setState({errorInput: true });
     }
     else if(this.state.password === ""){
@@ -35,7 +44,7 @@ export default class forgotPassword extends React.Component {
     }
     else {
       this.setState({errorInput: false });
-      fetch('https://classbooster.loca.lt/login', {
+      fetch('https://classbooster.loca.lt/forgotpassword', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -43,15 +52,16 @@ export default class forgotPassword extends React.Component {
           'Content-Type': 'application/json'
         },
       body: JSON.stringify({
-        username: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
       })
     }).then(res => res.json())
       .then(res => {
         console.log(res);
         if(res.success) {
-          this.state.page = 1;
           console.log("Success");
-          
+          this.setState({success: true });
+
         } else {
           this.setState({ errorMsg: JSON.stringify(res.error) });
           this.setState({errorInput: true });
@@ -82,13 +92,26 @@ export default class forgotPassword extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <input
                   type="text"
-                  placeholder="Email/Username"
+                  placeholder="Username"
                   className="login-placeHolderTextError"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
+                  value={this.state.username}
+                  onChange={this.handleUsername}
                 />
                 <br />
-                <br/><p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
+                <input
+                    type={this.state.showPassword ? "text" : "password"}
+                    placeholder="New Password"
+                  className="login-placeHolderTextError"
+                  value={this.state.password}
+                  onChange={this.handlePassword}
+                />
+                <br></br>
+                  <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
+                <br/>
+                <p className="signupLogin-errorMessage">Some fields are missing or incorrect <br></br>{this.state.errorMsg}</p>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}
@@ -101,20 +124,33 @@ export default class forgotPassword extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <input
                   type="text"
-                  placeholder="Email/Username"
+                  placeholder="Username"
                   className="placeHolderTextLogin"
-                  value={this.state.email}
-                  onChange={this.handleEmail}
+                  value={this.state.username}
+                  onChange={this.handleUsername}
                 />
                 <br />
-              
+                <input
+                    type={this.state.showPassword ? "text" : "password"}
+                    placeholder="New Password"
+                  className="placeHolderTextLogin"
+                  value={this.state.password}
+                  onChange={this.handlePassword}
+                />
                 <br/>
+                {this.state.success ? "Check your email and reset your password" :  ""}
+
+                <br/>
+                <input type="checkbox"  
+                className = "showPassword"
+                onClick  = {this.showPassword}
+                /> Show Password
+                <br></br>
                 <input type="submit"  
                 className = "signupLogin-ButtonB"
                 onClick  = {this.handleSubmit}
                 value="Next"/>
               </form>
-         
               )
   }
   

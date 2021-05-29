@@ -6,7 +6,11 @@ import {
   } from "react-router-dom";
 
 
+
 export default class Landing extends Component {
+   componentDidMount(){
+	  
+  } 
   render(){
     return (
 			<div className="landing-main">
