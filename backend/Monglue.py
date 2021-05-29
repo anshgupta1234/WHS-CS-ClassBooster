@@ -7,7 +7,7 @@ from login import login
 from logout import logout
 from addclassroom import add
 from forgotPassword import forgotPassGet, ForgotPassPost
-from flask import Flask,request,render_template, session
+from flask import Flask,request,render_template, session, request
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_cors import CORS
 from Update import update
@@ -27,9 +27,18 @@ def setup():
 api = Api(app)
 @app.after_request
 def apply_caching(response):
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
-    response.headers['Access-Control-Allow-Origin'] = 'https://classbooster.tech'
-    response.headers['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept, x-auth, Bypass-Tunnel-Reminder"
+    white = ['http://localhost:3000','https://classbooster.tech']
+    try:
+        print(request.referrer[:-1])
+        if request.referrer[:-1] in white:
+            print("yeet")
+            response.headers['Access-Control-Allow-Credentials'] = 'true'
+            response.headers['Access-Control-Allow-Origin'] = request.environ['HTTP_ORIGIN']
+            response.headers['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept, x-auth, Bypass-Tunnel-Reminder"
+    except KeyError:
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = 'https://classbooster.tech'
+        response.headers['Access-Control-Allow-Headers'] = "Origin, X-Requested-With, Content-Type, Accept, x-auth, Bypass-Tunnel-Reminder"
     return response
 resourcefields = {
     'username' : fields.String,
